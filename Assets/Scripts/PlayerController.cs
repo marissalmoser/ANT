@@ -1,3 +1,13 @@
+/**********************************************************************************
+
+// File Name :         PlayerController.cs
+// Author :            Marissa Moser
+// Creation Date :     September 13, 2023
+//
+// Brief Description : 
+
+**********************************************************************************/
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,18 +16,26 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    //components
+    //components and GOs
     public PlayerInput MyPlayerInput;
     public Rigidbody2D Rb;
+    public GameManager GameManager;
+    private GameManager gm;
+    public GameObject WalkGraphics;
+    public GameObject CrawlGraphics;
 
     //actions
-    private InputAction move;
-    private InputAction jump;
+    private InputAction move, jump, head, leg, crawl, changeMov;
 
     //moving variables
     private bool playerCanMove;
+    private bool playerCanCrawl;
+    private bool crawlMapEnabled;
     [SerializeField] private float speed;
     private float direction;
+    private float rotationSpeed = 3;
+    private Vector2 crawlDirection;
+    private Vector2 crawlRotation;
     private bool isFacingRight = true;
 
     //jumping variables
@@ -28,27 +46,38 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        MyPlayerInput.currentActionMap.Enable();
+        gm = GameManager.GetComponent<GameManager>();
 
-        move = MyPlayerInput.currentActionMap.FindAction("Move");
-        jump = MyPlayerInput.currentActionMap.FindAction("Jump");
+        MyPlayerInput.actions.FindActionMap("PlayerTwoDirectionMovement").Enable();
+        MyPlayerInput.actions.FindActionMap("PartSwitching").Enable();
+
+        move = MyPlayerInput.actions.FindActionMap("PlayerTwoDirectionMovement").FindAction("Move");
+        jump = MyPlayerInput.actions.FindActionMap("PlayerTwoDirectionMovement").FindAction("Jump");
+        crawl = MyPlayerInput.actions.FindActionMap("PlayerCrawlingMovement").FindAction("Crawl");
+        head = MyPlayerInput.actions.FindActionMap("PartSwitching").FindAction("Head");
+        leg = MyPlayerInput.actions.FindActionMap("PartSwitching").FindAction("Leg");
+        changeMov = MyPlayerInput.actions.FindActionMap("PartSwitching").FindAction("SwitchMovementSystem");
 
         move.started += Handle_moveStarted;
         move.canceled += Handle_moveCanceled;
         jump.started += Handle_jumpStarted;
         jump.canceled += Handle_jumpCanceled;
+        head.started += SwitchHeadPart;
+        leg.started += SwitchLegPart;
+        crawl.started += Handle_crawlStarted;
+        crawl.canceled += Handle_crawlCanceled;
+        changeMov.started += SwitchMovementSystem;
     }
+
 
     private void Handle_moveStarted(InputAction.CallbackContext obj)
     {
         playerCanMove = true;
     }
-
     private void Handle_moveCanceled(InputAction.CallbackContext obj)
     {
         playerCanMove = false;
     }
-
     private void Handle_jumpStarted(InputAction.CallbackContext obj)
     {
         if (jumpStart == false)
@@ -56,10 +85,57 @@ public class PlayerController : MonoBehaviour
             jumpStart = true;
         }
     }
-
     private void Handle_jumpCanceled(InputAction.CallbackContext obj)
     {
         jumpStart = false;
+    }
+
+    private void Handle_crawlStarted(InputAction.CallbackContext obj)
+    {
+        playerCanCrawl = true;
+    }
+    private void Handle_crawlCanceled(InputAction.CallbackContext obj)
+    {
+        playerCanCrawl = false;
+        Rb.velocity = Vector2.zero;
+        crawlDirection = Vector2.zero;
+    }
+
+    private void SwitchMovementSystem(InputAction.CallbackContext obj)
+    {
+        //switch to 2D movement system
+        if(crawlMapEnabled && playerCanCrawl)
+        {
+            print("switch to 2D movement system");
+            crawlMapEnabled = false;
+            Rb.gravityScale = 4;
+            MyPlayerInput.actions.FindActionMap("PlayerTwoDirectionMovement").Enable();
+            MyPlayerInput.actions.FindActionMap("PlayerCrawlingMovement").Disable();
+            CrawlGraphics.SetActive(false);
+            WalkGraphics.SetActive(true);
+        }
+        //switch to crawling movement system
+        if(!crawlMapEnabled && playerCanMove)
+        {
+            print("switch to crawling movement system");
+            crawlMapEnabled = true;
+            Rb.gravityScale = 0;
+            MyPlayerInput.actions.FindActionMap("PlayerTwoDirectionMovement").Disable();
+            MyPlayerInput.actions.FindActionMap("PlayerCrawlingMovement").Enable();
+            CrawlGraphics.SetActive(true);
+            WalkGraphics.SetActive(false);
+        }
+    }
+
+    private void SwitchHeadPart(InputAction.CallbackContext obj)
+    {
+        print("head");
+        gm.BaseHead = !gm.BaseHead;
+    }
+    private void SwitchLegPart(InputAction.CallbackContext obj)
+    {
+        print("leg");
+        gm.BaseLeg = !gm.BaseLeg;
     }
 
     private void Update()
@@ -68,6 +144,20 @@ public class PlayerController : MonoBehaviour
         if (playerCanMove == true)
         {
             direction = move.ReadValue<float>();
+        }
+
+        if(playerCanCrawl == true)
+        {
+            crawlDirection = crawl.ReadValue<Vector2>();
+        }
+        //rotation of the player during movement. Only if in crawl map
+        if (crawlDirection != Vector2.zero && crawlMapEnabled)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(transform.forward, crawlRotation);
+            Quaternion rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            Rb.MoveRotation(rotation);
+            //print(rotation);
+            //print(crawlRotation);
         }
     }
 
@@ -84,24 +174,23 @@ public class PlayerController : MonoBehaviour
         }
 
         //player jump
-        if (IsGrounded() && jumpStart)
+        if (IsGrounded() && jumpStart && !crawlMapEnabled)
         {
-            print("jump");
+            //print("jump");
             Rb.velocity = new Vector2(Rb.velocity.x, jumpingPower);
         }
-        /*
         
-        else if(jumpStart && Rb.velocity.y > 0)
+        //player crawl
+        if(playerCanCrawl == true && crawlMapEnabled)
         {
-            //Rb.velocity = new Vector2(Rb.velocity.x, Rb.velocity.x * 0.5f);
-            print("boost"); 
-        }*/
+            Rb.velocity = new Vector2(speed * crawlDirection.x, speed * crawlDirection.y);
+        }
 
     }
 
     private void Flip()
     {
-        if (!isFacingRight && direction < 0f || isFacingRight && direction > 0)
+        if (!isFacingRight && direction < 0f || isFacingRight && direction > 0 && !crawlMapEnabled)
         {
             isFacingRight = !isFacingRight;
             Vector3 localScale = transform.localScale;

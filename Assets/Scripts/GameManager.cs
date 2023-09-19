@@ -1,8 +1,8 @@
 /**********************************************************************************
 
-// File Name :         PlayerBehavior.cs
+// File Name :         GameManager.cs
 // Author :            Marissa Moser
-// Creation Date :     September 19, 2023
+// Creation Date :     September 18, 2023
 //
 // Brief Description : 
 
@@ -12,16 +12,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBehavior : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    public GameManager GameManager;
-    private GameManager gm;
+    public bool BaseWalking;
+    public bool BaseHead;
+    public bool BaseMid;
+    public bool BaseLeg;
 
     void Start()
     {
-        gm = GameManager.GetComponent<GameManager>();
+        
     }
 
+    // Update is called once per frame
     void Update()
     {
         
