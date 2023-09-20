@@ -14,14 +14,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public bool BaseWalking;
     public bool BaseHead;
-    public bool BaseMid;
     public bool BaseLeg;
 
     void Start()
     {
-        
+        BaseHead = true;
+        BaseLeg = true;
     }
 
     // Update is called once per frame
