@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour
     private void SwitchMovementSystem(InputAction.CallbackContext obj)
     {
         //switch to 2D movement system
-        if(crawlMapEnabled && playerCanCrawl)
+        if(crawlMapEnabled)
         {
             print("switch to 2D movement system");
             crawlMapEnabled = false;
@@ -129,7 +129,7 @@ public class PlayerController : MonoBehaviour
             WalkGraphics.SetActive(true);
         }
         //switch to crawling movement system
-        if(!crawlMapEnabled && playerCanMove)
+        else
         {
             print("switch to crawling movement system");
             crawlMapEnabled = true;

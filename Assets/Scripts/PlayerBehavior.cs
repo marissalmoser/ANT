@@ -21,6 +21,9 @@ public class PlayerBehavior : MonoBehaviour
     private bool breakableTriggered;
     private GameObject breakableObject;
 
+    [SerializeField] private GameObject beeVision;
+    [SerializeField] private GameObject spotToCarry;
+
     void Start()
     {
         gm = GameManager.GetComponent<GameManager>();
@@ -29,20 +32,27 @@ public class PlayerBehavior : MonoBehaviour
 
     void Update()
     {
+        //Breaks objects
         if (gm.BaseHead && breakableTriggered && pc.Interact)
         {
             print("breaking");
             Destroy(breakableObject);
+        }
 
-            print(gm.BaseHead);
-            print(breakableTriggered);
-            print(pc.Interact);
+        //Bee Vision
+        if(!gm.BaseHead)
+        {
+            beeVision.SetActive(true);
+        }
+        if (gm.BaseHead)
+        {
+            beeVision.SetActive(false);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //if base head is true, and is hive to break
+        //triggeres a breakable object
         if(collision.gameObject.CompareTag("Breakable"))
         {
             breakableTriggered = true;
@@ -52,7 +62,7 @@ public class PlayerBehavior : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        //if base head is true, and is hive to break
+        //moved away from breakable object
         if (collision.gameObject.CompareTag("Breakable"))
         {
             breakableTriggered = false;
