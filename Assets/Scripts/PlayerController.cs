@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     public GameObject CrawlGraphics;
 
     //actions
-    private InputAction move, jump, head, leg, crawl, changeMov;
+    private InputAction move, jump, head, leg, crawl, changeMov, interact;
 
     //moving variables
     private bool playerCanMove;
@@ -44,6 +44,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     private bool jumpStart;
 
+    //interacting
+    public bool Interact;
+
     void Start()
     {
         gm = GameManager.GetComponent<GameManager>();
@@ -57,6 +60,7 @@ public class PlayerController : MonoBehaviour
         head = MyPlayerInput.actions.FindActionMap("PartSwitching").FindAction("Head");
         leg = MyPlayerInput.actions.FindActionMap("PartSwitching").FindAction("Leg");
         changeMov = MyPlayerInput.actions.FindActionMap("PartSwitching").FindAction("SwitchMovementSystem");
+        interact = MyPlayerInput.actions.FindActionMap("PartSwitching").FindAction("Interact");
 
         move.started += Handle_moveStarted;
         move.canceled += Handle_moveCanceled;
@@ -67,8 +71,18 @@ public class PlayerController : MonoBehaviour
         crawl.started += Handle_crawlStarted;
         crawl.canceled += Handle_crawlCanceled;
         changeMov.started += SwitchMovementSystem;
+        interact.started += Handle_interactStarted;
+        interact.canceled += Handle_interactCanceled;
     }
 
+    private void Handle_interactCanceled(InputAction.CallbackContext obj)
+    {
+        Interact = false;
+    }
+    private void Handle_interactStarted(InputAction.CallbackContext obj)
+    {
+        Interact = true;
+    }
 
     private void Handle_moveStarted(InputAction.CallbackContext obj)
     {
