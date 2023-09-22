@@ -191,6 +191,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SpawnWebPlatform",
+                    "type": "Button",
+                    "id": "81678f71-04e2-43aa-8a8b-924db1ffd136",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -268,6 +277,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "59ec6633-257b-4ec7-8572-aa6a99b288cf",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpawnWebPlatform",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

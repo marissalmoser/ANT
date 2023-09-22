@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     public GameObject CrawlGraphics;
 
     //actions
-    private InputAction move, jump, head, leg, crawl, changeMov, interact;
+    private InputAction move, jump, head, leg, crawl, changeMov, interact, spawnWeb;
 
     //moving variables
     [Header("Player Movement")]
@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
         leg = MyPlayerInput.actions.FindActionMap("PartSwitching").FindAction("Leg");
         changeMov = MyPlayerInput.actions.FindActionMap("PartSwitching").FindAction("SwitchMovementSystem");
         interact = MyPlayerInput.actions.FindActionMap("PartSwitching").FindAction("Interact");
+        spawnWeb = MyPlayerInput.actions.FindActionMap("PartSwitching").FindAction("SpawnWebPlatform");
 
         move.started += Handle_moveStarted;
         move.canceled += Handle_moveCanceled;
@@ -83,6 +84,8 @@ public class PlayerController : MonoBehaviour
         changeMov.started += SwitchMovementSystem;
         interact.started += Handle_interactStarted;
         interact.canceled += Handle_interactCanceled;
+        spawnWeb.started += SpawnWebStarted;
+        spawnWeb.canceled += SpawnWebCanceled;
     }
 
     private void Handle_interactStarted(InputAction.CallbackContext obj)
@@ -188,6 +191,17 @@ public class PlayerController : MonoBehaviour
             WebShooterCrawl.SetActive(true);
             WebShooterWalk.SetActive(true);
         }
+    }
+
+    private void SpawnWebStarted(InputAction.CallbackContext obj)
+    {
+        pb.SpawnWebPlatform();
+    }
+
+    private void SpawnWebCanceled(InputAction.CallbackContext obj)
+    {
+        pb.WebPlatform.GetComponent<WebPlatformBehavior>().PlatformCanMove = false;
+        pb.WebPlatform = null;
     }
 
     private void Update()

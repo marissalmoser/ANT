@@ -32,9 +32,12 @@ public class PlayerBehavior : MonoBehaviour
     [Header("Carrying Objects")]
     [SerializeField] private Transform spotToCarry;
     private GameObject pickUpObject;
-    [SerializeField] private GameObject newParent;
     private bool pickUpTriggered;
     private bool canPickUpObj = true;
+
+    [Header("Web Platforms")]
+    public GameObject WebPlatform;
+    [SerializeField] private GameObject WebPlatformPrefab;
 
     void Start()
     {
@@ -47,7 +50,7 @@ public class PlayerBehavior : MonoBehaviour
         //Breaks Objects
         if (gm.BaseHead && breakableTriggered && pc.Interact)
         {
-            print("breaking");
+            //print("breaking");
             Destroy(breakableObject);
         }
 
@@ -114,5 +117,10 @@ public class PlayerBehavior : MonoBehaviour
             canPickUpObj = true;
             pickUpObject = null;
         }
+    }
+
+    public void SpawnWebPlatform()
+    {
+        WebPlatform = Instantiate(WebPlatformPrefab, transform.position, transform.rotation);
     }
 }
