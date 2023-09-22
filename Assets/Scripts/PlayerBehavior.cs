@@ -14,15 +14,27 @@ using UnityEngine;
 
 public class PlayerBehavior : MonoBehaviour
 {
+    //components and GOs
     public GameManager GameManager;
     private GameManager gm;
     private PlayerController pc;
 
+    //breaking object vars
+    [Header("Breaking Objects")]
     private bool breakableTriggered;
     private GameObject breakableObject;
 
+    //bee vision vars
+    [Header("Bee Vision")]
     [SerializeField] private GameObject beeVision;
-    [SerializeField] private GameObject spotToCarry;
+
+    //carrying object vars
+    [Header("Carrying Objects")]
+    [SerializeField] private Transform spotToCarry;
+    private GameObject pickUpObject;
+    [SerializeField] private GameObject newParent;
+    private bool pickUpTriggered;
+    private bool canPickUpObj = true;
 
     void Start()
     {
@@ -32,7 +44,7 @@ public class PlayerBehavior : MonoBehaviour
 
     void Update()
     {
-        //Breaks objects
+        //Breaks Objects
         if (gm.BaseHead && breakableTriggered && pc.Interact)
         {
             print("breaking");
@@ -58,6 +70,13 @@ public class PlayerBehavior : MonoBehaviour
             breakableTriggered = true;
             breakableObject = collision.gameObject;
         }
+
+        //triggeres a pickup-able object
+        if (collision.gameObject.CompareTag("PickUp-able"))
+        {
+            pickUpTriggered = true;
+            pickUpObject = collision.gameObject;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -67,6 +86,33 @@ public class PlayerBehavior : MonoBehaviour
         {
             breakableTriggered = false;
             breakableObject = null;
+        }
+
+        //triggeres a pickup-able object
+        if (collision.gameObject.CompareTag("PickUp-able"))
+        {
+            pickUpTriggered = false;
+        }
+    }
+
+    public void PickUpObject()
+    {
+        //picking up
+        if (pickUpTriggered && canPickUpObj && gm.BaseLeg)
+        {
+            //print("picked up");
+            pickUpObject.transform.position = spotToCarry.position;
+            pickUpObject.transform.parent = gameObject.transform;
+            canPickUpObj = false;
+            pickUpTriggered = false;
+        }
+        //dropping
+        else if (!canPickUpObj && gm.BaseLeg)
+        {
+            //print("dropped");
+            pickUpObject.transform.parent = null;
+            canPickUpObj = true;
+            pickUpObject = null;
         }
     }
 }

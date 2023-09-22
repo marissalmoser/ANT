@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6886924630408367114}
   - component: {fileID: 6886924630408367117}
   - component: {fileID: 6886924630408367116}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Hive to Push
   m_TagString: Untagged
   m_Icon: {fileID: 0}
