@@ -21,14 +21,16 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D Rb;
     public GameManager GameManager;
     private GameManager gm;
+    private PlayerBehavior pb;
     public GameObject WalkGraphics;
     public GameObject CrawlGraphics;
 
     //actions
-    private InputAction move, jump, head, leg, crawl, changeMov, interact;
+    private InputAction move, jump, head, leg, crawl, changeMov, interact, spawnWeb;
 
     //moving variables
-    private bool playerCanMove;
+    [Header("Player Movement")]
+    [SerializeField] private bool playerCanMove;
     private bool playerCanCrawl;
     private bool crawlMapEnabled;
     [SerializeField] private float speed;
@@ -39,17 +41,25 @@ public class PlayerController : MonoBehaviour
     private bool isFacingRight = true;
 
     //jumping variables
+    [Header("Jumping")]
     [SerializeField] private float jumpingPower = 16f;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     private bool jumpStart;
 
     //interacting
-    public bool Interact;
+    [HideInInspector] public bool Interact;
+
+    [Header("Bug Parts")]
+    [SerializeField] private GameObject BeeMaskWalk;
+    [SerializeField] private GameObject BeeMaskCrawl;
+    [SerializeField] private GameObject WebShooterWalk;
+    [SerializeField] private GameObject WebShooterCrawl;
 
     void Start()
     {
         gm = GameManager.GetComponent<GameManager>();
+        pb = gameObject.GetComponent<PlayerBehavior>();
 
         MyPlayerInput.actions.FindActionMap("PlayerTwoDirectionMovement").Enable();
         MyPlayerInput.actions.FindActionMap("PartSwitching").Enable();
@@ -61,6 +71,7 @@ public class PlayerController : MonoBehaviour
         leg = MyPlayerInput.actions.FindActionMap("PartSwitching").FindAction("Leg");
         changeMov = MyPlayerInput.actions.FindActionMap("PartSwitching").FindAction("SwitchMovementSystem");
         interact = MyPlayerInput.actions.FindActionMap("PartSwitching").FindAction("Interact");
+        spawnWeb = MyPlayerInput.actions.FindActionMap("PartSwitching").FindAction("SpawnWebPlatform");
 
         move.started += Handle_moveStarted;
         move.canceled += Handle_moveCanceled;
@@ -73,15 +84,21 @@ public class PlayerController : MonoBehaviour
         changeMov.started += SwitchMovementSystem;
         interact.started += Handle_interactStarted;
         interact.canceled += Handle_interactCanceled;
+        spawnWeb.started += SpawnWebStarted;
+        spawnWeb.canceled += SpawnWebCanceled;
     }
 
-    private void Handle_interactCanceled(InputAction.CallbackContext obj)
-    {
-        Interact = false;
-    }
     private void Handle_interactStarted(InputAction.CallbackContext obj)
     {
         Interact = true;
+
+        pb.PickUpObject();
+    }
+    private void Handle_interactCanceled(InputAction.CallbackContext obj)
+    {
+        Interact = false;
+
+        
     }
 
     private void Handle_moveStarted(InputAction.CallbackContext obj)
@@ -145,11 +162,46 @@ public class PlayerController : MonoBehaviour
     {
         print("head");
         gm.BaseHead = !gm.BaseHead;
+
+        //changes the sprite
+        if(gm.BaseHead)
+        {
+            BeeMaskCrawl.SetActive(false);
+            BeeMaskWalk.SetActive(false);
+        }
+        if(!gm.BaseHead)
+        {
+            BeeMaskCrawl.SetActive(true);
+            BeeMaskWalk.SetActive(true);
+        }
     }
     private void SwitchLegPart(InputAction.CallbackContext obj)
     {
         print("leg");
         gm.BaseLeg = !gm.BaseLeg;
+
+        //changes the sprite
+        if (gm.BaseLeg)
+        {
+            WebShooterCrawl.SetActive(false);
+            WebShooterWalk.SetActive(false);
+        }
+        if (!gm.BaseLeg)
+        {
+            WebShooterCrawl.SetActive(true);
+            WebShooterWalk.SetActive(true);
+        }
+    }
+
+    private void SpawnWebStarted(InputAction.CallbackContext obj)
+    {
+        pb.SpawnWebPlatform();
+    }
+
+    private void SpawnWebCanceled(InputAction.CallbackContext obj)
+    {
+        pb.WebPlatform.GetComponent<WebPlatformBehavior>().PlatformCanMove = false;
+        pb.WebPlatform = null;
     }
 
     private void Update()
@@ -204,7 +256,7 @@ public class PlayerController : MonoBehaviour
 
     private void Flip()
     {
-        if (!isFacingRight && direction < 0f || isFacingRight && direction > 0 && !crawlMapEnabled)
+        if (isFacingRight && direction < 0f || !isFacingRight && direction > 0 && !crawlMapEnabled)
         {
             isFacingRight = !isFacingRight;
             Vector3 localScale = transform.localScale;
