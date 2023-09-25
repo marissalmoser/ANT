@@ -10,7 +10,6 @@ public class WebPlatformBehavior : MonoBehaviour
 
     void Update()
     {
-        
         if(PlatformCanMove)
         {
             print(PlatformCanMove);
@@ -19,6 +18,7 @@ public class WebPlatformBehavior : MonoBehaviour
         else
         {
             Rb.velocity = Vector2.zero;
+            Rb.constraints = RigidbodyConstraints2D.FreezePosition;
 
         }
     }
