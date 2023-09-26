@@ -128,7 +128,6 @@ public class BeeStates : MonoBehaviour
 
             if (PerformDetection())
             {
-                print("still there");
                 FSM(2);
             }
             else
@@ -139,17 +138,10 @@ public class BeeStates : MonoBehaviour
                 FSM(0);
             }
         }
-        
-        yield return null;
     }
 
     IEnumerator AlertState()
     {
-        targetPos = transform.position;
-        while (Vector2.Distance(transform.position, targetPos) > 0.5f)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
-        }
         print("BEE MORE SNEAKY BZZZZZZ");
         //eyes and dance animation
         yield return null;
@@ -161,6 +153,10 @@ public class BeeStates : MonoBehaviour
         targetPos = transform.position;
         transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
         rb.gravityScale = 4;
+        if(exclamation != null)
+        {
+            exclamation.SetActive(false);
+        }
         //bzzzz sound
         yield return null;
     }
