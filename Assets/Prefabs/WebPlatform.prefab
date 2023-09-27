@@ -147,5 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlatformCanMove: 1
-  platformSpeed: 0
+  platformSpeed: 10
   Rb: {fileID: 8418515672282630114}
+  Direction: 0
+  Player: {fileID: 0}

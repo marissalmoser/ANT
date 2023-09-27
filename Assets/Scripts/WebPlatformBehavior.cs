@@ -5,23 +5,40 @@ using UnityEngine;
 public class WebPlatformBehavior : MonoBehaviour
 {
     public bool PlatformCanMove = true;
-    [SerializeField] private float platformSpeed = 15f;
+    [SerializeField] private float platformSpeed;
     [SerializeField] private Rigidbody2D Rb;
+    public float Direction;
+    [SerializeField] private GameObject Player;
 
-    void Update()
+
+    void Start()
     {
-        if(PlatformCanMove)
-        {
-            print(PlatformCanMove);
-            Rb.velocity = new Vector2(platformSpeed, Rb.velocity.y);
-        }
-        else
-        {
-            Rb.velocity = Vector2.zero;
-            Rb.constraints = RigidbodyConstraints2D.FreezePosition;
+        StartCoroutine(PlatformMoving());
+        Rb.freezeRotation = true;
+    }
 
+    IEnumerator PlatformMoving()
+    {
+        while(true)
+        {
+            if (PlatformCanMove)
+            {
+                //print(PlatformCanMove);
+                Rb.velocity = new Vector2(platformSpeed * Direction, 0);
+            }
+            else
+            {
+                //print("else");
+                Rb.velocity = Vector2.zero;
+                Rb.constraints = RigidbodyConstraints2D.FreezePosition;
+                Rb.freezeRotation = true;
+                StopCoroutine(PlatformMoving());
+            }
+
+            yield return null;
         }
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && !PlatformCanMove)
@@ -32,7 +49,8 @@ public class WebPlatformBehavior : MonoBehaviour
 
     IEnumerator DestroyWebPlatform()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
+        //Player.GetComponent<PlayerBehavior>().PlatformCount--;
         Destroy(gameObject);
     }
 }

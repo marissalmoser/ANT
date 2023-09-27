@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     public GameObject CrawlGraphics;
 
     //actions
-    private InputAction move, jump, head, leg, crawl, changeMov, interact, spawnWeb;
+    private InputAction move, jump, head, leg, crawl, changeMov, interact, spawnWeb, pause;
 
     //moving variables
     [Header("Player Movement")]
@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour
         changeMov = MyPlayerInput.actions.FindActionMap("PartSwitching").FindAction("SwitchMovementSystem");
         interact = MyPlayerInput.actions.FindActionMap("PartSwitching").FindAction("Interact");
         spawnWeb = MyPlayerInput.actions.FindActionMap("PartSwitching").FindAction("SpawnWebPlatform");
+        pause = MyPlayerInput.actions.FindActionMap("PartSwitching").FindAction("Pause");
 
         move.started += Handle_moveStarted;
         move.canceled += Handle_moveCanceled;
@@ -86,6 +87,12 @@ public class PlayerController : MonoBehaviour
         interact.canceled += Handle_interactCanceled;
         spawnWeb.started += SpawnWebStarted;
         spawnWeb.canceled += SpawnWebCanceled;
+        pause.started += GamePaused;
+    }
+
+    private void GamePaused(InputAction.CallbackContext obj)
+    {
+        Application.Quit();
     }
 
     private void Handle_interactStarted(InputAction.CallbackContext obj)
@@ -196,12 +203,20 @@ public class PlayerController : MonoBehaviour
     private void SpawnWebStarted(InputAction.CallbackContext obj)
     {
         pb.SpawnWebPlatform();
+        if(pb.WebPlatform != null)
+        {
+            pb.WebPlatform.GetComponent<WebPlatformBehavior>().Direction = direction;
+        }
     }
 
     private void SpawnWebCanceled(InputAction.CallbackContext obj)
     {
-        pb.WebPlatform.GetComponent<WebPlatformBehavior>().PlatformCanMove = false;
-        pb.WebPlatform = null;
+        //print(pb.WebPlatform);
+        if(pb.WebPlatform != null)
+        {
+            pb.WebPlatform.GetComponent<WebPlatformBehavior>().PlatformCanMove = false;
+            pb.WebPlatform = null;
+        }
     }
 
     private void Update()

@@ -152,7 +152,8 @@ public class BeeStates : MonoBehaviour
         //stop all movement
         targetPos = transform.position;
         transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
-        rb.gravityScale = 4;
+        rb.gravityScale = 2;
+        //turn off bee vision
         if(exclamation != null)
         {
             exclamation.SetActive(false);

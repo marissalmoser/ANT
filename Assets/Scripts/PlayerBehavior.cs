@@ -38,6 +38,7 @@ public class PlayerBehavior : MonoBehaviour
     [Header("Web Platforms")]
     public GameObject WebPlatform;
     [SerializeField] private GameObject WebPlatformPrefab;
+    public int PlatformCount;
 
     void Start()
     {
@@ -121,6 +122,10 @@ public class PlayerBehavior : MonoBehaviour
 
     public void SpawnWebPlatform()
     {
-        WebPlatform = Instantiate(WebPlatformPrefab, transform.position, transform.rotation);
+        //if(!gm.BaseHead && PlatformCount < 3)
+        {
+            PlatformCount++;
+            WebPlatform = Instantiate(WebPlatformPrefab, spotToCarry.position, transform.rotation);
+        }
     }
 }
