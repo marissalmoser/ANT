@@ -30,15 +30,16 @@ public class PlayerController : MonoBehaviour
 
     //moving variables
     [Header("Player Movement")]
-    [SerializeField] private bool playerCanMove;
-    private bool playerCanCrawl;
+    [SerializeField] private bool playerCanMove;        //starts and stops player movement regardless of system
+    private bool playerCanCrawl;                        //
     private bool crawlMapEnabled;
     [SerializeField] private float speed;
     private float direction;
-    private float rotationSpeed = 3;
+    //private float rotationSpeed = 3;
     private Vector2 crawlDirection;
-    private Vector2 crawlRotation;
+    //private Vector2 crawlRotation;
     private bool isFacingRight = true;
+    [SerializeField] private LayerMask climbableWalls;
 
     //jumping variables
     [Header("Jumping")]
@@ -141,27 +142,28 @@ public class PlayerController : MonoBehaviour
 
     private void SwitchMovementSystem(InputAction.CallbackContext obj)
     {
-        //switch to 2D movement system
-        if(crawlMapEnabled)
-        {
-            print("switch to 2D movement system");
-            crawlMapEnabled = false;
-            Rb.gravityScale = 4;
-            MyPlayerInput.actions.FindActionMap("PlayerTwoDirectionMovement").Enable();
-            MyPlayerInput.actions.FindActionMap("PlayerCrawlingMovement").Disable();
-            CrawlGraphics.SetActive(false);
-            WalkGraphics.SetActive(true);
-        }
+        
         //switch to crawling movement system
-        else
+        if (!crawlMapEnabled && gm.BaseLeg)
         {
-            print("switch to crawling movement system");
+            //print("switch to crawling movement system");
             crawlMapEnabled = true;
             Rb.gravityScale = 0;
             MyPlayerInput.actions.FindActionMap("PlayerTwoDirectionMovement").Disable();
             MyPlayerInput.actions.FindActionMap("PlayerCrawlingMovement").Enable();
             CrawlGraphics.SetActive(true);
             WalkGraphics.SetActive(false);
+        }
+        //switch to 2D movement system
+        else
+        {
+            //print("switch to 2D movement system");
+            crawlMapEnabled = false;
+            Rb.gravityScale = 4;
+            MyPlayerInput.actions.FindActionMap("PlayerTwoDirectionMovement").Enable();
+            MyPlayerInput.actions.FindActionMap("PlayerCrawlingMovement").Disable();
+            CrawlGraphics.SetActive(false);
+            WalkGraphics.SetActive(true);
         }
     }
 
@@ -248,14 +250,14 @@ public class PlayerController : MonoBehaviour
             crawlDirection = crawl.ReadValue<Vector2>();
         }
         //rotation of the player during movement. Only if in crawl map
-        if (crawlDirection != Vector2.zero && crawlMapEnabled)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(transform.forward, crawlRotation);
-            Quaternion rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-            Rb.MoveRotation(rotation);
-            //print(rotation);
-            //print(crawlRotation);
-        }
+        //if (crawlDirection != Vector2.zero && crawlMapEnabled)
+        //{
+        //    Quaternion targetRotation = Quaternion.LookRotation(transform.forward, crawlRotation);
+        //    Quaternion rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        //    Rb.MoveRotation(rotation);
+        //    //print(rotation);
+        //    //print(crawlRotation);
+        //}
     }
 
     private void FixedUpdate()
@@ -271,17 +273,19 @@ public class PlayerController : MonoBehaviour
         }
 
         //player jump
-        if (IsGrounded() && jumpStart && !crawlMapEnabled)
+        if (IsGrounded() && jumpStart && !crawlMapEnabled && Rb.velocity.y < 0.5f)
         {
             //print("jump");
             Rb.velocity = new Vector2(Rb.velocity.x, jumpingPower);
         }
         
         //player crawl
-        if(playerCanCrawl == true && crawlMapEnabled)
+        if(playerCanCrawl && crawlMapEnabled && CanClimb())                                                               // add bool for crawlable walls here
         {
             Rb.velocity = new Vector2(speed * crawlDirection.x, speed * crawlDirection.y);
         }
+
+        //print(CanClimb());
 
     }
 
@@ -299,5 +303,10 @@ public class PlayerController : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+    }
+
+    private bool CanClimb()
+    {
+        return Physics2D.OverlapCircle(transform.position, 0.2f, climbableWalls);
     }
 }

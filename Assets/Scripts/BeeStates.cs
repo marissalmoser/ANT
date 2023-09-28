@@ -164,7 +164,10 @@ public class BeeStates : MonoBehaviour
         {
             exclamation.SetActive(false);
         }
-        Destroy(detectorOriginPt);  //removes frmo list and turns off visuals
+        
+        gm.BeeVisionObjects.Remove(detectorOriginPt);
+        Destroy(detectorOriginPt);
+
         //bzzzz sound
         yield return null;
     }
