@@ -36,9 +36,9 @@ public class PlayerBehavior : MonoBehaviour
     private bool canPickUpObj = true;
 
     [Header("Web Platforms")]
-    public GameObject WebPlatform;
+    [HideInInspector] public GameObject WebPlatform;
     [SerializeField] private GameObject WebPlatformPrefab;
-    public int PlatformCount;
+    //public int PlatformCount;
 
     void Start()
     {
@@ -123,10 +123,12 @@ public class PlayerBehavior : MonoBehaviour
 
     public void SpawnWebPlatform()
     {
-        //if(!gm.BaseHead && PlatformCount < 3)
+        if (gm.WebPlatformList.Count < 3)       //if part enabled 
         {
-            PlatformCount++;
+            //PlatformCount++;
             WebPlatform = Instantiate(WebPlatformPrefab, spotToCarry.position, transform.rotation);
+            gm.WebPlatformList.Add(WebPlatform);
+            print(gm.WebPlatformList.Count); 
         }
     }
 }

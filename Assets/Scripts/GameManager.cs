@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public bool BaseLeg;
 
     public List<GameObject> BeeVisionObjects = new List<GameObject>();
+    public List<GameObject> WebPlatformList = new List<GameObject>();
 
     void Start()
     {
