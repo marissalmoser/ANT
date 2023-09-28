@@ -59,6 +59,7 @@ public class PlayerBehavior : MonoBehaviour
         if(!gm.BaseHead)
         {
             beeVision.SetActive(true);
+
         }
         if (gm.BaseHead)
         {

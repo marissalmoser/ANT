@@ -7,6 +7,8 @@ public class BeeStates : MonoBehaviour
 {
     public int State;
     private Rigidbody2D rb;
+    public GameManager GameManager;
+    private GameManager gm;
 
     [Header("Bee")]
     private bool isFacingRight = true;
@@ -23,7 +25,7 @@ public class BeeStates : MonoBehaviour
     [Header("Detection")]
     [SerializeField] private Vector2 detectorSize;
     [SerializeField] private LayerMask playerLayer;
-    [SerializeField] private Transform detectorOriginPt;
+    [SerializeField] private GameObject detectorOriginPt;
     private GameObject Player;
 
     [Header("Gizmos")]
@@ -34,6 +36,10 @@ public class BeeStates : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        gm = GameManager.GetComponent<GameManager>();
+
+        gm.BeeVisionObjects.Add(detectorOriginPt);
+        //print(gm.BeeVisionObjects.Count);
 
         step = speed * Time.deltaTime;
 
@@ -53,12 +59,12 @@ public class BeeStates : MonoBehaviour
                 StopAllCoroutines();
                 StartCoroutine(PatrolState());
                 StartCoroutine(ConstantDetection());
-                print("start detecting");
+                //print("start detecting");
                 break;
             case (1):                                              //Suspicious
                 StopAllCoroutines();
                 StartCoroutine(SusState());
-                print("stop detecting");
+                //print("stop detecting");
                 break;
             case (2):                                              //Alert
                 StopAllCoroutines();
@@ -95,7 +101,7 @@ public class BeeStates : MonoBehaviour
 
     IEnumerator SusState()
     {
-        print("sus");
+        //print("sus");
         //pauses movement
         targetPos = transform.position;
         Flip();
@@ -132,7 +138,7 @@ public class BeeStates : MonoBehaviour
             }
             else
             {
-                print("back to patrol");
+                //print("back to patrol");
                 targetPos = posA;
                 Flip();
                 FSM(0);
@@ -158,17 +164,18 @@ public class BeeStates : MonoBehaviour
         {
             exclamation.SetActive(false);
         }
+        Destroy(detectorOriginPt);  //removes frmo list and turns off visuals
         //bzzzz sound
         yield return null;
     }
 
     public bool PerformDetection()
     {
-        Collider2D collider = Physics2D.OverlapBox(detectorOriginPt.position, detectorSize, 0, playerLayer);
+        Collider2D collider = Physics2D.OverlapBox(detectorOriginPt.transform.position, detectorSize, 0, playerLayer);
         if(collider != null)
         {
             Player = collider.gameObject;
-            print("player detected");
+            //print("player detected");
             return (true);
         }
         else
@@ -181,11 +188,11 @@ public class BeeStates : MonoBehaviour
     {
         while(true)
         {
-            Collider2D collider = Physics2D.OverlapBox(detectorOriginPt.position, detectorSize, 0, playerLayer);
+            Collider2D collider = Physics2D.OverlapBox(detectorOriginPt.transform.position, detectorSize, 0, playerLayer);
             if (collider != null)
             {
                 Player = collider.gameObject;
-                print("player detected");
+                //print("player detected");
                 FSM(1);
             }
 
@@ -200,7 +207,7 @@ public class BeeStates : MonoBehaviour
             Gizmos.color = gizmoIdle;
             if (Player != null)
                 Gizmos.color = gizmoDetected;
-            Gizmos.DrawCube(detectorOriginPt.position, detectorSize);
+            Gizmos.DrawCube(detectorOriginPt.transform.position, detectorSize);
         }
     }
 

@@ -17,15 +17,11 @@ public class GameManager : MonoBehaviour
     public bool BaseHead;
     public bool BaseLeg;
 
+    public List<GameObject> BeeVisionObjects = new List<GameObject>();
+
     void Start()
     {
         BaseHead = true;
-        BaseLeg = true;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        BaseLeg = true; 
     }
 }

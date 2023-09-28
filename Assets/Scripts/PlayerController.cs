@@ -167,24 +167,40 @@ public class PlayerController : MonoBehaviour
 
     private void SwitchHeadPart(InputAction.CallbackContext obj)
     {
-        print("head");
         gm.BaseHead = !gm.BaseHead;
 
-        //changes the sprite
-        if(gm.BaseHead)
-        {
-            BeeMaskCrawl.SetActive(false);
-            BeeMaskWalk.SetActive(false);
-        }
+        //Bee Vision turned on
         if(!gm.BaseHead)
         {
+            //changes the sprite
             BeeMaskCrawl.SetActive(true);
             BeeMaskWalk.SetActive(true);
+
+            //vision on
+            foreach (var vision in gm.BeeVisionObjects)
+            {
+                vision.GetComponent<SpriteRenderer>().enabled = true;
+            }
         }
+
+        //Bee vision turned off
+        if (gm.BaseHead)
+        {
+            //changes the sprite
+            BeeMaskCrawl.SetActive(false);
+            BeeMaskWalk.SetActive(false);
+
+            //vision off
+            foreach (var vision in gm.BeeVisionObjects)
+            {
+                vision.GetComponent<SpriteRenderer>().enabled = false;
+            }
+        }
+
+        
     }
     private void SwitchLegPart(InputAction.CallbackContext obj)
     {
-        print("leg");
         gm.BaseLeg = !gm.BaseLeg;
 
         //changes the sprite
