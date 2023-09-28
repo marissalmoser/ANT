@@ -10,11 +10,14 @@ public class WebPlatformBehavior : MonoBehaviour
     public float Direction;
     [SerializeField] private GameObject Player;
 
+    private GameManager gm;
+
 
     void Start()
     {
         StartCoroutine(PlatformMoving());
         Rb.freezeRotation = true;
+        gm = FindObjectOfType<GameManager>().GetComponent<GameManager>();
     }
 
     IEnumerator PlatformMoving()
@@ -50,7 +53,7 @@ public class WebPlatformBehavior : MonoBehaviour
     IEnumerator DestroyWebPlatform()
     {
         yield return new WaitForSeconds(5);
-        //Player.GetComponent<PlayerBehavior>().PlatformCount--;
+        gm.WebPlatformList.Remove(gameObject);
         Destroy(gameObject);
     }
 }
