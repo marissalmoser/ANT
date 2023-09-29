@@ -103,18 +103,16 @@ public class PlayerBehavior : MonoBehaviour
     public void PickUpObject()
     {
         //picking up
-        if (pickUpTriggered && canPickUpObj && gm.BaseLeg)
+        if (pickUpTriggered && canPickUpObj)
         {
-            //print("picked up");
             pickUpObject.transform.position = spotToCarry.position;
             pickUpObject.transform.parent = gameObject.transform;
             canPickUpObj = false;
             pickUpTriggered = false;
         }
         //dropping
-        else if (!canPickUpObj && gm.BaseLeg)
+        else if (!canPickUpObj)
         {
-            //print("dropped");
             pickUpObject.transform.parent = null;
             canPickUpObj = true;
             pickUpObject = null;
@@ -123,12 +121,11 @@ public class PlayerBehavior : MonoBehaviour
 
     public void SpawnWebPlatform()
     {
-        if (gm.WebPlatformList.Count < 3)       //if part enabled 
+        if (gm.WebPlatformList.Count < 3 && !gm.BaseLeg)
         {
-            //PlatformCount++;
             WebPlatform = Instantiate(WebPlatformPrefab, spotToCarry.position, transform.rotation);
             gm.WebPlatformList.Add(WebPlatform);
-            print(gm.WebPlatformList.Count); 
+            //print(gm.WebPlatformList.Count); 
         }
     }
 }
