@@ -111,7 +111,7 @@ public class PlayerBehavior : MonoBehaviour
             pickUpTriggered = false;
         }
         //dropping
-        else if (!canPickUpObj)
+        else if (!canPickUpObj && pickUpObject != null)
         {
             pickUpObject.transform.parent = null;
             canPickUpObj = true;

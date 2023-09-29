@@ -55,7 +55,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject BeeMaskWalk;
     [SerializeField] private GameObject BeeMaskCrawl;
     [SerializeField] private GameObject WebShooterWalk;
-    [SerializeField] private GameObject WebShooterCrawl;
 
     void Start()
     {
@@ -208,12 +207,10 @@ public class PlayerController : MonoBehaviour
         //changes the sprite
         if (gm.BaseLeg)
         {
-            WebShooterCrawl.SetActive(false);
             WebShooterWalk.SetActive(false);
         }
         if (!gm.BaseLeg)
         {
-            WebShooterCrawl.SetActive(true);
             WebShooterWalk.SetActive(true);
         }
     }
@@ -280,7 +277,7 @@ public class PlayerController : MonoBehaviour
         }
         
         //player crawl
-        if(playerCanCrawl && crawlMapEnabled && CanClimb())                                                               // add bool for crawlable walls here
+        if(playerCanCrawl && crawlMapEnabled)          // && CanClimb()    ?
         {
             Rb.velocity = new Vector2(speed * crawlDirection.x, speed * crawlDirection.y);
         }
