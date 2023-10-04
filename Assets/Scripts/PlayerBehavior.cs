@@ -15,7 +15,6 @@ using UnityEngine;
 public class PlayerBehavior : MonoBehaviour
 {
     //components and GOs
-    public GameManager GameManager;
     private GameManager gm;
     private PlayerController pc;
 
@@ -42,7 +41,7 @@ public class PlayerBehavior : MonoBehaviour
 
     void Start()
     {
-        gm = GameManager.GetComponent<GameManager>();
+        gm = FindObjectOfType<GameManager>().GetComponent<GameManager>();
         pc = gameObject.GetComponent<PlayerController>();
     }
 

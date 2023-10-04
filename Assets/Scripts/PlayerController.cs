@@ -18,8 +18,8 @@ public class PlayerController : MonoBehaviour
 {
     //components and GOs
     public PlayerInput MyPlayerInput;
-    public Rigidbody2D Rb;
-    public GameManager GameManager;
+    private Rigidbody2D rb;
+    //public GameManager GameManager;
     private GameManager gm;
     private PlayerBehavior pb;
     public GameObject WalkGraphics;
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     //moving variables
     [Header("Player Movement")]
     [SerializeField] private bool playerCanMove;        //starts and stops player movement regardless of system
-    private bool playerCanCrawl;                        //
+    private bool playerCanCrawl;                        //on start and cancel
     private bool crawlMapEnabled;
     [SerializeField] private float speed;
     private float direction;
@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     //private Vector2 crawlRotation;
     private bool isFacingRight = true;
     [SerializeField] private LayerMask climbableWalls;
+    private float angle;
 
     //jumping variables
     [Header("Jumping")]
@@ -56,10 +57,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject BeeMaskCrawl;
     [SerializeField] private GameObject WebShooterWalk;
 
-    void Start()
+    [Header("Bug Parts")]
+    [SerializeField] private Camera cam;
+    private Vector3 camOffset = new Vector3(0, 1, -10);
+    private Vector3 camPos;
+
+    void Awake()
     {
-        gm = GameManager.GetComponent<GameManager>();
+        gm = FindObjectOfType<GameManager>().GetComponent<GameManager>();
         pb = gameObject.GetComponent<PlayerBehavior>();
+        rb = gameObject.GetComponent<Rigidbody2D>();
 
         MyPlayerInput.actions.FindActionMap("PlayerTwoDirectionMovement").Enable();
         MyPlayerInput.actions.FindActionMap("PartSwitching").Enable();
@@ -135,19 +142,18 @@ public class PlayerController : MonoBehaviour
     private void Handle_crawlCanceled(InputAction.CallbackContext obj)
     {
         playerCanCrawl = false;
-        Rb.velocity = Vector2.zero;
+        rb.velocity = Vector2.zero;
         crawlDirection = Vector2.zero;
     }
 
     private void SwitchMovementSystem(InputAction.CallbackContext obj)
     {
-        
         //switch to crawling movement system
         if (!crawlMapEnabled && gm.BaseLeg)
         {
             //print("switch to crawling movement system");
             crawlMapEnabled = true;
-            Rb.gravityScale = 0;
+            rb.gravityScale = 0;
             MyPlayerInput.actions.FindActionMap("PlayerTwoDirectionMovement").Disable();
             MyPlayerInput.actions.FindActionMap("PlayerCrawlingMovement").Enable();
             CrawlGraphics.SetActive(true);
@@ -158,7 +164,8 @@ public class PlayerController : MonoBehaviour
         {
             //print("switch to 2D movement system");
             crawlMapEnabled = false;
-            Rb.gravityScale = 4;
+            rb.gravityScale = 4;
+            transform.rotation = Quaternion.AngleAxis(0, Vector3.forward);
             MyPlayerInput.actions.FindActionMap("PlayerTwoDirectionMovement").Enable();
             MyPlayerInput.actions.FindActionMap("PlayerCrawlingMovement").Disable();
             CrawlGraphics.SetActive(false);
@@ -202,16 +209,19 @@ public class PlayerController : MonoBehaviour
     }
     private void SwitchLegPart(InputAction.CallbackContext obj)
     {
-        gm.BaseLeg = !gm.BaseLeg;
-
-        //changes the sprite
-        if (gm.BaseLeg)
+        //enables web shooter
+        if (gm.BaseLeg && !playerCanCrawl)
         {
-            WebShooterWalk.SetActive(false);
-        }
-        if (!gm.BaseLeg)
-        {
+            print("web on");
             WebShooterWalk.SetActive(true);
+            gm.BaseLeg = !gm.BaseLeg;
+        }
+        //disables web shooter
+        else
+        {
+            print("web off");
+            WebShooterWalk.SetActive(false);
+            gm.BaseLeg = !gm.BaseLeg;
         }
     }
 
@@ -246,15 +256,14 @@ public class PlayerController : MonoBehaviour
         {
             crawlDirection = crawl.ReadValue<Vector2>();
         }
+
         //rotation of the player during movement. Only if in crawl map
-        //if (crawlDirection != Vector2.zero && crawlMapEnabled)
-        //{
-        //    Quaternion targetRotation = Quaternion.LookRotation(transform.forward, crawlRotation);
-        //    Quaternion rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-        //    Rb.MoveRotation(rotation);
-        //    //print(rotation);
-        //    //print(crawlRotation);
-        //}
+        if (crawlDirection != Vector2.zero && crawlMapEnabled)
+        {
+            angle = Mathf.Atan2(crawlDirection.y, crawlDirection.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+
+        }
     }
 
     private void FixedUpdate()
@@ -262,27 +271,30 @@ public class PlayerController : MonoBehaviour
         //player 2D movement
         if(playerCanMove == true)
         {
-            Rb.velocity = new Vector2(speed * direction, Rb.velocity.y);
+            rb.velocity = new Vector2(speed * direction, rb.velocity.y);
         }
         else
         {
-            Rb.velocity = new Vector2(0, Rb.velocity.y);
+            rb.velocity = new Vector2(0, rb.velocity.y);
         }
 
         //player jump
-        if (IsGrounded() && jumpStart && !crawlMapEnabled && Rb.velocity.y < 0.5f)
+        if (IsGrounded() && jumpStart && !crawlMapEnabled && rb.velocity.y < 0.5f)
         {
             //print("jump");
-            Rb.velocity = new Vector2(Rb.velocity.x, jumpingPower);
+            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
         }
         
         //player crawl
         if(playerCanCrawl && crawlMapEnabled)          // && CanClimb()    ?
         {
-            Rb.velocity = new Vector2(speed * crawlDirection.x, speed * crawlDirection.y);
+            rb.velocity = new Vector2(crawlDirection.x, crawlDirection.y) * speed;
+            //print(CanClimb());
         }
 
-        //print(CanClimb());
+        //camera movement
+        camPos = transform.position + camOffset;
+        cam.transform.position = camPos;
 
     }
 
@@ -302,8 +314,26 @@ public class PlayerController : MonoBehaviour
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
-    private bool CanClimb()
+    private bool CanClimbWall()
     {
-        return Physics2D.OverlapCircle(transform.position, 0.2f, climbableWalls);
+        return Physics2D.OverlapCircle(transform.position, 0.2f, ~climbableWalls);
+    }
+
+    public void OnDestroy()
+    {
+        move.started -= Handle_moveStarted;
+        move.canceled -= Handle_moveCanceled;
+        jump.started -= Handle_jumpStarted;
+        jump.canceled -= Handle_jumpCanceled;
+        head.started -= SwitchHeadPart;
+        leg.started -= SwitchLegPart;
+        crawl.started -= Handle_crawlStarted;
+        crawl.canceled -= Handle_crawlCanceled;
+        changeMov.started -= SwitchMovementSystem;
+        interact.started -= Handle_interactStarted;
+        interact.canceled -= Handle_interactCanceled;
+        spawnWeb.started -= SpawnWebStarted;
+        spawnWeb.canceled -= SpawnWebCanceled;
+        pause.started -= GamePaused;
     }
 }

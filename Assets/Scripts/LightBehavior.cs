@@ -1,3 +1,13 @@
+/**********************************************************************************
+
+// File Name :         LightBehavior.cs
+// Author :            Marissa Moser
+// Creation Date :     September 25, 2023
+//
+// Brief Description : 
+
+**********************************************************************************/ 
+
 using System;
 using System.Collections;
 using System.Collections.Generic;

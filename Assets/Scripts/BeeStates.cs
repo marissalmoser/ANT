@@ -1,3 +1,13 @@
+/**********************************************************************************
+
+// File Name :         BeeStates.cs
+// Author :            Marissa Moser
+// Creation Date :     September 24, 2023
+//
+// Brief Description : 
+
+**********************************************************************************/
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +17,6 @@ public class BeeStates : MonoBehaviour
 {
     public int State;
     private Rigidbody2D rb;
-    public GameManager GameManager;
     private GameManager gm;
 
     [Header("Bee")]
@@ -36,7 +45,7 @@ public class BeeStates : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
-        gm = GameManager.GetComponent<GameManager>();
+        gm = FindObjectOfType<GameManager>().GetComponent<GameManager>();
 
         gm.BeeVisionObjects.Add(detectorOriginPt);
         //print(gm.BeeVisionObjects.Count);
@@ -149,7 +158,7 @@ public class BeeStates : MonoBehaviour
     IEnumerator AlertState()
     {
         print("BEE MORE SNEAKY BZZZZZZ");
-        //eyes and dance animation
+        StartCoroutine(gm.EndLevel());
         yield return null;
     }
 
@@ -195,8 +204,7 @@ public class BeeStates : MonoBehaviour
             if (collider != null)
             {
                 Player = collider.gameObject;
-                //print("player detected");
-                FSM(1);
+                FSM(1);                         //goes into suspicious state
             }
 
             yield return new WaitForSeconds(0.3f);

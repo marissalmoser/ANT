@@ -11,9 +11,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager gm;
+
     public bool BaseHead;
     public bool BaseLeg;
 
@@ -22,7 +25,25 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        if(gm == null)
+        {
+            gm = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(this);
+        }
         BaseHead = true;
         BaseLeg = true; 
+    }
+
+    public IEnumerator EndLevel()
+    {
+        print("Game Over");
+        //stop movement
+        //all bee scream animation
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
