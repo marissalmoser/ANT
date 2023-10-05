@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> BeeVisionObjects = new List<GameObject>();
     public List<GameObject> WebPlatformList = new List<GameObject>();
+    public List<GameObject> Bees = new List<GameObject>();
 
     void Start()
     {
@@ -41,8 +42,9 @@ public class GameManager : MonoBehaviour
     public IEnumerator EndLevel()
     {
         print("Game Over");
-        //stop movement
-        //all bee scream animation
+        //stop player movement
+        //forloop all bee scream animation from list of bees, set move towards pos to player
+        //clear bee list
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

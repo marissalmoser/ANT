@@ -48,7 +48,7 @@ public class BeeStates : MonoBehaviour
         gm = FindObjectOfType<GameManager>().GetComponent<GameManager>();
 
         gm.BeeVisionObjects.Add(detectorOriginPt);
-        //print(gm.BeeVisionObjects.Count);
+        gm.Bees.Add(gameObject);
 
         step = speed * Time.deltaTime;
 

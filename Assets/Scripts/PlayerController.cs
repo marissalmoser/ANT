@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     [Header("Player Movement")]
     [SerializeField] private bool playerCanMove;        //starts and stops player movement regardless of system
     private bool playerCanCrawl;                        //on start and cancel
-    private bool crawlMapEnabled;
+    public bool CrawlMapEnabled;
     [SerializeField] private float speed;
     private float direction;
     //private float rotationSpeed = 3;
@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     private bool isFacingRight = true;
     [SerializeField] private LayerMask climbableWalls;
     private float angle;
+    private int canMove = 1;
 
     //jumping variables
     [Header("Jumping")]
@@ -53,11 +54,11 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool Interact;
 
     [Header("Bug Parts")]
-    [SerializeField] private GameObject BeeMaskWalk;
-    [SerializeField] private GameObject BeeMaskCrawl;
-    [SerializeField] private GameObject WebShooterWalk;
+    [SerializeField] private GameObject beeMaskWalk;
+    [SerializeField] private GameObject beeMaskCrawl;
+    [SerializeField] private GameObject webShooterWalk;
 
-    [Header("Bug Parts")]
+    [Header("Camera")]
     [SerializeField] private Camera cam;
     private Vector3 camOffset = new Vector3(0, 1, -10);
     private Vector3 camPos;
@@ -111,13 +112,15 @@ public class PlayerController : MonoBehaviour
     private void Handle_interactCanceled(InputAction.CallbackContext obj)
     {
         Interact = false;
-
-        
     }
 
     private void Handle_moveStarted(InputAction.CallbackContext obj)
     {
         playerCanMove = true;
+        if (canMove == 0)
+        {
+            //part not enabled
+        }
     }
     private void Handle_moveCanceled(InputAction.CallbackContext obj)
     {
@@ -138,6 +141,10 @@ public class PlayerController : MonoBehaviour
     private void Handle_crawlStarted(InputAction.CallbackContext obj)
     {
         playerCanCrawl = true;
+        if(canMove == 0)
+        {
+            //part not enabled
+        }
     }
     private void Handle_crawlCanceled(InputAction.CallbackContext obj)
     {
@@ -149,27 +156,34 @@ public class PlayerController : MonoBehaviour
     private void SwitchMovementSystem(InputAction.CallbackContext obj)
     {
         //switch to crawling movement system
-        if (!crawlMapEnabled && gm.BaseLeg)
+        if (!CrawlMapEnabled && gm.BaseLeg && canMove == 1)
         {
             //print("switch to crawling movement system");
-            crawlMapEnabled = true;
+            CrawlMapEnabled = true;
             rb.gravityScale = 0;
+            rb.velocity = Vector2.zero;
+            //spotToCarry.transform.position = crawlCarryOffset + transform.position;
             MyPlayerInput.actions.FindActionMap("PlayerTwoDirectionMovement").Disable();
             MyPlayerInput.actions.FindActionMap("PlayerCrawlingMovement").Enable();
             CrawlGraphics.SetActive(true);
             WalkGraphics.SetActive(false);
         }
         //switch to 2D movement system
-        else
+        else if (canMove == 1)
         {
             //print("switch to 2D movement system");
-            crawlMapEnabled = false;
+            CrawlMapEnabled = false;
             rb.gravityScale = 4;
+            //spotToCarry.transform.position = walkCarryOffset + transform.position;
             transform.rotation = Quaternion.AngleAxis(0, Vector3.forward);
             MyPlayerInput.actions.FindActionMap("PlayerTwoDirectionMovement").Enable();
             MyPlayerInput.actions.FindActionMap("PlayerCrawlingMovement").Disable();
             CrawlGraphics.SetActive(false);
             WalkGraphics.SetActive(true);
+        }
+        else
+        {
+            //part not enabled
         }
     }
 
@@ -181,28 +195,34 @@ public class PlayerController : MonoBehaviour
         if(!gm.BaseHead)
         {
             //changes the sprite
-            BeeMaskCrawl.SetActive(true);
-            BeeMaskWalk.SetActive(true);
+            beeMaskCrawl.SetActive(true);
+            beeMaskWalk.SetActive(true);
 
             //vision on
             foreach (var vision in gm.BeeVisionObjects)
             {
                 vision.GetComponent<SpriteRenderer>().enabled = true;
             }
+
+            //stop movement
+            canMove = 0;
         }
 
         //Bee vision turned off
         if (gm.BaseHead)
         {
             //changes the sprite
-            BeeMaskCrawl.SetActive(false);
-            BeeMaskWalk.SetActive(false);
+            beeMaskCrawl.SetActive(false);
+            beeMaskWalk.SetActive(false);
 
             //vision off
             foreach (var vision in gm.BeeVisionObjects)
             {
                 vision.GetComponent<SpriteRenderer>().enabled = false;
             }
+
+            //resume movement
+            canMove = 1;
         }
 
         
@@ -213,14 +233,14 @@ public class PlayerController : MonoBehaviour
         if (gm.BaseLeg && !playerCanCrawl)
         {
             print("web on");
-            WebShooterWalk.SetActive(true);
+            webShooterWalk.SetActive(true);
             gm.BaseLeg = !gm.BaseLeg;
         }
         //disables web shooter
         else
         {
             print("web off");
-            WebShooterWalk.SetActive(false);
+            webShooterWalk.SetActive(false);
             gm.BaseLeg = !gm.BaseLeg;
         }
     }
@@ -257,8 +277,8 @@ public class PlayerController : MonoBehaviour
             crawlDirection = crawl.ReadValue<Vector2>();
         }
 
-        //rotation of the player during movement. Only if in crawl map
-        if (crawlDirection != Vector2.zero && crawlMapEnabled)
+        //rotation of the player during movement. Only if in crawl map and bee vision off
+        if (crawlDirection != Vector2.zero && CrawlMapEnabled && canMove == 1)
         {
             angle = Mathf.Atan2(crawlDirection.y, crawlDirection.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
@@ -271,7 +291,7 @@ public class PlayerController : MonoBehaviour
         //player 2D movement
         if(playerCanMove == true)
         {
-            rb.velocity = new Vector2(speed * direction, rb.velocity.y);
+            rb.velocity = new Vector2(speed * direction * canMove, rb.velocity.y);
         }
         else
         {
@@ -279,16 +299,17 @@ public class PlayerController : MonoBehaviour
         }
 
         //player jump
-        if (IsGrounded() && jumpStart && !crawlMapEnabled && rb.velocity.y < 0.5f)
+        if (IsGrounded() && jumpStart && !CrawlMapEnabled && rb.velocity.y < 0.5f && canMove == 1)
         {
             //print("jump");
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
         }
+        //else "part not enabled"
         
         //player crawl
-        if(playerCanCrawl && crawlMapEnabled)          // && CanClimb()    ?
+        if(playerCanCrawl && CrawlMapEnabled)          // && CanClimb()    ?
         {
-            rb.velocity = new Vector2(crawlDirection.x, crawlDirection.y) * speed;
+            rb.velocity = new Vector2(crawlDirection.x, crawlDirection.y) * speed * canMove;
             //print(CanClimb());
         }
 
@@ -300,12 +321,15 @@ public class PlayerController : MonoBehaviour
 
     private void Flip()
     {
-        if (isFacingRight && direction < 0f || !isFacingRight && direction > 0 && !crawlMapEnabled)
+        if (isFacingRight && direction < 0f || !isFacingRight && direction > 0 && !CrawlMapEnabled)
         {
-            isFacingRight = !isFacingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1;
-            transform.localScale = localScale;
+            if(canMove == 1)
+            {
+                isFacingRight = !isFacingRight;
+                Vector3 localScale = transform.localScale;
+                localScale.x *= -1;
+                transform.localScale = localScale;
+            }
         }
     }
 

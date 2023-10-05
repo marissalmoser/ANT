@@ -655,9 +655,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   Interact: 0
-  BeeMaskWalk: {fileID: 2444803443774060171}
-  BeeMaskCrawl: {fileID: 2444803443469020180}
-  WebShooterWalk: {fileID: 2444803442040450903}
+  beeMaskWalk: {fileID: 2444803443774060171}
+  beeMaskCrawl: {fileID: 2444803443469020180}
+  webShooterWalk: {fileID: 2444803442040450903}
+  spotToCarry: {fileID: 2444803443211612257}
   cam: {fileID: 0}
 --- !u!114 &2444803443801640145
 MonoBehaviour:

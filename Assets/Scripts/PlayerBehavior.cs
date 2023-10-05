@@ -24,20 +24,20 @@ public class PlayerBehavior : MonoBehaviour
     private GameObject breakableObject;
 
     //bee vision vars
-    [Header("Bee Vision")]
-    [SerializeField] private GameObject beeVision;
+    //[Header("Bee Vision")]
 
     //carrying object vars
     [Header("Carrying Objects")]
     [SerializeField] private Transform spotToCarry;
-    private GameObject pickUpObject;
+    private GameObject pickedUpObject;
     private bool pickUpTriggered;
-    private bool canPickUpObj = true;
+    private bool isCarrying;
+    private Vector3 crawlCarryOffset = new Vector3(0, -0.12f, 0);
+    private Vector3 walkCarryOffset = new Vector3(0, 0.35f, 0);
 
     [Header("Web Platforms")]
     [HideInInspector] public GameObject WebPlatform;
     [SerializeField] private GameObject WebPlatformPrefab;
-    //public int PlatformCount;
 
     void Start()
     {
@@ -57,12 +57,12 @@ public class PlayerBehavior : MonoBehaviour
         //Bee Vision
         if(!gm.BaseHead)
         {
-            beeVision.SetActive(true);
+            //beeVision.SetActive(true);
 
         }
         if (gm.BaseHead)
         {
-            beeVision.SetActive(false);
+            //beeVision.SetActive(false);
         }
     }
 
@@ -74,12 +74,21 @@ public class PlayerBehavior : MonoBehaviour
             breakableTriggered = true;
             breakableObject = collision.gameObject;
         }
+    }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
         //triggeres a pickup-able object
         if (collision.gameObject.CompareTag("PickUp-able"))
         {
             pickUpTriggered = true;
-            pickUpObject = collision.gameObject;
+            //print(pickUpTriggered);
+
+            if (!isCarrying)
+            {
+
+                pickedUpObject = collision.gameObject;
+            }
         }
     }
 
@@ -96,26 +105,45 @@ public class PlayerBehavior : MonoBehaviour
         if (collision.gameObject.CompareTag("PickUp-able"))
         {
             pickUpTriggered = false;
+            print(pickUpTriggered);
         }
     }
 
     public void PickUpObject()
     {
         //picking up
-        if (pickUpTriggered && canPickUpObj)
+        if (pickUpTriggered && !isCarrying)
         {
-            pickUpObject.transform.position = spotToCarry.position;
-            pickUpObject.transform.parent = gameObject.transform;
-            canPickUpObj = false;
-            pickUpTriggered = false;
+            //print("pick up");
+            isCarrying = true;
+            StartCoroutine(MovePickedUpObjeect());
         }
         //dropping
-        else if (!canPickUpObj && pickUpObject != null)
+        else if (pickedUpObject != null)
         {
-            pickUpObject.transform.parent = null;
-            canPickUpObj = true;
-            pickUpObject = null;
+            //print("drop");
+            isCarrying = false;
         }
+    }
+
+    IEnumerator MovePickedUpObjeect()
+    {
+        while(isCarrying)
+        {
+            if(pc.CrawlMapEnabled && pickedUpObject != null)
+            {
+                pickedUpObject.transform.position = transform.position + crawlCarryOffset;
+                pickedUpObject.transform.rotation = transform.rotation;
+            }
+            else if(pickedUpObject != null)
+            {
+                pickedUpObject.transform.position = transform.position + walkCarryOffset;
+            }
+            yield return null;
+        }
+
+        pickedUpObject = null;
+        StopCoroutine(MovePickedUpObjeect());
     }
 
     public void SpawnWebPlatform()
