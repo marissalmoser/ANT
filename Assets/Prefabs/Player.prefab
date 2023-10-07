@@ -645,6 +645,7 @@ MonoBehaviour:
   WalkGraphics: {fileID: 2444803442952169869}
   CrawlGraphics: {fileID: 2444803443335895379}
   playerCanMove: 0
+  CrawlMapEnabled: 0
   speed: 10
   climbableWalls:
     serializedVersion: 2
@@ -658,7 +659,6 @@ MonoBehaviour:
   beeMaskWalk: {fileID: 2444803443774060171}
   beeMaskCrawl: {fileID: 2444803443469020180}
   webShooterWalk: {fileID: 2444803442040450903}
-  spotToCarry: {fileID: 2444803443211612257}
   cam: {fileID: 0}
 --- !u!114 &2444803443801640145
 MonoBehaviour:
@@ -672,7 +672,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b69d343114b32f469046d615411a086, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beeVision: {fileID: 0}
   spotToCarry: {fileID: 2444803443211612254}
   WebPlatform: {fileID: 0}
   WebPlatformPrefab: {fileID: 4626731483180130535, guid: 61419224914f1c04ebbe84ddead1336f, type: 3}

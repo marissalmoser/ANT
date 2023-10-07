@@ -122,9 +122,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5293886322531504876}
   - component: {fileID: 8873776406786294116}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BeeVisionGlow
-  m_TagString: Untagged
+  m_TagString: PickUp-able
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

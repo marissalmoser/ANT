@@ -20,13 +20,14 @@ public class PlayerController : MonoBehaviour
     public PlayerInput MyPlayerInput;
     private Rigidbody2D rb;
     //public GameManager GameManager;
-    private GameManager gm;
+    //private GameManager gm;
     private PlayerBehavior pb;
     public GameObject WalkGraphics;
     public GameObject CrawlGraphics;
 
     //actions
     private InputAction move, jump, head, leg, crawl, changeMov, interact, spawnWeb, pause;
+    public static Action BeeVisionUI, WebShooterUI, ErrorMessage;
 
     //moving variables
     [Header("Player Movement")]
@@ -65,7 +66,8 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        gm = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+        //gm = GameManager.Instance;
+
         pb = gameObject.GetComponent<PlayerBehavior>();
         rb = gameObject.GetComponent<Rigidbody2D>();
 
@@ -120,6 +122,7 @@ public class PlayerController : MonoBehaviour
         if (canMove == 0)
         {
             //part not enabled
+            ErrorMessage?.Invoke();                                                                                               // 5th?
         }
     }
     private void Handle_moveCanceled(InputAction.CallbackContext obj)
@@ -144,6 +147,7 @@ public class PlayerController : MonoBehaviour
         if(canMove == 0)
         {
             //part not enabled
+            ErrorMessage?.Invoke(); 
         }
     }
     private void Handle_crawlCanceled(InputAction.CallbackContext obj)
@@ -156,7 +160,7 @@ public class PlayerController : MonoBehaviour
     private void SwitchMovementSystem(InputAction.CallbackContext obj)
     {
         //switch to crawling movement system
-        if (!CrawlMapEnabled && gm.BaseLeg && canMove == 1)
+        if (!CrawlMapEnabled && GameManager.Instance.BaseLeg && canMove == 1)
         {
             //print("switch to crawling movement system");
             CrawlMapEnabled = true;
@@ -168,8 +172,14 @@ public class PlayerController : MonoBehaviour
             CrawlGraphics.SetActive(true);
             WalkGraphics.SetActive(false);
         }
+        //trying to crawl with web shooter enabled
+        else if(!CrawlMapEnabled && !GameManager.Instance.BaseLeg && canMove == 1)
+        {
+            ErrorMessage?.Invoke();
+        }
+
         //switch to 2D movement system
-        else if (canMove == 1)
+        else if (CrawlMapEnabled && canMove == 1)
         {
             //print("switch to 2D movement system");
             CrawlMapEnabled = false;
@@ -183,43 +193,38 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            //part not enabled
+            //trying to move with bee vision
+            ErrorMessage?.Invoke();
         }
     }
 
     private void SwitchHeadPart(InputAction.CallbackContext obj)
     {
-        gm.BaseHead = !gm.BaseHead;
+        GameManager.Instance.BaseHead = !GameManager.Instance.BaseHead;
 
         //Bee Vision turned on
-        if(!gm.BaseHead)
+        if(!GameManager.Instance.BaseHead)
         {
             //changes the sprite
             beeMaskCrawl.SetActive(true);
             beeMaskWalk.SetActive(true);
 
             //vision on
-            foreach (var vision in gm.BeeVisionObjects)
-            {
-                vision.GetComponent<SpriteRenderer>().enabled = true;
-            }
-
+            BeeVisionUI?.Invoke();
+            
             //stop movement
             canMove = 0;
         }
 
         //Bee vision turned off
-        if (gm.BaseHead)
+        if (GameManager.Instance.BaseHead)
         {
             //changes the sprite
             beeMaskCrawl.SetActive(false);
             beeMaskWalk.SetActive(false);
 
             //vision off
-            foreach (var vision in gm.BeeVisionObjects)
-            {
-                vision.GetComponent<SpriteRenderer>().enabled = false;
-            }
+            BeeVisionUI?.Invoke();
 
             //resume movement
             canMove = 1;
@@ -229,19 +234,28 @@ public class PlayerController : MonoBehaviour
     }
     private void SwitchLegPart(InputAction.CallbackContext obj)
     {
+
+        //trying to turn web on with crawl
+        if (GameManager.Instance.BaseLeg && CrawlMapEnabled)
+        {
+            //part not enabled
+            ErrorMessage?.Invoke();
+        }
         //enables web shooter
-        if (gm.BaseLeg && !playerCanCrawl)
+        else if (GameManager.Instance.BaseLeg && !playerCanCrawl)
         {
             print("web on");
             webShooterWalk.SetActive(true);
-            gm.BaseLeg = !gm.BaseLeg;
+            GameManager.Instance.BaseLeg = !GameManager.Instance.BaseLeg;
+            WebShooterUI?.Invoke();
         }
         //disables web shooter
         else
         {
             print("web off");
             webShooterWalk.SetActive(false);
-            gm.BaseLeg = !gm.BaseLeg;
+            GameManager.Instance.BaseLeg = !GameManager.Instance.BaseLeg;
+            WebShooterUI?.Invoke();
         }
     }
 
@@ -267,11 +281,11 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         Flip();
+
         if (playerCanMove == true)
         {
             direction = move.ReadValue<float>();
         }
-
         if(playerCanCrawl == true)
         {
             crawlDirection = crawl.ReadValue<Vector2>();
@@ -304,7 +318,10 @@ public class PlayerController : MonoBehaviour
             //print("jump");
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
         }
-        //else "part not enabled"
+        else if(IsGrounded() && jumpStart && !CrawlMapEnabled && rb.velocity.y < 0.5f)
+        {
+            ErrorMessage?.Invoke(); 
+        }
         
         //player crawl
         if(playerCanCrawl && CrawlMapEnabled)          // && CanClimb()    ?

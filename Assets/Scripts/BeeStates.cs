@@ -17,7 +17,8 @@ public class BeeStates : MonoBehaviour
 {
     public int State;
     private Rigidbody2D rb;
-    private GameManager gm;
+    [SerializeField] GameObject LevelManager;
+    private LevelManager lm;
 
     [Header("Bee")]
     private bool isFacingRight = true;
@@ -42,18 +43,24 @@ public class BeeStates : MonoBehaviour
     public Color gizmoDetected = Color.red;
     public bool ShowGizmos = true;
 
-    void Start()
+    private  void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
-        gm = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+        lm = LevelManager.GetComponent<LevelManager>();
 
-        gm.BeeVisionObjects.Add(detectorOriginPt);
-        gm.Bees.Add(gameObject);
+        lm.BeeVisionObjects.Add(detectorOriginPt);
+        lm.Bees.Add(gameObject);
 
         step = speed * Time.deltaTime;
 
         FSM(0);
+
+        PlayerController.BeeVisionUI += BeeVisionEnabled;
+        PlayerController.BeeVisionUI += BeeVisionDisabled;
     }
+
+  
+
 
     /// <summary>
     /// Call this function with the State's parameter to change states :)
@@ -158,7 +165,7 @@ public class BeeStates : MonoBehaviour
     IEnumerator AlertState()
     {
         print("BEE MORE SNEAKY BZZZZZZ");
-        StartCoroutine(gm.EndLevel());
+        StartCoroutine(GameManager.Instance.EndLevel());
         yield return null;
     }
 
@@ -173,9 +180,9 @@ public class BeeStates : MonoBehaviour
         {
             exclamation.SetActive(false);
         }
-        
-        gm.BeeVisionObjects.Remove(detectorOriginPt);
-        Destroy(detectorOriginPt);
+
+        lm.BeeVisionObjects.Remove(detectorOriginPt);
+        Destroy(detectorOriginPt); //just turn off the sprite renderer is its off
 
         //bzzzz sound
         yield return null;
@@ -232,4 +239,21 @@ public class BeeStates : MonoBehaviour
             transform.localScale = localScale;
         }
     }
+
+    private void BeeVisionEnabled()
+    {
+        foreach (var vision in lm.BeeVisionObjects)
+        {
+            vision.GetComponent<SpriteRenderer>().enabled = true;
+        }
+    }
+
+    private void BeeVisionDisabled()
+    {
+        foreach (var vision in lm.BeeVisionObjects)
+        {
+            vision.GetComponent<SpriteRenderer>().enabled = false;
+        }
+    }
+
 }

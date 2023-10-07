@@ -17,37 +17,50 @@ public class LightBehavior : MonoBehaviour
 {
     [SerializeField] private GameObject Bee;
     private GameObject hiveObject;
+    private bool hiveInPlace;
+    [SerializeField] private LayerMask hiveLM;
+    [SerializeField] private Vector2 detectorSize;
 
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Start()
     {
-        if (collision.gameObject.CompareTag("PickUp-able"))
+        PlayerBehavior.ObjectDropped += LightBlocked;
+        StartCoroutine(ConstantDetection());
+    }
+
+    private void LightBlocked()
+    {
+        if (hiveInPlace)
         {
-            hiveObject = collision.gameObject;
-            StartCoroutine(LightBlocked());
+            Bee.GetComponent<BeeStates>().FSM(3);
+            Destroy(hiveObject.transform.parent.gameObject);
+            Destroy(gameObject);
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("PickUp-able"))
-        {
-            StopAllCoroutines();
-            hiveObject = null;
-        }
-    }
-
-    IEnumerator LightBlocked()
+    IEnumerator ConstantDetection()
     {
         while (true)
         {
-            if (hiveObject.transform.parent == null) 
+            Collider2D collider = Physics2D.OverlapBox(transform.position, detectorSize, 0, hiveLM);
+            if (collider != null)
             {
-                Bee.GetComponent<BeeStates>().FSM(3);
-                Destroy(gameObject);
-                Destroy(hiveObject);
+                //print(collider.gameObject);
+                hiveInPlace = true;
+                hiveObject = collider.gameObject;
+                //print(hiveObject);
             }
-            yield return null;
+            else
+            {
+                hiveInPlace = false;
+                hiveObject = null;
+            }
+
+            yield return new WaitForSeconds(0.3f);
         }
+    }
+
+    private void OnDestroy()
+    {
+        PlayerBehavior.ObjectDropped -= LightBlocked;
     }
 }

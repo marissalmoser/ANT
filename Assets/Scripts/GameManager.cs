@@ -12,29 +12,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager gm;
+    public static GameManager Instance;
 
     public bool BaseHead;
     public bool BaseLeg;
 
-    public List<GameObject> BeeVisionObjects = new List<GameObject>();
     public List<GameObject> WebPlatformList = new List<GameObject>();
-    public List<GameObject> Bees = new List<GameObject>();
 
-    void Start()
+    void Awake()
     {
-        if(gm == null)
+        if(Instance == null)
         {
-            gm = this;
+            Instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
+
         BaseHead = true;
         BaseLeg = true; 
     }
@@ -47,5 +47,6 @@ public class GameManager : MonoBehaviour
         //clear bee list
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
     }
 }

@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 3461796977761094395}
   - component: {fileID: 3461796977761094394}
   - component: {fileID: 3461796977761094396}
-  - component: {fileID: 3461796977761094397}
+  - component: {fileID: 3373553991704726180}
   m_Layer: 0
   m_Name: Light
   m_TagString: Untagged
@@ -275,7 +275,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.1836016, y: 1.3668551}
   m_EdgeRadius: 0
---- !u!114 &3461796977761094397
+--- !u!114 &3373553991704726180
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -288,3 +288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bee: {fileID: 0}
+  hiveInPlace: 0
+  hiveLM:
+    serializedVersion: 2
+    m_Bits: 64

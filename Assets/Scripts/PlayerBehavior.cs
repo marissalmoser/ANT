@@ -11,11 +11,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerBehavior : MonoBehaviour
 {
     //components and GOs
-    private GameManager gm;
     private PlayerController pc;
 
     //breaking object vars
@@ -34,6 +34,7 @@ public class PlayerBehavior : MonoBehaviour
     private bool isCarrying;
     private Vector3 crawlCarryOffset = new Vector3(0, -0.12f, 0);
     private Vector3 walkCarryOffset = new Vector3(0, 0.35f, 0);
+    public static Action ObjectDropped;
 
     [Header("Web Platforms")]
     [HideInInspector] public GameObject WebPlatform;
@@ -41,26 +42,26 @@ public class PlayerBehavior : MonoBehaviour
 
     void Start()
     {
-        gm = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+        //gm = FindObjectOfType<GameManager>().GetComponent<GameManager>();
         pc = gameObject.GetComponent<PlayerController>();
     }
 
     void Update()
     {
         //Breaks Objects
-        if (gm.BaseHead && breakableTriggered && pc.Interact)
+        if (GameManager.Instance.BaseHead && breakableTriggered && pc.Interact)
         {
             //print("breaking");
             Destroy(breakableObject);
         }
 
         //Bee Vision
-        if(!gm.BaseHead)
+        if(!GameManager.Instance.BaseHead)
         {
             //beeVision.SetActive(true);
 
         }
-        if (gm.BaseHead)
+        if (GameManager.Instance.BaseHead)
         {
             //beeVision.SetActive(false);
         }
@@ -86,7 +87,6 @@ public class PlayerBehavior : MonoBehaviour
 
             if (!isCarrying)
             {
-
                 pickedUpObject = collision.gameObject;
             }
         }
@@ -105,7 +105,7 @@ public class PlayerBehavior : MonoBehaviour
         if (collision.gameObject.CompareTag("PickUp-able"))
         {
             pickUpTriggered = false;
-            print(pickUpTriggered);
+            //print(pickUpTriggered);
         }
     }
 
@@ -121,8 +121,9 @@ public class PlayerBehavior : MonoBehaviour
         //dropping
         else if (pickedUpObject != null)
         {
-            //print("drop");
+            print("drop");
             isCarrying = false;
+            ObjectDropped?.Invoke();
         }
     }
 
@@ -148,10 +149,10 @@ public class PlayerBehavior : MonoBehaviour
 
     public void SpawnWebPlatform()
     {
-        if (gm.WebPlatformList.Count < 3 && !gm.BaseLeg)
+        if (GameManager.Instance.WebPlatformList.Count < 3 && !GameManager.Instance.BaseLeg)
         {
             WebPlatform = Instantiate(WebPlatformPrefab, spotToCarry.position, transform.rotation);
-            gm.WebPlatformList.Add(WebPlatform);
+            GameManager.Instance.WebPlatformList.Add(WebPlatform);
             //print(gm.WebPlatformList.Count); 
         }
     }
