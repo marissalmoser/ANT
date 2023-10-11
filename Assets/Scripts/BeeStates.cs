@@ -165,6 +165,7 @@ public class BeeStates : MonoBehaviour
     IEnumerator AlertState()
     {
         print("BEE MORE SNEAKY BZZZZZZ");
+        //all bees move toward player
         StartCoroutine(GameManager.Instance.EndLevel());
         yield return null;
     }
