@@ -42,29 +42,7 @@ public class PlayerBehavior : MonoBehaviour
 
     void Start()
     {
-        //gm = FindObjectOfType<GameManager>().GetComponent<GameManager>();
         pc = gameObject.GetComponent<PlayerController>();
-    }
-
-    void Update()
-    {
-        //Breaks Objects
-        //if (GameManager.Instance.BaseHead && breakableTriggered && pc.Interact)
-        //{
-        //    //print("breaking");
-        //    Destroy(breakableObject);
-        //}
-
-        //Bee Vision
-        if(!GameManager.Instance.BaseHead)
-        {
-            //beeVision.SetActive(true);
-
-        }
-        if (GameManager.Instance.BaseHead)
-        {
-            //beeVision.SetActive(false);
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -124,6 +102,15 @@ public class PlayerBehavior : MonoBehaviour
             print("drop");
             isCarrying = false;
             ObjectDropped?.Invoke();
+        }
+    }
+
+    public void BreakObject()
+    {
+        if (GameManager.Instance.BaseHead && breakableTriggered)
+        {
+            //print("breaking");
+            Destroy(breakableObject);
         }
     }
 

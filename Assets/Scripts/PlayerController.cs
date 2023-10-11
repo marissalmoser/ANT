@@ -109,6 +109,8 @@ public class PlayerController : MonoBehaviour
     {
         Interact = true;
 
+        pb.BreakObject();
+
         pb.PickUpObject();
     }
     private void Handle_interactCanceled(InputAction.CallbackContext obj)
