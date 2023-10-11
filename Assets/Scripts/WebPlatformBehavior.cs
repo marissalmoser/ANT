@@ -18,16 +18,12 @@ public class WebPlatformBehavior : MonoBehaviour
     [SerializeField] private float platformSpeed;
     [SerializeField] private Rigidbody2D Rb;
     public float Direction;
-    [SerializeField] private GameObject Player;
-
-    private GameManager gm;
-
+    private Coroutine currrentCoroutine;
 
     void Start()
     {
-        StartCoroutine(PlatformMoving());
+        currrentCoroutine = StartCoroutine(PlatformMoving());
         Rb.freezeRotation = true;
-        gm = FindObjectOfType<GameManager>().GetComponent<GameManager>();
     }
 
     IEnumerator PlatformMoving()
@@ -37,7 +33,7 @@ public class WebPlatformBehavior : MonoBehaviour
             if (PlatformCanMove)
             {
                 //print(PlatformCanMove);
-                Rb.velocity = new Vector2(platformSpeed * Direction, 0);
+                Rb.velocity = new Vector2(platformSpeed * Direction, 0);    //point and click
             }
             else
             {
@@ -45,7 +41,8 @@ public class WebPlatformBehavior : MonoBehaviour
                 Rb.velocity = Vector2.zero;
                 Rb.constraints = RigidbodyConstraints2D.FreezePosition;
                 Rb.freezeRotation = true;
-                StopCoroutine(PlatformMoving());
+                StopCoroutine(currrentCoroutine);
+                currrentCoroutine = StartCoroutine(PlatformBehavior());
             }
 
             yield return null;
@@ -60,10 +57,20 @@ public class WebPlatformBehavior : MonoBehaviour
         }
     }
 
+    IEnumerator PlatformBehavior()
+    {
+        print("wait 5");
+        yield return new WaitForSeconds(5);
+        currrentCoroutine = StartCoroutine(DestroyWebPlatform());
+    }
+
     IEnumerator DestroyWebPlatform()
     {
+        print("destroy in 5");
+        StopCoroutine(currrentCoroutine);
+        //play destroy animantion;
         yield return new WaitForSeconds(5);
-        gm.WebPlatformList.Remove(gameObject);
+        GameManager.Instance.WebPlatformList.Remove(gameObject);
         Destroy(gameObject);
     }
 }
