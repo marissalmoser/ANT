@@ -49,7 +49,7 @@ public class PlayerBehavior : MonoBehaviour
     void Update()
     {
         //Breaks Objects
-        if (GameManager.Instance.BaseHead && breakableTriggered && pc.Interact)
+       if (GameManager.Instance.BaseHead && breakableTriggered && pc.Interact)
         {
             //print("breaking");
             Destroy(breakableObject);
