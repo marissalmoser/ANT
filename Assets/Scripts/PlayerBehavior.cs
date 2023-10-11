@@ -49,11 +49,11 @@ public class PlayerBehavior : MonoBehaviour
     void Update()
     {
         //Breaks Objects
-        if (GameManager.Instance.BaseHead && breakableTriggered && pc.Interact)
-        {
-            //print("breaking");
-            Destroy(breakableObject);
-        }
+        //if (GameManager.Instance.BaseHead && breakableTriggered && pc.Interact)
+        //{
+        //    //print("breaking");
+        //    Destroy(breakableObject);
+        //}
 
         //Bee Vision
         if(!GameManager.Instance.BaseHead)
