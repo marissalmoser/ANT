@@ -109,7 +109,6 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (GameManager.Instance.BaseHead && breakableTriggered)
         {
-            //print("breaking");
             Destroy(breakableObject);
         }
     }
@@ -140,7 +139,7 @@ public class PlayerBehavior : MonoBehaviour
         {
             WebPlatform = Instantiate(WebPlatformPrefab, spotToCarry.position, transform.rotation);
             GameManager.Instance.WebPlatformList.Add(WebPlatform);
-            //print(gm.WebPlatformList.Count); 
+            PlayerController.PlatformCountUI?.Invoke();
         }
     }
 }

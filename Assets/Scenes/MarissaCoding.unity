@@ -1195,7 +1195,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &973029310
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1373,6 +1373,9 @@ MonoBehaviour:
   beeVisionText: {fileID: 1922153187}
   webPlatformText: {fileID: 804164532}
   errorMessageText: {fileID: 665583040}
+  WebPlatform1UI: {fileID: 973029309}
+  WebPlatform2UI: {fileID: 1207301434}
+  WebPlatform3UI: {fileID: 1700204192}
 --- !u!1 &1206668590
 GameObject:
   m_ObjectHideFlags: 0
@@ -1431,7 +1434,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1207301435
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1635,7 +1638,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1700204193
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1947,6 +1950,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1063440051061534949, guid: 2731053a08911bf4bb8c4aa3fbd4f78d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1063440052790088546, guid: 2731053a08911bf4bb8c4aa3fbd4f78d, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1997,6 +2004,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1063440052790088575, guid: 2731053a08911bf4bb8c4aa3fbd4f78d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1063440052828694841, guid: 2731053a08911bf4bb8c4aa3fbd4f78d, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

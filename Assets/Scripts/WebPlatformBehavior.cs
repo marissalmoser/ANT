@@ -71,6 +71,7 @@ public class WebPlatformBehavior : MonoBehaviour
         //play destroy animantion;
         yield return new WaitForSeconds(5);
         GameManager.Instance.WebPlatformList.Remove(gameObject);
+        PlayerController.PlatformCountUI?.Invoke();
         Destroy(gameObject);
     }
 }

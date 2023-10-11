@@ -19,15 +19,13 @@ public class PlayerController : MonoBehaviour
     //components and GOs
     public PlayerInput MyPlayerInput;
     private Rigidbody2D rb;
-    //public GameManager GameManager;
-    //private GameManager gm;
     private PlayerBehavior pb;
     public GameObject WalkGraphics;
     public GameObject CrawlGraphics;
 
     //actions
     private InputAction move, jump, head, leg, crawl, changeMov, interact, spawnWeb, pause;
-    public static Action BeeVisionUI, WebShooterUI, ErrorMessage;
+    public static Action BeeVisionUI, WebShooterUI, ErrorMessage, PlatformCountUI;
 
     //moving variables
     [Header("Player Movement")]
@@ -36,9 +34,7 @@ public class PlayerController : MonoBehaviour
     public bool CrawlMapEnabled;
     [SerializeField] private float speed;
     private float direction;
-    //private float rotationSpeed = 3;
     private Vector2 crawlDirection;
-    //private Vector2 crawlRotation;
     private bool isFacingRight = true;
     [SerializeField] private LayerMask climbableWalls;
     private float angle;
@@ -264,7 +260,9 @@ public class PlayerController : MonoBehaviour
     private void SpawnWebStarted(InputAction.CallbackContext obj)
     {
         pb.SpawnWebPlatform();
-        if(pb.WebPlatform != null)
+
+        //delete after new mouse pos
+        if (pb.WebPlatform != null)
         {
             pb.WebPlatform.GetComponent<WebPlatformBehavior>().Direction = direction;
         }
