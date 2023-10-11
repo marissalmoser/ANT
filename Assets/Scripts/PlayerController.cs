@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
 
     //interacting
     [HideInInspector] public bool Interact;
+    private Vector3 mousePosition;
+    private Vector2 mouseWorldPosition;
 
     [Header("Bug Parts")]
     [SerializeField] private GameObject beeMaskWalk;
@@ -92,7 +94,6 @@ public class PlayerController : MonoBehaviour
         interact.started += Handle_interactStarted;
         interact.canceled += Handle_interactCanceled;
         spawnWeb.started += SpawnWebStarted;
-        spawnWeb.canceled += SpawnWebCanceled;
         pause.started += GamePaused;
     }
 
@@ -259,23 +260,11 @@ public class PlayerController : MonoBehaviour
 
     private void SpawnWebStarted(InputAction.CallbackContext obj)
     {
+        mouseWorldPosition = Vector2.zero;
+        mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        WebPlatformBehavior.MousePosition = mouseWorldPosition;
+
         pb.SpawnWebPlatform();
-
-        //delete after new mouse pos
-        if (pb.WebPlatform != null)
-        {
-            pb.WebPlatform.GetComponent<WebPlatformBehavior>().Direction = direction;
-        }
-    }
-
-    private void SpawnWebCanceled(InputAction.CallbackContext obj)
-    {
-        //print(pb.WebPlatform);
-        if(pb.WebPlatform != null)
-        {
-            pb.WebPlatform.GetComponent<WebPlatformBehavior>().PlatformCanMove = false;
-            pb.WebPlatform = null;
-        }
     }
 
     private void Update()
@@ -374,7 +363,6 @@ public class PlayerController : MonoBehaviour
         interact.started -= Handle_interactStarted;
         interact.canceled -= Handle_interactCanceled;
         spawnWeb.started -= SpawnWebStarted;
-        spawnWeb.canceled -= SpawnWebCanceled;
         pause.started -= GamePaused;
     }
 }
