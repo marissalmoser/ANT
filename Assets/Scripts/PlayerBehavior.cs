@@ -110,6 +110,7 @@ public class PlayerBehavior : MonoBehaviour
         if (GameManager.Instance.BaseHead && breakableTriggered)
         {
             Destroy(breakableObject);
+            StartCoroutine(GameManager.Instance.NextLevel());
         }
     }
 
@@ -143,4 +144,6 @@ public class PlayerBehavior : MonoBehaviour
             PlayerController.PlatformCountUI?.Invoke();
         }
     }
+
+    
 }

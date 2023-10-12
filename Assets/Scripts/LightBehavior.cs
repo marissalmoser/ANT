@@ -31,7 +31,7 @@ public class LightBehavior : MonoBehaviour
     {
         if (hiveInPlace)
         {
-            Bee.GetComponent<BeeStates>().FSM(3);
+            Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
             Destroy(hiveObject.transform.parent.gameObject);
             Destroy(gameObject);
         }

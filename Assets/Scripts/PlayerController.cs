@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     public GameObject CrawlGraphics;
 
     //actions
-    private InputAction move, jump, head, leg, crawl, changeMov, interact, spawnWeb, pause;
+    private InputAction move, jump, head, leg, crawl, changeMov, interact, spawnWeb, pause, nextLevel;
     public static Action BeeVisionUI, WebShooterUI, ErrorMessage, PlatformCountUI;
 
     //moving variables
@@ -81,6 +81,7 @@ public class PlayerController : MonoBehaviour
         interact = MyPlayerInput.actions.FindActionMap("PartSwitching").FindAction("Interact");
         spawnWeb = MyPlayerInput.actions.FindActionMap("PartSwitching").FindAction("SpawnWebPlatform");
         pause = MyPlayerInput.actions.FindActionMap("PartSwitching").FindAction("Pause");
+        nextLevel = MyPlayerInput.actions.FindActionMap("PartSwitching").FindAction("NextLevelKB");
 
         move.started += Handle_moveStarted;
         move.canceled += Handle_moveCanceled;
@@ -95,6 +96,12 @@ public class PlayerController : MonoBehaviour
         interact.canceled += Handle_interactCanceled;
         spawnWeb.started += SpawnWebStarted;
         pause.started += GamePaused;
+        nextLevel.started += SkipToNextLevel;
+    }
+
+    private void SkipToNextLevel(InputAction.CallbackContext obj)
+    {
+        StartCoroutine(GameManager.Instance.NextLevel());
     }
 
     private void GamePaused(InputAction.CallbackContext obj)
@@ -121,7 +128,7 @@ public class PlayerController : MonoBehaviour
         if (canMove == 0)
         {
             //part not enabled
-            ErrorMessage?.Invoke();                                                                                               // 5th?
+            ErrorMessage?.Invoke();
         }
     }
     private void Handle_moveCanceled(InputAction.CallbackContext obj)
@@ -313,7 +320,7 @@ public class PlayerController : MonoBehaviour
         }
         
         //player crawl
-        if(playerCanCrawl && CrawlMapEnabled)          // && CanClimb()    ?
+        if(playerCanCrawl && CrawlMapEnabled)// && WallBehavior.OnClimbableWall)          // && CanClimb()    ?
         {
             rb.velocity = new Vector2(crawlDirection.x, crawlDirection.y) * speed * canMove;
             //print(CanClimb());
