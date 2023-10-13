@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 1063440051504674361}
   m_Layer: 7
   m_Name: WalkGraphics
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 1063440051921946339}
   m_Layer: 7
   m_Name: CrawlGraphics
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
