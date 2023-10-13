@@ -17,13 +17,16 @@ public class WebPlatformBehavior : MonoBehaviour
     public bool PlatformCanMove = true;
     [SerializeField] private float platformSpeed;
     [SerializeField] private Rigidbody2D Rb;
-    public float Direction;
+    private float step;
+    public static Vector3 MousePosition;
     private Coroutine currrentCoroutine;
 
     void Start()
     {
         currrentCoroutine = StartCoroutine(PlatformMoving());
         Rb.freezeRotation = true;
+
+        step = platformSpeed * Time.deltaTime;
     }
 
     IEnumerator PlatformMoving()
@@ -32,8 +35,16 @@ public class WebPlatformBehavior : MonoBehaviour
         {
             if (PlatformCanMove)
             {
-                //print(PlatformCanMove);
-                Rb.velocity = new Vector2(platformSpeed * Direction, 0);    //point and click
+                if(Vector2.Distance(transform.position, MousePosition) > 0.05f)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, MousePosition, step);
+                    //transform.Translate(targetPos * step);
+                    //Rb.AddForce(targetPos);
+                }
+                else
+                {
+                    PlatformCanMove = false;
+                }
             }
             else
             {
@@ -59,18 +70,19 @@ public class WebPlatformBehavior : MonoBehaviour
 
     IEnumerator PlatformBehavior()
     {
-        print("wait 5");
+        //print("wait 5");
         yield return new WaitForSeconds(5);
         currrentCoroutine = StartCoroutine(DestroyWebPlatform());
     }
 
     IEnumerator DestroyWebPlatform()
     {
-        print("destroy in 5");
+        //print("destroy in 5");
         StopCoroutine(currrentCoroutine);
         //play destroy animantion;
         yield return new WaitForSeconds(5);
         GameManager.Instance.WebPlatformList.Remove(gameObject);
+        PlayerController.PlatformCountUI?.Invoke();
         Destroy(gameObject);
     }
 }

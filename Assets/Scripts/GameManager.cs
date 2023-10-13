@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        Application.targetFrameRate = 60;
+
         BaseHead = true;
         BaseLeg = true; 
     }
@@ -48,5 +50,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
+    }
+    public IEnumerator NextLevel()
+    {
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

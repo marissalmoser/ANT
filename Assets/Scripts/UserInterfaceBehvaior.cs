@@ -20,6 +20,10 @@ public class UserInterfaceBehvaior : MonoBehaviour
     [SerializeField] private TMP_Text webPlatformText;
     [SerializeField] private GameObject errorMessageText;
 
+    [SerializeField] private GameObject WebPlatform1UI;
+    [SerializeField] private GameObject WebPlatform2UI;
+    [SerializeField] private GameObject WebPlatform3UI;
+
     private Coroutine errorCoroutineCache;
 
     void Awake()
@@ -27,6 +31,7 @@ public class UserInterfaceBehvaior : MonoBehaviour
         PlayerController.BeeVisionUI += SwitchHeadUI;
         PlayerController.WebShooterUI += SwitchLegUI;
         PlayerController.ErrorMessage += StartErrorCoroutine;
+        PlayerController.PlatformCountUI += ChangePlatformCountUI;
     }
 
     private void StartErrorCoroutine()
@@ -72,6 +77,34 @@ public class UserInterfaceBehvaior : MonoBehaviour
         }
     }
 
+    public void ChangePlatformCountUI()
+    {
+        if(GameManager.Instance.WebPlatformList.Count == 0)
+        {
+            WebPlatform1UI.SetActive(false);
+            WebPlatform2UI.SetActive(false);
+            WebPlatform3UI.SetActive(false);
+        }
+        if (GameManager.Instance.WebPlatformList.Count == 1)
+        {
+            WebPlatform1UI.SetActive(true);
+            WebPlatform2UI.SetActive(false);
+            WebPlatform3UI.SetActive(false);
+        }
+        if (GameManager.Instance.WebPlatformList.Count == 2)
+        {
+            WebPlatform1UI.SetActive(true);
+            WebPlatform2UI.SetActive(true);
+            WebPlatform3UI.SetActive(false);
+        }
+        if (GameManager.Instance.WebPlatformList.Count == 3)
+        {
+            WebPlatform1UI.SetActive(true);
+            WebPlatform2UI.SetActive(true);
+            WebPlatform3UI.SetActive(true);
+        }
+    }
+
     public IEnumerator ErrorMesageUI()
     {
         errorMessageText.SetActive(true);
@@ -86,5 +119,7 @@ public class UserInterfaceBehvaior : MonoBehaviour
     {
         PlayerController.BeeVisionUI -= SwitchHeadUI;
         PlayerController.WebShooterUI -= SwitchLegUI;
+        PlayerController.ErrorMessage -= StartErrorCoroutine;
+        PlayerController.PlatformCountUI -= ChangePlatformCountUI;
     }
 }
