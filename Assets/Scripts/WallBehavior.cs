@@ -1,3 +1,13 @@
+/**********************************************************************************
+
+// File Name :         WallBehavior.cs
+// Author :            Marissa Moser
+// Creation Date :     October 12, 2023
+//
+// Brief Description : 
+
+**********************************************************************************/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

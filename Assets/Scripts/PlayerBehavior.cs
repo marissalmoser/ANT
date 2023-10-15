@@ -99,7 +99,7 @@ public class PlayerBehavior : MonoBehaviour
         //dropping
         else if (pickedUpObject != null)
         {
-            print("drop");
+            //print("drop");
             isCarrying = false;
             ObjectDropped?.Invoke();
         }

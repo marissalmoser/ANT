@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
 
     //actions
     private InputAction move, jump, head, leg, crawl, changeMov, interact, spawnWeb, pause, nextLevel;
-    public static Action BeeVisionUI, WebShooterUI, ErrorMessage, PlatformCountUI;
+    public static Action BeeVision, WebShooterUI, ErrorMessage, PlatformCountUI;
 
     //moving variables
     [Header("Player Movement")]
@@ -201,7 +201,6 @@ public class PlayerController : MonoBehaviour
         CrawlGraphics.SetActive(false);
         WalkGraphics.SetActive(true);
     }
-
     public void SwitchToCrawl()
     {
         //print("switch to crawling movement system");
@@ -226,7 +225,7 @@ public class PlayerController : MonoBehaviour
             beeMaskWalk.SetActive(true);
 
             //vision on
-            BeeVisionUI?.Invoke();
+            BeeVision?.Invoke();
             
             //stop movement
             canMove = 0;
@@ -240,7 +239,7 @@ public class PlayerController : MonoBehaviour
             beeMaskWalk.SetActive(false);
 
             //vision off
-            BeeVisionUI?.Invoke();
+            BeeVision?.Invoke();
 
             //resume movement
             canMove = 1;
