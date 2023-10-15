@@ -259,7 +259,7 @@ public class PlayerController : MonoBehaviour
         //enables web shooter
         else if (GameManager.Instance.BaseLeg && !playerCanCrawl)
         {
-            print("web on");
+            //print("web on");
             webShooterWalk.SetActive(true);
             GameManager.Instance.BaseLeg = !GameManager.Instance.BaseLeg;
             WebShooterUI?.Invoke();
@@ -267,7 +267,7 @@ public class PlayerController : MonoBehaviour
         //disables web shooter
         else
         {
-            print("web off");
+            //print("web off");
             webShooterWalk.SetActive(false);
             GameManager.Instance.BaseLeg = !GameManager.Instance.BaseLeg;
             WebShooterUI?.Invoke();

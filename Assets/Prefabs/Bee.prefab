@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3096334909567291336}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.52, y: 1.12, z: 0}
-  m_LocalScale: {x: 0.61, y: 0.61, z: 0.61}
+  m_LocalPosition: {x: 2.67, y: 2.11, z: 0}
+  m_LocalScale: {x: 1.45, y: 1.45, z: 1.45}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3096334909587116316}
@@ -113,8 +113,8 @@ Transform:
   m_GameObject: {fileID: 3096334909587116311}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.5, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3096334909725936242}
   - {fileID: 3096334909567291338}
@@ -162,7 +162,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 23d6f4302aec76147872da52063a7ac5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0c7358cdb34d54e4d8a5bef145b5b2f7, type: 3}
   m_Color: {r: 1, g: 0.87129843, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -207,8 +207,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.10122418, y: 0.058600683}
-  m_Size: {x: 1.094344, y: 1.0304223}
+  m_Offset: {x: -0.07897143, y: -0.3086076}
+  m_Size: {x: 5.0557733, y: 1.7648637}
   m_Direction: 1
 --- !u!114 &3096334909587116304
 MonoBehaviour:
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   State: 0
   LevelManager: {fileID: 0}
-  startInToPatrol: 0
+  StartInToPatrol: 0
   hivePiece: {fileID: 0}
   lightObject: {fileID: 0}
   canFlip: 1
@@ -265,9 +265,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3096334909725936240}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.35, y: 0, z: 0}
-  m_LocalScale: {x: 5.945894, y: 3.9012258, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 14.69, y: 0, z: 0}
+  m_LocalScale: {x: 29.68, y: 19.473671, z: 4.99168}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3096334909587116316}
   m_RootOrder: 0

@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 221744538}
   - component: {fileID: 221744537}
   - component: {fileID: 221744539}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8878,7 +8878,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.83921576, g: 0.5294118, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -10083,11 +10083,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7290652049613805561, guid: d9daf17686ce9cd43b561f5c2c4f621f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.81
+      value: 2.04
       objectReference: {fileID: 0}
     - target: {fileID: 7290652049613805561, guid: d9daf17686ce9cd43b561f5c2c4f621f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.64
+      value: 7.23
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9daf17686ce9cd43b561f5c2c4f621f, type: 3}
@@ -10102,7 +10102,7 @@ GameObject:
   - component: {fileID: 1554646613}
   - component: {fileID: 1554646612}
   - component: {fileID: 1554646611}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wood (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -20,6 +20,7 @@ public class WebPlatformBehavior : MonoBehaviour
     private float step;
     public static Vector3 MousePosition;
     private Coroutine currrentCoroutine;
+    private Animator anim;
 
     void Start()
     {
@@ -27,6 +28,8 @@ public class WebPlatformBehavior : MonoBehaviour
         Rb.freezeRotation = true;
 
         step = platformSpeed * Time.deltaTime;
+
+        anim = gameObject.GetComponent<Animator>();
     }
 
     IEnumerator PlatformMoving()
@@ -70,19 +73,26 @@ public class WebPlatformBehavior : MonoBehaviour
 
     IEnumerator PlatformBehavior()
     {
-        //print("wait 5");
+        print("wait 5");
         yield return new WaitForSeconds(5);
         currrentCoroutine = StartCoroutine(DestroyWebPlatform());
     }
 
     IEnumerator DestroyWebPlatform()
     {
-        //print("destroy in 5");
+        print("destroy in 5");
         StopCoroutine(currrentCoroutine);
-        //play destroy animantion;
-        yield return new WaitForSeconds(5);
+        anim.SetBool("WebBreaking", true);
+
+        yield return new WaitForSeconds(3);
+
         GameManager.Instance.WebPlatformList.Remove(gameObject);
         PlayerController.PlatformCountUI?.Invoke();
+        anim.SetBool("WebFalling", true);
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+
+        yield return new WaitForSeconds(1);
+
         Destroy(gameObject);
     }
 }
