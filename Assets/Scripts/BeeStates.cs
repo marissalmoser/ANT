@@ -19,7 +19,7 @@ public class BeeStates : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField] GameObject LevelManager;
     private LevelManager lm;
-    [SerializeField] private bool startInToPatrol;
+    public bool StartInToPatrol;
     [SerializeField] private GameObject hivePiece;
     [SerializeField] private GameObject lightObject;
 
@@ -59,7 +59,7 @@ public class BeeStates : MonoBehaviour
         step = speed * Time.deltaTime;
 
 
-        if(!startInToPatrol)
+        if(!StartInToPatrol)
         {
             FSM(States.Patrol);
         }
@@ -202,7 +202,7 @@ public class BeeStates : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         //wing animation
-        while (startInToPatrol)
+        while (StartInToPatrol)
         {
             targetPos = posA;
             Flip();
