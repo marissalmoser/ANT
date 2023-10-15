@@ -22,6 +22,7 @@ public class LightBehavior : MonoBehaviour
     private bool hiveInPlace;
     [SerializeField] private LayerMask hiveLM;
     [SerializeField] private Vector2 detectorSize;
+    [SerializeField] private bool hivePlacedVertically;
 
     private void Start()
     {
@@ -34,10 +35,13 @@ public class LightBehavior : MonoBehaviour
     {
         if (hiveInPlace)
         {
-            Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
-            lm.BeeVisionObjects.Remove(hiveObject.transform.parent.gameObject);
-            Destroy(hiveObject.transform.parent.gameObject);
-            Destroy(gameObject);
+            if(!hivePlacedVertically && hiveObject)
+            {
+                Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
+                lm.BeeVisionObjects.Remove(hiveObject.transform.parent.gameObject);
+                Destroy(hiveObject.transform.parent.gameObject);
+                Destroy(gameObject);
+            }
         }
     }
 
