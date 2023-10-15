@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
 
     //actions
     private InputAction move, jump, head, leg, crawl, changeMov, interact, spawnWeb, pause, nextLevel;
-    public static Action BeeVisionUI, WebShooterUI, ErrorMessage, PlatformCountUI;
+    public static Action BeeVision, WebShooterUI, ErrorMessage, PlatformCountUI;
 
     //moving variables
     [Header("Player Movement")]
@@ -97,6 +97,8 @@ public class PlayerController : MonoBehaviour
         spawnWeb.started += SpawnWebStarted;
         pause.started += GamePaused;
         nextLevel.started += SkipToNextLevel;
+
+        WallBehavior.WallTriggered += SwitchToWalk;
     }
 
     private void SkipToNextLevel(InputAction.CallbackContext obj)
@@ -166,20 +168,12 @@ public class PlayerController : MonoBehaviour
     private void SwitchMovementSystem(InputAction.CallbackContext obj)
     {
         //switch to crawling movement system
-        if (!CrawlMapEnabled && GameManager.Instance.BaseLeg && canMove == 1)
+        if (!CrawlMapEnabled && GameManager.Instance.BaseLeg && canMove == 1 && WallBehavior.OnClimbableWall)
         {
-            //print("switch to crawling movement system");
-            CrawlMapEnabled = true;
-            rb.gravityScale = 0;
-            rb.velocity = Vector2.zero;
-            //spotToCarry.transform.position = crawlCarryOffset + transform.position;
-            MyPlayerInput.actions.FindActionMap("PlayerTwoDirectionMovement").Disable();
-            MyPlayerInput.actions.FindActionMap("PlayerCrawlingMovement").Enable();
-            CrawlGraphics.SetActive(true);
-            WalkGraphics.SetActive(false);
+            SwitchToCrawl();
         }
         //trying to crawl with web shooter enabled
-        else if(!CrawlMapEnabled && !GameManager.Instance.BaseLeg && canMove == 1)
+        else if(!CrawlMapEnabled && !GameManager.Instance.BaseLeg && canMove == 1 && WallBehavior.OnClimbableWall)
         {
             ErrorMessage?.Invoke();
         }
@@ -187,21 +181,36 @@ public class PlayerController : MonoBehaviour
         //switch to 2D movement system
         else if (CrawlMapEnabled && canMove == 1)
         {
-            //print("switch to 2D movement system");
-            CrawlMapEnabled = false;
-            rb.gravityScale = 4;
-            //spotToCarry.transform.position = walkCarryOffset + transform.position;
-            transform.rotation = Quaternion.AngleAxis(0, Vector3.forward);
-            MyPlayerInput.actions.FindActionMap("PlayerTwoDirectionMovement").Enable();
-            MyPlayerInput.actions.FindActionMap("PlayerCrawlingMovement").Disable();
-            CrawlGraphics.SetActive(false);
-            WalkGraphics.SetActive(true);
+            SwitchToWalk();
         }
         else
         {
-            //trying to move with bee vision
+            //trying to move with bee vision, OR also climb on climbable walls, add bool check here to make that a different message.
             ErrorMessage?.Invoke();
         }
+    }
+
+    public void SwitchToWalk()
+    {
+        //print("switch to 2D movement system");
+        CrawlMapEnabled = false;
+        rb.gravityScale = 4;
+        transform.rotation = Quaternion.AngleAxis(0, Vector3.forward);
+        MyPlayerInput.actions.FindActionMap("PlayerTwoDirectionMovement").Enable();
+        MyPlayerInput.actions.FindActionMap("PlayerCrawlingMovement").Disable();
+        CrawlGraphics.SetActive(false);
+        WalkGraphics.SetActive(true);
+    }
+    public void SwitchToCrawl()
+    {
+        //print("switch to crawling movement system");
+        CrawlMapEnabled = true;
+        rb.gravityScale = 0;
+        rb.velocity = Vector2.zero;
+        MyPlayerInput.actions.FindActionMap("PlayerTwoDirectionMovement").Disable();
+        MyPlayerInput.actions.FindActionMap("PlayerCrawlingMovement").Enable();
+        CrawlGraphics.SetActive(true);
+        WalkGraphics.SetActive(false);
     }
 
     private void SwitchHeadPart(InputAction.CallbackContext obj)
@@ -216,7 +225,7 @@ public class PlayerController : MonoBehaviour
             beeMaskWalk.SetActive(true);
 
             //vision on
-            BeeVisionUI?.Invoke();
+            BeeVision?.Invoke();
             
             //stop movement
             canMove = 0;
@@ -230,7 +239,7 @@ public class PlayerController : MonoBehaviour
             beeMaskWalk.SetActive(false);
 
             //vision off
-            BeeVisionUI?.Invoke();
+            BeeVision?.Invoke();
 
             //resume movement
             canMove = 1;
@@ -320,7 +329,7 @@ public class PlayerController : MonoBehaviour
         }
         
         //player crawl
-        if(playerCanCrawl && CrawlMapEnabled)// && WallBehavior.OnClimbableWall)          // && CanClimb()    ?
+        if(playerCanCrawl && CrawlMapEnabled) 
         {
             rb.velocity = new Vector2(crawlDirection.x, crawlDirection.y) * speed * canMove;
             //print(CanClimb());
@@ -351,11 +360,6 @@ public class PlayerController : MonoBehaviour
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
-    private bool CanClimbWall()
-    {
-        return Physics2D.OverlapCircle(transform.position, 0.2f, ~climbableWalls);
-    }
-
     public void OnDestroy()
     {
         move.started -= Handle_moveStarted;
@@ -371,5 +375,6 @@ public class PlayerController : MonoBehaviour
         interact.canceled -= Handle_interactCanceled;
         spawnWeb.started -= SpawnWebStarted;
         pause.started -= GamePaused;
+        WallBehavior.WallTriggered -= SwitchToWalk;
     }
 }

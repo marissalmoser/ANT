@@ -28,7 +28,7 @@ public class UserInterfaceBehvaior : MonoBehaviour
 
     void Awake()
     {
-        PlayerController.BeeVisionUI += SwitchHeadUI;
+        PlayerController.BeeVision += SwitchHeadUI;
         PlayerController.WebShooterUI += SwitchLegUI;
         PlayerController.ErrorMessage += StartErrorCoroutine;
         PlayerController.PlatformCountUI += ChangePlatformCountUI;
@@ -52,13 +52,11 @@ public class UserInterfaceBehvaior : MonoBehaviour
         // on UI
         if(!GameManager.Instance.BaseHead)
         {
-            print("on");
             beeVisionText.text = "Bee Vision: On";
         }
         // off UI
         else
         {
-            print("off");
             beeVisionText.text = "Bee Vision Off";
         }
     }
@@ -117,7 +115,7 @@ public class UserInterfaceBehvaior : MonoBehaviour
 
     private void OnDestroy()
     {
-        PlayerController.BeeVisionUI -= SwitchHeadUI;
+        PlayerController.BeeVision -= SwitchHeadUI;
         PlayerController.WebShooterUI -= SwitchLegUI;
         PlayerController.ErrorMessage -= StartErrorCoroutine;
         PlayerController.PlatformCountUI -= ChangePlatformCountUI;
