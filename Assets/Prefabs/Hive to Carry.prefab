@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2042952660300257367}
   - component: {fileID: 2042952660300257365}
   - component: {fileID: 435465792042471779}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hive to Carry
   m_TagString: PickUp-able
   m_Icon: {fileID: 0}
