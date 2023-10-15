@@ -138,7 +138,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (GameManager.Instance.WebPlatformList.Count < 3 && !GameManager.Instance.BaseLeg)
         {
-            print("spawn");
+            //print("spawn");
             WebPlatform = Instantiate(WebPlatformPrefab, spotToCarry.position, transform.rotation);
             GameManager.Instance.WebPlatformList.Add(WebPlatform);
             PlayerController.PlatformCountUI?.Invoke();
