@@ -183,7 +183,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.38823533, g: 0.25490198, b: 0.07058824, a: 1}
+  m_Color: {r: 0.32156864, g: 0.21176471, b: 0.05882353, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -320,7 +320,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.38823533, g: 0.25490198, b: 0.07058824, a: 1}
+  m_Color: {r: 0.32156864, g: 0.21176471, b: 0.05882353, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -476,7 +476,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.38823533, g: 0.25490198, b: 0.07058824, a: 1}
+  m_Color: {r: 0.32156864, g: 0.21176471, b: 0.05882353, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -8925,7 +8925,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.38823533, g: 0.25490198, b: 0.07058824, a: 1}
+  m_Color: {r: 0.3207547, g: 0.21075818, b: 0.05870414, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -9062,7 +9062,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.38823533, g: 0.25490198, b: 0.07058824, a: 1}
+  m_Color: {r: 0.32156864, g: 0.21176471, b: 0.05882353, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -9844,6 +9844,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8198495593707414725, guid: c1f3b470c41c1994ca806400beeb0e4e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -36
+      objectReference: {fileID: 0}
     - target: {fileID: 8198495595177234945, guid: c1f3b470c41c1994ca806400beeb0e4e, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -10181,7 +10185,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.38823533, g: 0.25490198, b: 0.07058824, a: 1}
+  m_Color: {r: 0.32156864, g: 0.21176471, b: 0.05882353, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
