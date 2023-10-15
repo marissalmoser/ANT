@@ -42,13 +42,13 @@ public class LightBehavior : MonoBehaviour
                 Destroy(hiveObject.transform.parent.gameObject);
                 Destroy(gameObject);
             }
-            if (hivePlacedVertically && hiveObject.transform.rotation.z == 90 || hiveObject.transform.rotation.z == -90)
-            {
-                Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
-                lm.BeeVisionObjects.Remove(hiveObject.transform.parent.gameObject);
-                Destroy(hiveObject.transform.parent.gameObject);
-                Destroy(gameObject);
-            }
+            //if (hivePlacedVertically && hiveObject.transform.rotation.z == 90 || hiveObject.transform.rotation.z == -90)
+            //{
+            //    Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
+            //    lm.BeeVisionObjects.Remove(hiveObject.transform.parent.gameObject);
+            //    Destroy(hiveObject.transform.parent.gameObject);
+            //    Destroy(gameObject);
+            //}
         }
     }
 
@@ -76,7 +76,7 @@ public class LightBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if(collision.CompareTag("Player") && Bee.GetComponent<BeeStates>().StartInToPatrol)
         {
             Bee.GetComponent<BeeStates>().FSM(BeeStates.States.ToPatrol);
         }
