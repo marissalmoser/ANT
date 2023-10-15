@@ -150,9 +150,7 @@ MonoBehaviour:
   PlatformCanMove: 1
   platformSpeed: 10
   Rb: {fileID: 4626731483180130531}
-  Direction: 0
-  Player: {fileID: 0}
-  GameManager: {fileID: 0}
+  PlatformTargetPos: {x: 0, y: 0, z: 0}
 --- !u!251 &7040193394544376850
 PlatformEffector2D:
   m_ObjectHideFlags: 0

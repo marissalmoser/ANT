@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 3096334909587116304}
   m_Layer: 8
   m_Name: Bee
-  m_TagString: Untagged
+  m_TagString: Bee
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -223,12 +223,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   State: 0
-  GameManager: {fileID: 0}
+  LevelManager: {fileID: 0}
+  startInToPatrol: 0
+  hivePiece: {fileID: 0}
+  lightObject: {fileID: 0}
   canFlip: 1
   exclamation: {fileID: 3096334909567291336}
   posA: {x: 1.5, y: 0}
   posB: {x: 7.5, y: 0}
-  speed: 1
+  speed: 2
   detectorSize: {x: 6, y: 4}
   playerLayer:
     serializedVersion: 2
@@ -311,7 +314,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.03488314, g: 1, b: 0, a: 0.2627451}
+  m_Color: {r: 0, g: 0.7854686, b: 0.98039216, a: 0.44705883}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

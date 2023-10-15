@@ -9,6 +9,31 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
+        PlayerController.BeeVision += BeeVisionEnabled;
+    }
+    private void BeeVisionEnabled()
+    {
+        if(!GameManager.Instance.BaseHead)
+        {
+            foreach (var vision in BeeVisionObjects)
+            {
+                //check if var is not null?
+                print("bes");
+                vision.GetComponent<SpriteRenderer>().enabled = true;
+            }
+        }
+        else
+        {
+            foreach (var vision in BeeVisionObjects)
+            {
+                vision.GetComponent<SpriteRenderer>().enabled = false;
+            }
+        }
+    }
 
+
+    private void OnDisable()
+    {
+        PlayerController.BeeVision -= BeeVisionEnabled;
     }
 }

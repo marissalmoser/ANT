@@ -16,6 +16,8 @@ using UnityEngine;
 public class LightBehavior : MonoBehaviour
 {
     [SerializeField] private GameObject Bee;
+    [SerializeField] private GameObject levelManager;
+    private LevelManager lm;
     private GameObject hiveObject;
     private bool hiveInPlace;
     [SerializeField] private LayerMask hiveLM;
@@ -25,13 +27,15 @@ public class LightBehavior : MonoBehaviour
     {
         PlayerBehavior.ObjectDropped += LightBlocked;
         StartCoroutine(ConstantDetection());
+        lm = levelManager.GetComponent<LevelManager>();
     }
 
     private void LightBlocked()
     {
         if (hiveInPlace)
         {
-            Bee.GetComponent<BeeStates>().FSM(3);
+            Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
+            lm.BeeVisionObjects.Remove(hiveObject.transform.parent.gameObject);
             Destroy(hiveObject.transform.parent.gameObject);
             Destroy(gameObject);
         }
@@ -56,6 +60,14 @@ public class LightBehavior : MonoBehaviour
             }
 
             yield return new WaitForSeconds(0.3f);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Player"))
+        {
+            Bee.GetComponent<BeeStates>().FSM(BeeStates.States.ToPatrol);
         }
     }
 

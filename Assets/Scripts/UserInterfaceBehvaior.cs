@@ -20,13 +20,18 @@ public class UserInterfaceBehvaior : MonoBehaviour
     [SerializeField] private TMP_Text webPlatformText;
     [SerializeField] private GameObject errorMessageText;
 
+    [SerializeField] private GameObject WebPlatform1UI;
+    [SerializeField] private GameObject WebPlatform2UI;
+    [SerializeField] private GameObject WebPlatform3UI;
+
     private Coroutine errorCoroutineCache;
 
     void Awake()
     {
-        PlayerController.BeeVisionUI += SwitchHeadUI;
+        PlayerController.BeeVision += SwitchHeadUI;
         PlayerController.WebShooterUI += SwitchLegUI;
         PlayerController.ErrorMessage += StartErrorCoroutine;
+        PlayerController.PlatformCountUI += ChangePlatformCountUI;
     }
 
     private void StartErrorCoroutine()
@@ -47,13 +52,11 @@ public class UserInterfaceBehvaior : MonoBehaviour
         // on UI
         if(!GameManager.Instance.BaseHead)
         {
-            print("on");
             beeVisionText.text = "Bee Vision: On";
         }
         // off UI
         else
         {
-            print("off");
             beeVisionText.text = "Bee Vision Off";
         }
     }
@@ -72,6 +75,34 @@ public class UserInterfaceBehvaior : MonoBehaviour
         }
     }
 
+    public void ChangePlatformCountUI()
+    {
+        if(GameManager.Instance.WebPlatformList.Count == 0)
+        {
+            WebPlatform1UI.SetActive(false);
+            WebPlatform2UI.SetActive(false);
+            WebPlatform3UI.SetActive(false);
+        }
+        if (GameManager.Instance.WebPlatformList.Count == 1)
+        {
+            WebPlatform1UI.SetActive(true);
+            WebPlatform2UI.SetActive(false);
+            WebPlatform3UI.SetActive(false);
+        }
+        if (GameManager.Instance.WebPlatformList.Count == 2)
+        {
+            WebPlatform1UI.SetActive(true);
+            WebPlatform2UI.SetActive(true);
+            WebPlatform3UI.SetActive(false);
+        }
+        if (GameManager.Instance.WebPlatformList.Count == 3)
+        {
+            WebPlatform1UI.SetActive(true);
+            WebPlatform2UI.SetActive(true);
+            WebPlatform3UI.SetActive(true);
+        }
+    }
+
     public IEnumerator ErrorMesageUI()
     {
         errorMessageText.SetActive(true);
@@ -84,7 +115,9 @@ public class UserInterfaceBehvaior : MonoBehaviour
 
     private void OnDestroy()
     {
-        PlayerController.BeeVisionUI -= SwitchHeadUI;
+        PlayerController.BeeVision -= SwitchHeadUI;
         PlayerController.WebShooterUI -= SwitchLegUI;
+        PlayerController.ErrorMessage -= StartErrorCoroutine;
+        PlayerController.PlatformCountUI -= ChangePlatformCountUI;
     }
 }

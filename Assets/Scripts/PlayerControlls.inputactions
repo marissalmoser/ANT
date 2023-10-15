@@ -211,13 +211,22 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "NextLevelKB",
+                    "type": "Button",
+                    "id": "d81fc566-2d66-455e-816c-6e12d1ffca17",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "9c4e79d1-f427-4f5c-a23e-2a350f8af386",
-                    "path": "<Keyboard>/1",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -239,7 +248,7 @@
                 {
                     "name": "",
                     "id": "7de83016-fb83-4667-a37d-0bf7bd1c3193",
-                    "path": "<Keyboard>/3",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -305,11 +314,22 @@
                 {
                     "name": "",
                     "id": "59ec6633-257b-4ec7-8572-aa6a99b288cf",
-                    "path": "<Keyboard>/q",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "SpawnWebPlatform",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fbfe4c00-1cc7-4646-b06d-e83e2ed621f1",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextLevelKB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

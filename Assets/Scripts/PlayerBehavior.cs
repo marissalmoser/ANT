@@ -99,7 +99,7 @@ public class PlayerBehavior : MonoBehaviour
         //dropping
         else if (pickedUpObject != null)
         {
-            print("drop");
+            //print("drop");
             isCarrying = false;
             ObjectDropped?.Invoke();
         }
@@ -109,8 +109,8 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (GameManager.Instance.BaseHead && breakableTriggered)
         {
-            //print("breaking");
             Destroy(breakableObject);
+            StartCoroutine(GameManager.Instance.NextLevel());
         }
     }
 
@@ -138,9 +138,12 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (GameManager.Instance.WebPlatformList.Count < 3 && !GameManager.Instance.BaseLeg)
         {
+            print("spawn");
             WebPlatform = Instantiate(WebPlatformPrefab, spotToCarry.position, transform.rotation);
             GameManager.Instance.WebPlatformList.Add(WebPlatform);
-            //print(gm.WebPlatformList.Count); 
+            PlayerController.PlatformCountUI?.Invoke();
         }
     }
+
+    
 }

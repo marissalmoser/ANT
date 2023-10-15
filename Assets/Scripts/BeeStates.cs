@@ -19,6 +19,11 @@ public class BeeStates : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField] GameObject LevelManager;
     private LevelManager lm;
+    [SerializeField] private bool startInToPatrol;
+    [SerializeField] private GameObject hivePiece;
+    [SerializeField] private GameObject lightObject;
+
+    public enum States{Patrol, Suspicious, Alert, Sleep, ToPatrol}
 
     [Header("Bee")]
     private bool isFacingRight = true;
@@ -53,42 +58,39 @@ public class BeeStates : MonoBehaviour
 
         step = speed * Time.deltaTime;
 
-        FSM(0);
 
-        PlayerController.BeeVisionUI += BeeVisionEnabled;
-        PlayerController.BeeVisionUI += BeeVisionDisabled;
+        if(!startInToPatrol)
+        {
+            FSM(States.Patrol);
+        }
     }
 
-  
-
-
-    /// <summary>
-    /// Call this function with the State's parameter to change states :)
-    /// </summary>
-    public void FSM(int newState)
+    public void FSM(States state)
     {
-        State = newState;
-        switch (State)
+        //State = newState;
+        switch (state)
         {
-            case (0):                                              //Patrol
+            case States.Patrol:                                              //Patrol
                 
                 StopAllCoroutines();
                 StartCoroutine(PatrolState());
                 StartCoroutine(ConstantDetection());
-                //print("start detecting");
                 break;
-            case (1):                                              //Suspicious
+            case States.Suspicious:                                         //Suspicious
                 StopAllCoroutines();
                 StartCoroutine(SusState());
-                //print("stop detecting");
                 break;
-            case (2):                                              //Alert
+            case States.Alert:                                              //Alert
                 StopAllCoroutines();
                 StartCoroutine(AlertState());
                 break;
-            case (3):                                              //Sleep
+            case States.Sleep:                                              //Sleep
                 StopAllCoroutines();
                 StartCoroutine(SleepState());
+                break;
+            case States.ToPatrol:
+                StopAllCoroutines();
+                StartCoroutine(ToPatrol());
                 break;
         }
     }
@@ -150,14 +152,14 @@ public class BeeStates : MonoBehaviour
 
             if (PerformDetection())
             {
-                FSM(2);
+                FSM(States.Alert);
             }
             else
             {
                 //print("back to patrol");
                 targetPos = posA;
                 Flip();
-                FSM(0);
+                FSM(States.Patrol);
             }
         }
     }
@@ -189,9 +191,37 @@ public class BeeStates : MonoBehaviour
         yield return null;
     }
 
+    IEnumerator ToPatrol()
+    {
+        //hive falls
+        hivePiece.GetComponent<Rigidbody2D>().gravityScale = 1;
+        //light turns on ->                                                           change to be gradual when have art
+        lightObject.GetComponent<SpriteRenderer>().enabled = true;
+        lightObject.transform.GetChild(0).gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(1);
+
+        //wing animation
+        while (startInToPatrol)
+        {
+            targetPos = posA;
+            Flip();
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+
+            if(Vector2.Distance(transform.position, posA) < 0.5)
+            {
+                //hivePiece.GetComponent<Rigidbody2D>().gravityScale = 0;                   ??
+                FSM(States.Patrol);
+            }
+
+            yield return null;
+        }
+    }
+
+
     public bool PerformDetection()
     {
-        Collider2D collider = Physics2D.OverlapBox(detectorOriginPt.transform.position, detectorSize, 0, playerLayer);
+        Collider2D collider = Physics2D.OverlapBox(detectorOriginPt.transform.position, detectorSize, 90, playerLayer);
         if(collider != null)
         {
             Player = collider.gameObject;
@@ -208,11 +238,11 @@ public class BeeStates : MonoBehaviour
     {
         while(true)
         {
-            Collider2D collider = Physics2D.OverlapBox(detectorOriginPt.transform.position, detectorSize, 0, playerLayer);
+            Collider2D collider = Physics2D.OverlapBox(detectorOriginPt.transform.position, detectorSize, 90, playerLayer);
             if (collider != null)
             {
                 Player = collider.gameObject;
-                FSM(1);                         //goes into suspicious state
+                FSM(States.Suspicious);                         //goes into suspicious state
             }
 
             yield return new WaitForSeconds(0.3f);
@@ -240,21 +270,4 @@ public class BeeStates : MonoBehaviour
             transform.localScale = localScale;
         }
     }
-
-    private void BeeVisionEnabled()
-    {
-        foreach (var vision in lm.BeeVisionObjects)
-        {
-            vision.GetComponent<SpriteRenderer>().enabled = true;
-        }
-    }
-
-    private void BeeVisionDisabled()
-    {
-        foreach (var vision in lm.BeeVisionObjects)
-        {
-            vision.GetComponent<SpriteRenderer>().enabled = false;
-        }
-    }
-
 }
