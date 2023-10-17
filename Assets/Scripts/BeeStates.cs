@@ -48,7 +48,7 @@ public class BeeStates : MonoBehaviour
     public Color gizmoDetected = Color.red;
     public bool ShowGizmos = true;
 
-    private  void Awake()
+    private void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         lm = LevelManager.GetComponent<LevelManager>();
@@ -97,7 +97,9 @@ public class BeeStates : MonoBehaviour
 
     IEnumerator PatrolState()
     {
-        while(true)
+        
+
+        while (true)
         {
             if (Vector2.Distance(transform.position, posA) < 0.5)
             {
@@ -119,7 +121,8 @@ public class BeeStates : MonoBehaviour
 
     IEnumerator SusState()
     {
-        //print("sus");
+        AudioManager.Instance.Play("BeeSeesPlayer");
+        
         //pauses movement
         targetPos = transform.position;
         Flip();
@@ -159,6 +162,7 @@ public class BeeStates : MonoBehaviour
                 //print("back to patrol");
                 targetPos = posA;
                 Flip();
+                AudioManager.Instance.Play("BeeBuzzing");
                 FSM(States.Patrol);
             }
         }
@@ -167,6 +171,7 @@ public class BeeStates : MonoBehaviour
     IEnumerator AlertState()
     {
         print("BEE MORE SNEAKY BZZZZZZ");
+        AudioManager.Instance.Play("BeeAlert");
         //all bees move toward player
         StartCoroutine(GameManager.Instance.EndLevel());
         yield return null;
@@ -178,8 +183,10 @@ public class BeeStates : MonoBehaviour
         targetPos = transform.position;
         transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
         rb.gravityScale = 2;
+        AudioManager.Instance.Play("BeeSnoring");
+
         //turn off bee vision
-        if(exclamation != null)
+        if (exclamation != null)
         {
             exclamation.SetActive(false);
         }

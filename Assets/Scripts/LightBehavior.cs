@@ -38,7 +38,10 @@ public class LightBehavior : MonoBehaviour
             if(!hivePlacedVertically && hiveObject.transform.rotation.z == 0 || hiveObject.transform.rotation.z == 180)
             {
                 Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
-                lm.BeeVisionObjects.Remove(hiveObject.transform.parent.gameObject);
+
+                //Sound s = System.Array.Find(sounds, sounds => sounds.name == name);
+                print(hiveObject);
+                lm.BeeVisionObjects.Remove(hiveObject);
                 Destroy(hiveObject.transform.parent.gameObject);
                 Destroy(gameObject);
             }

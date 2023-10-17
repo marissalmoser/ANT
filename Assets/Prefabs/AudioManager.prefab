@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7064501964427545766
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7064501964427545752}
+  - component: {fileID: 7064501964427545767}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7064501964427545752
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7064501964427545766}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 18.289877, y: 6.3008513, z: -0.04944501}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7064501964427545767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7064501964427545766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 962a8afbab36d4e40a00ef2f29bd1076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Background
+    clip: {fileID: 0}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: BeeVisionOn
+    clip: {fileID: 8300000, guid: 8f751679d19f3f142ab533545c659e67, type: 3}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: BeeVisionOff
+    clip: {fileID: 8300000, guid: b1a52ad2634c47840a1ad89482edc8e2, type: 3}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: WebShooterOn
+    clip: {fileID: 8300000, guid: f63173ccf768a6d4da3f0475774cfceb, type: 3}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: WebShooterOff
+    clip: {fileID: 8300000, guid: 874137dbbd04e6b4ab039556710e2b6b, type: 3}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: SwitchingMovementSystems
+    clip: {fileID: 0}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: Jump
+    clip: {fileID: 0}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: ErrorMessage
+    clip: {fileID: 0}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: BeeBuzzing
+    clip: {fileID: 8300000, guid: fa3e57e5d873f79458c16c6941e6b2cd, type: 3}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: BeeSeesPlayer
+    clip: {fileID: 8300000, guid: 4c43db5f1d9c862499d34a8adb36a065, type: 3}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: BeeAlert
+    clip: {fileID: 8300000, guid: eeac1864235409b4491e5105b93f3f75, type: 3}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: BeeSnoring
+    clip: {fileID: 8300000, guid: e763604ba26ba9d48807122d4cc4b582, type: 3}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: PlayerSlidesOffWall
+    clip: {fileID: 0}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}

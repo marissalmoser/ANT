@@ -229,6 +229,9 @@ public class PlayerController : MonoBehaviour
             
             //stop movement
             canMove = 0;
+
+            //sound
+            AudioManager.Instance.Play("BeeVisionOn");
         }
 
         //Bee vision turned off
@@ -243,6 +246,9 @@ public class PlayerController : MonoBehaviour
 
             //resume movement
             canMove = 1;
+
+            //sound
+            AudioManager.Instance.Play("BeeVisionOff");
         }
 
         
@@ -263,6 +269,7 @@ public class PlayerController : MonoBehaviour
             webShooterWalk.SetActive(true);
             GameManager.Instance.BaseLeg = !GameManager.Instance.BaseLeg;
             WebShooterUI?.Invoke();
+            AudioManager.Instance.Play("WebShooterOn");
         }
         //disables web shooter
         else
@@ -271,6 +278,7 @@ public class PlayerController : MonoBehaviour
             webShooterWalk.SetActive(false);
             GameManager.Instance.BaseLeg = !GameManager.Instance.BaseLeg;
             WebShooterUI?.Invoke();
+            AudioManager.Instance.Play("WebShooterOff");
         }
     }
 
