@@ -97,8 +97,6 @@ public class BeeStates : MonoBehaviour
 
     IEnumerator PatrolState()
     {
-        
-
         while (true)
         {
             if (Vector2.Distance(transform.position, posA) < 0.5)
@@ -228,7 +226,7 @@ public class BeeStates : MonoBehaviour
 
     public bool PerformDetection()
     {
-        Collider2D collider = Physics2D.OverlapBox(detectorOriginPt.transform.position, detectorSize, 90, playerLayer);
+        Collider2D collider = Physics2D.OverlapBox(detectorOriginPt.transform.position, detectorSize, 0, playerLayer);
         if(collider != null)
         {
             Player = collider.gameObject;
@@ -245,7 +243,7 @@ public class BeeStates : MonoBehaviour
     {
         while(true)
         {
-            Collider2D collider = Physics2D.OverlapBox(detectorOriginPt.transform.position, detectorSize, 90, playerLayer);
+            Collider2D collider = Physics2D.OverlapBox(detectorOriginPt.transform.position, detectorSize, 0, playerLayer);
             if (collider != null)
             {
                 Player = collider.gameObject;
