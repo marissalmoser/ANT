@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
     private PlayerBehavior pb;
     public GameObject WalkGraphics;
     public GameObject CrawlGraphics;
+    private Animator walkingAnim;
+    private Animator crawlingAnim;
 
     //actions
     private InputAction move, jump, head, leg, crawl, changeMov, interact, spawnWeb, pause, nextLevel;
@@ -68,6 +70,8 @@ public class PlayerController : MonoBehaviour
 
         pb = gameObject.GetComponent<PlayerBehavior>();
         rb = gameObject.GetComponent<Rigidbody2D>();
+        walkingAnim = WalkGraphics.GetComponent<Animator>();
+        crawlingAnim = CrawlGraphics.GetComponent<Animator>();
 
         MyPlayerInput.actions.FindActionMap("PlayerTwoDirectionMovement").Enable();
         MyPlayerInput.actions.FindActionMap("PartSwitching").Enable();
@@ -105,7 +109,6 @@ public class PlayerController : MonoBehaviour
     {
         StartCoroutine(GameManager.Instance.NextLevel());
     }
-
     private void GamePaused(InputAction.CallbackContext obj)
     {
         Application.Quit();
@@ -127,6 +130,10 @@ public class PlayerController : MonoBehaviour
     private void Handle_moveStarted(InputAction.CallbackContext obj)
     {
         playerCanMove = true;
+
+        //walking animations
+        walkingAnim.SetBool("isWalking", true);
+
         if (canMove == 0)
         {
             //part not enabled
@@ -136,6 +143,8 @@ public class PlayerController : MonoBehaviour
     private void Handle_moveCanceled(InputAction.CallbackContext obj)
     {
         playerCanMove = false;
+
+        walkingAnim.SetBool("isWalking", false);
     }
     private void Handle_jumpStarted(InputAction.CallbackContext obj)
     {
@@ -152,7 +161,10 @@ public class PlayerController : MonoBehaviour
     private void Handle_crawlStarted(InputAction.CallbackContext obj)
     {
         playerCanCrawl = true;
-        if(canMove == 0)
+
+        crawlingAnim.SetBool("isCrawling", true);
+
+        if (canMove == 0)
         {
             //part not enabled
             ErrorMessage?.Invoke(); 
@@ -161,6 +173,9 @@ public class PlayerController : MonoBehaviour
     private void Handle_crawlCanceled(InputAction.CallbackContext obj)
     {
         playerCanCrawl = false;
+
+        crawlingAnim.SetBool("isCrawling", false);
+
         rb.velocity = Vector2.zero;
         crawlDirection = Vector2.zero;
     }
