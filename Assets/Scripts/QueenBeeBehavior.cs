@@ -114,7 +114,7 @@ public class QueenBeeBehavior : MonoBehaviour
     IEnumerator AlertState()
     {
         print("BEE MORE SNEAKY BZZZZZZ");
-        StartCoroutine(GameManager.Instance.EndLevel()); 
+        StartCoroutine(GameManager.Instance.RestartLevel()); 
         yield return null;
     }
 
@@ -127,7 +127,9 @@ public class QueenBeeBehavior : MonoBehaviour
         lm.BeeVisionObjects.Remove(detectorOriginPt);
         Destroy(detectorOriginPt);
 
-        yield return null;
+        print("YOU BEAT THE BEE!");
+        yield return new WaitForSeconds(2);
+        StartCoroutine(GameManager.Instance.GameWon());
     }
 
     public bool PerformDetection()
@@ -182,7 +184,8 @@ public class QueenBeeBehavior : MonoBehaviour
     public void LightShutOff()
     {
         lightBlocked++;
-        if(lightBlocked >3)
+        print(lightBlocked);
+        if(lightBlocked >=3)
         {
             FSM(States.Sleep);
         }

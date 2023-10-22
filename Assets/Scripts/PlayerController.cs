@@ -132,12 +132,16 @@ public class PlayerController : MonoBehaviour
         playerCanMove = true;
 
         //walking animations
-        walkingAnim.SetBool("isWalking", true);
+        
 
         if (canMove == 0)
         {
             //part not enabled
             ErrorMessage?.Invoke();
+        }
+        else
+        {
+            walkingAnim.SetBool("isWalking", true);
         }
     }
     private void Handle_moveCanceled(InputAction.CallbackContext obj)
@@ -162,12 +166,14 @@ public class PlayerController : MonoBehaviour
     {
         playerCanCrawl = true;
 
-        crawlingAnim.SetBool("isCrawling", true);
-
         if (canMove == 0)
         {
             //part not enabled
             ErrorMessage?.Invoke(); 
+        }
+        else
+        {
+            crawlingAnim.SetBool("isCrawling", true);
         }
     }
     private void Handle_crawlCanceled(InputAction.CallbackContext obj)
@@ -183,14 +189,17 @@ public class PlayerController : MonoBehaviour
     private void SwitchMovementSystem(InputAction.CallbackContext obj)
     {
         //switch to crawling movement system
-        if (!CrawlMapEnabled && GameManager.Instance.BaseLeg && canMove == 1 && WallBehavior.OnClimbableWall)
+        if (!CrawlMapEnabled && canMove == 1) // && WallBehavior.OnClimbableWall) this broke it??
         {
-            SwitchToCrawl();
-        }
-        //trying to crawl with web shooter enabled
-        else if(!CrawlMapEnabled && !GameManager.Instance.BaseLeg && canMove == 1 && WallBehavior.OnClimbableWall)
-        {
-            ErrorMessage?.Invoke();
+            if (GameManager.Instance.BaseLeg)
+            {
+                SwitchToCrawl();
+            }
+            else
+            {
+                //trying to crawl with web shooter enabled
+                ErrorMessage?.Invoke();
+            }
         }
 
         //switch to 2D movement system
@@ -198,10 +207,15 @@ public class PlayerController : MonoBehaviour
         {
             SwitchToWalk();
         }
+
+        else if (!GameManager.Instance.BaseHead)
+        {
+            //trying to move with bee vision
+            ErrorMessage?.Invoke();
+        }
         else
         {
-            //trying to move with bee vision, OR also climb on climbable walls, add bool check here to make that a different message.
-            ErrorMessage?.Invoke();
+            print("what?");
         }
     }
 
@@ -215,6 +229,10 @@ public class PlayerController : MonoBehaviour
         MyPlayerInput.actions.FindActionMap("PlayerCrawlingMovement").Disable();
         CrawlGraphics.SetActive(false);
         WalkGraphics.SetActive(true);
+        if(pb.pickedUpObject != null)
+        {
+            pb.pickedUpObject.transform.rotation = Quaternion.Euler(0,0,0);
+        }
     }
     public void SwitchToCrawl()
     {

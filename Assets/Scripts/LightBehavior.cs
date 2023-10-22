@@ -36,36 +36,90 @@ public class LightBehavior : MonoBehaviour
         if (hiveInPlace)
         {
             print("dropped");
-            if(!hivePlacedVertically && hiveObject.transform.rotation.z == 0 || hiveObject.transform.rotation.z == 180)
-            {
-                if (queensLight)
-                {
-                    Bee.GetComponent<QueenBeeBehavior>().LightShutOff();
-                }
-                else
-                {
-                    Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
-                }
 
-                lm.BeeVisionObjects.Remove(hiveObject);
-                Destroy(hiveObject.transform.parent.gameObject);
-                Destroy(gameObject);
-            }
-            if (hivePlacedVertically && hiveObject.transform.rotation.z == 90 || hiveObject.transform.rotation.z == -90)
+            if (queensLight)
             {
-                if (queensLight)
-                {
-                    Bee.GetComponent<QueenBeeBehavior>().LightShutOff();
-                }
-                else
-                {
-                    Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
-                }
-
-                lm.BeeVisionObjects.Remove(hiveObject.transform.parent.gameObject);
-                Destroy(hiveObject.transform.parent.gameObject);
-                Destroy(gameObject);
+                Bee.GetComponent<QueenBeeBehavior>().LightShutOff();
             }
+            else
+            {
+                Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
+            }
+
+            lm.BeeVisionObjects.Remove(hiveObject.transform.parent.gameObject);
+            Destroy(hiveObject.transform.parent.gameObject);
+            Destroy(gameObject);
+
+            //if (!hivePlacedVertically && hiveObject.transform.parent.transform.rotation.z == 0)
+            //{
+            //    print("horiz 0");
+            //    if (queensLight)
+            //    {
+            //        Bee.GetComponent<QueenBeeBehavior>().LightShutOff();
+            //    }
+            //    else
+            //    {
+            //        Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
+            //    }
+
+            //    lm.BeeVisionObjects.Remove(hiveObject);
+            //    Destroy(hiveObject.transform.parent.gameObject);
+            //    Destroy(gameObject);
+            //}
+            //else if (!hivePlacedVertically/* && hiveObject.transform.parent.transform.rotation.z == 180*/)
+            //{
+            //    print("horiz 180");
+            //    if (queensLight)
+            //    {
+            //        Bee.GetComponent<QueenBeeBehavior>().LightShutOff();
+            //    }
+            //    else
+            //    {
+            //        Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
+            //    }
+
+            //    lm.BeeVisionObjects.Remove(hiveObject);
+            //    Destroy(hiveObject.transform.parent.gameObject);
+            //    Destroy(gameObject);
+            //}
+
+            //if (hivePlacedVertically)
+            //{
+            //    print("vert");
+            //    if(hiveObject.transform.parent.transform.rotation.z == 90 || hiveObject.transform.parent.transform.rotation.z == -90)
+            //    {
+            //        print("vert 90");
+            //        if (queensLight)
+            //        {
+            //            Bee.GetComponent<QueenBeeBehavior>().LightShutOff();
+            //        }
+            //        else
+            //        {
+            //            Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
+            //        }
+
+            //        lm.BeeVisionObjects.Remove(hiveObject.transform.parent.gameObject);
+            //        Destroy(hiveObject.transform.parent.gameObject);
+            //        Destroy(gameObject);
+            //    }
+                
+            //}
+            //else if (hivePlacedVertically && hiveObject.transform.parent.transform.rotation.z == -90)
+            //{
+            //    print("vert -90");
+            //    if (queensLight)
+            //    {
+            //        Bee.GetComponent<QueenBeeBehavior>().LightShutOff();
+            //    }
+            //    else
+            //    {
+            //        Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
+            //    }
+
+            //    lm.BeeVisionObjects.Remove(hiveObject.transform.parent.gameObject);
+            //    Destroy(hiveObject.transform.parent.gameObject);
+            //    Destroy(gameObject);
+            //}
         }
     }
 
@@ -76,10 +130,8 @@ public class LightBehavior : MonoBehaviour
             Collider2D collider = Physics2D.OverlapBox(transform.position, detectorSize, 0, hiveLM);
             if (collider != null)
             {
-                //print(collider.gameObject);
                 hiveInPlace = true;
-                hiveObject = collider.gameObject;
-                //print(hiveObject);
+                hiveObject = collider.gameObject;   //bee vision object
             }
             else
             {
@@ -97,6 +149,11 @@ public class LightBehavior : MonoBehaviour
         {
             Bee.GetComponent<BeeStates>().FSM(BeeStates.States.ToPatrol);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawCube(transform.position, detectorSize);
     }
 
     private void OnDestroy()
