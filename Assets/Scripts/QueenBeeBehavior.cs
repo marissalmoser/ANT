@@ -184,7 +184,7 @@ public class QueenBeeBehavior : MonoBehaviour
     public void LightShutOff()
     {
         lightBlocked++;
-        print(lightBlocked);
+        //print(lightBlocked);
         if(lightBlocked >=3)
         {
             FSM(States.Sleep);

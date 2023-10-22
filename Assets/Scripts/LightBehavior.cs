@@ -35,91 +35,50 @@ public class LightBehavior : MonoBehaviour
     {
         if (hiveInPlace)
         {
-            print("dropped");
+            //print("dropped");
+            //print(hiveObject.transform.parent.transform.rotation.z);
 
-            if (queensLight)
+            if (!hivePlacedVertically) 
             {
-                Bee.GetComponent<QueenBeeBehavior>().LightShutOff();
-            }
-            else
-            {
-                Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
-            }
+                if(hiveObject.transform.parent.transform.rotation.z == 0 || hiveObject.transform.parent.transform.rotation.z == 1)
+                {
+                    //print("horiz 0");
+                    if (queensLight)
+                    {
+                        Bee.GetComponent<QueenBeeBehavior>().LightShutOff();
+                    }
+                    else
+                    {
+                        Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
+                    }
 
-            lm.BeeVisionObjects.Remove(hiveObject.transform.parent.gameObject);
-            Destroy(hiveObject.transform.parent.gameObject);
-            Destroy(gameObject);
-
-            //if (!hivePlacedVertically && hiveObject.transform.parent.transform.rotation.z == 0)
-            //{
-            //    print("horiz 0");
-            //    if (queensLight)
-            //    {
-            //        Bee.GetComponent<QueenBeeBehavior>().LightShutOff();
-            //    }
-            //    else
-            //    {
-            //        Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
-            //    }
-
-            //    lm.BeeVisionObjects.Remove(hiveObject);
-            //    Destroy(hiveObject.transform.parent.gameObject);
-            //    Destroy(gameObject);
-            //}
-            //else if (!hivePlacedVertically/* && hiveObject.transform.parent.transform.rotation.z == 180*/)
-            //{
-            //    print("horiz 180");
-            //    if (queensLight)
-            //    {
-            //        Bee.GetComponent<QueenBeeBehavior>().LightShutOff();
-            //    }
-            //    else
-            //    {
-            //        Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
-            //    }
-
-            //    lm.BeeVisionObjects.Remove(hiveObject);
-            //    Destroy(hiveObject.transform.parent.gameObject);
-            //    Destroy(gameObject);
-            //}
-
-            //if (hivePlacedVertically)
-            //{
-            //    print("vert");
-            //    if(hiveObject.transform.parent.transform.rotation.z == 90 || hiveObject.transform.parent.transform.rotation.z == -90)
-            //    {
-            //        print("vert 90");
-            //        if (queensLight)
-            //        {
-            //            Bee.GetComponent<QueenBeeBehavior>().LightShutOff();
-            //        }
-            //        else
-            //        {
-            //            Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
-            //        }
-
-            //        lm.BeeVisionObjects.Remove(hiveObject.transform.parent.gameObject);
-            //        Destroy(hiveObject.transform.parent.gameObject);
-            //        Destroy(gameObject);
-            //    }
+                    lm.BeeVisionObjects.Remove(hiveObject);
+                    Destroy(hiveObject.transform.parent.gameObject);
+                    Destroy(gameObject);
+                }
                 
-            //}
-            //else if (hivePlacedVertically && hiveObject.transform.parent.transform.rotation.z == -90)
-            //{
-            //    print("vert -90");
-            //    if (queensLight)
-            //    {
-            //        Bee.GetComponent<QueenBeeBehavior>().LightShutOff();
-            //    }
-            //    else
-            //    {
-            //        Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
-            //    }
+            }
+            else if (hivePlacedVertically)
+            {
+                //print("vert");
+                if (hiveObject.transform.parent.transform.rotation.z < 1 && hiveObject.transform.parent.transform.rotation.z > -1 && hiveObject.transform.parent.transform.rotation.z != 0)
+                {
+                    //print("vert 90");
+                    if (queensLight)
+                    {
+                        Bee.GetComponent<QueenBeeBehavior>().LightShutOff();
+                    }
+                    else
+                    {
+                        Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
+                    }
 
-            //    lm.BeeVisionObjects.Remove(hiveObject.transform.parent.gameObject);
-            //    Destroy(hiveObject.transform.parent.gameObject);
-            //    Destroy(gameObject);
-            //}
+                    lm.BeeVisionObjects.Remove(hiveObject.transform.parent.gameObject);
+                    Destroy(hiveObject.transform.parent.gameObject);
+                    Destroy(gameObject);
+                }
+
+            }
         }
     }
 
