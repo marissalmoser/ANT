@@ -41,9 +41,9 @@ public class GameManager : MonoBehaviour
         BaseLeg = true; 
     }
 
-    public IEnumerator EndLevel()
+    public IEnumerator RestartLevel()
     {
-        print("Game Over");
+        print("Level Restarting");
         //stop player movement
         //forloop all bee scream animation from list of bees, set move towards pos to player
         //clear bee list
@@ -55,5 +55,10 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+    public IEnumerator GameWon()
+    {
+        SceneManager.LoadScene(0);
+        yield return null;
     }
 }

@@ -23,7 +23,7 @@ public class LightBehavior : MonoBehaviour
     [SerializeField] private LayerMask hiveLM;
     [SerializeField] private Vector2 detectorSize;
     [SerializeField] private bool hivePlacedVertically;
-
+    [SerializeField] private bool queensLight;
     private void Start()
     {
         PlayerBehavior.ObjectDropped += LightBlocked;
@@ -35,23 +35,50 @@ public class LightBehavior : MonoBehaviour
     {
         if (hiveInPlace)
         {
-            if(!hivePlacedVertically && hiveObject.transform.rotation.z == 0 || hiveObject.transform.rotation.z == 180)
-            {
-                Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
+            //print("dropped");
+            //print(hiveObject.transform.parent.transform.rotation.z);
 
-                //Sound s = System.Array.Find(sounds, sounds => sounds.name == name);
-                print(hiveObject);
-                lm.BeeVisionObjects.Remove(hiveObject);
-                Destroy(hiveObject.transform.parent.gameObject);
-                Destroy(gameObject);
+            if (!hivePlacedVertically) 
+            {
+                if(hiveObject.transform.parent.transform.rotation.z == 0 || hiveObject.transform.parent.transform.rotation.z == 1)
+                {
+                    //print("horiz 0");
+                    if (queensLight)
+                    {
+                        Bee.GetComponent<QueenBeeBehavior>().LightShutOff();
+                    }
+                    else
+                    {
+                        Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
+                    }
+
+                    lm.BeeVisionObjects.Remove(hiveObject);
+                    Destroy(hiveObject.transform.parent.gameObject);
+                    Destroy(gameObject);
+                }
+                
             }
-            //if (hivePlacedVertically && hiveObject.transform.rotation.z == 90 || hiveObject.transform.rotation.z == -90)
-            //{
-            //    Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
-            //    lm.BeeVisionObjects.Remove(hiveObject.transform.parent.gameObject);
-            //    Destroy(hiveObject.transform.parent.gameObject);
-            //    Destroy(gameObject);
-            //}
+            else if (hivePlacedVertically)
+            {
+                //print("vert");
+                if (hiveObject.transform.parent.transform.rotation.z < 1 && hiveObject.transform.parent.transform.rotation.z > -1 && hiveObject.transform.parent.transform.rotation.z != 0)
+                {
+                    //print("vert 90");
+                    if (queensLight)
+                    {
+                        Bee.GetComponent<QueenBeeBehavior>().LightShutOff();
+                    }
+                    else
+                    {
+                        Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
+                    }
+
+                    lm.BeeVisionObjects.Remove(hiveObject.transform.parent.gameObject);
+                    Destroy(hiveObject.transform.parent.gameObject);
+                    Destroy(gameObject);
+                }
+
+            }
         }
     }
 
@@ -62,10 +89,8 @@ public class LightBehavior : MonoBehaviour
             Collider2D collider = Physics2D.OverlapBox(transform.position, detectorSize, 0, hiveLM);
             if (collider != null)
             {
-                //print(collider.gameObject);
                 hiveInPlace = true;
-                hiveObject = collider.gameObject;
-                //print(hiveObject);
+                hiveObject = collider.gameObject;   //bee vision object
             }
             else
             {
@@ -79,10 +104,15 @@ public class LightBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player") && Bee.GetComponent<BeeStates>().StartInToPatrol)
+        if(!queensLight && collision.CompareTag("Player") && Bee.GetComponent<BeeStates>().StartInToPatrol)
         {
             Bee.GetComponent<BeeStates>().FSM(BeeStates.States.ToPatrol);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawCube(transform.position, detectorSize);
     }
 
     private void OnDestroy()

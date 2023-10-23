@@ -17,6 +17,7 @@ public class BeeStates : MonoBehaviour
 {
     public int State;
     private Rigidbody2D rb;
+    private Animator anim;
     [SerializeField] GameObject LevelManager;
     private LevelManager lm;
     public bool StartInToPatrol;
@@ -52,6 +53,7 @@ public class BeeStates : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         lm = LevelManager.GetComponent<LevelManager>();
+        anim = gameObject.GetComponent<Animator>();
 
         lm.BeeVisionObjects.Add(detectorOriginPt);
         lm.Bees.Add(gameObject);
@@ -97,7 +99,8 @@ public class BeeStates : MonoBehaviour
 
     IEnumerator PatrolState()
     {
-        
+        StopAnimations();
+        anim.SetBool("Patrol", true);
 
         while (true)
         {
@@ -121,6 +124,9 @@ public class BeeStates : MonoBehaviour
 
     IEnumerator SusState()
     {
+        StopAnimations();
+        anim.SetBool("Suspicious", true);
+
         AudioManager.Instance.Play("BeeSeesPlayer");
         
         //pauses movement
@@ -132,7 +138,7 @@ public class BeeStates : MonoBehaviour
         targetPos = Player.transform.position;
         Flip();
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
 
         //moves toward where it saw the player
         while(Vector2.Distance(transform.position, targetPos) > 0.5f)
@@ -145,7 +151,7 @@ public class BeeStates : MonoBehaviour
         targetPos = transform.position;
         Flip();
         transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
 
         //checks for player
         if (Player != null)
@@ -170,15 +176,22 @@ public class BeeStates : MonoBehaviour
 
     IEnumerator AlertState()
     {
+        StopAnimations();
+        anim.SetBool("Alert", true);
+
         print("BEE MORE SNEAKY BZZZZZZ");
+
         AudioManager.Instance.Play("BeeAlert");
         //all bees move toward player
-        StartCoroutine(GameManager.Instance.EndLevel());
+        StartCoroutine(GameManager.Instance.RestartLevel());
         yield return null;
     }
 
     IEnumerator SleepState()
     {
+        StopAnimations();
+        anim.SetBool("Sleep", true);
+
         //stop all movement
         targetPos = transform.position;
         transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
@@ -208,6 +221,9 @@ public class BeeStates : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
+        StopAnimations();
+        anim.SetBool("ToPatrol", true);
+
         //wing animation
         while (StartInToPatrol)
         {
@@ -228,7 +244,7 @@ public class BeeStates : MonoBehaviour
 
     public bool PerformDetection()
     {
-        Collider2D collider = Physics2D.OverlapBox(detectorOriginPt.transform.position, detectorSize, 90, playerLayer);
+        Collider2D collider = Physics2D.OverlapBox(detectorOriginPt.transform.position, detectorSize, 0, playerLayer);
         if(collider != null)
         {
             Player = collider.gameObject;
@@ -245,7 +261,7 @@ public class BeeStates : MonoBehaviour
     {
         while(true)
         {
-            Collider2D collider = Physics2D.OverlapBox(detectorOriginPt.transform.position, detectorSize, 90, playerLayer);
+            Collider2D collider = Physics2D.OverlapBox(detectorOriginPt.transform.position, detectorSize, 0, playerLayer);
             if (collider != null)
             {
                 Player = collider.gameObject;
@@ -276,5 +292,14 @@ public class BeeStates : MonoBehaviour
             localScale.x *= -1;
             transform.localScale = localScale;
         }
+    }
+
+    private void StopAnimations()
+    {
+        anim.SetBool("ToPatrol", false);
+        anim.SetBool("Patrol", false);
+        anim.SetBool("Suspicious", false);
+        anim.SetBool("Alert", false);
+        anim.SetBool("Sleep", false);
     }
 }

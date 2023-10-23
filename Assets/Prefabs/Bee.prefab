@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 3096334909587116306}
   - component: {fileID: 3096334909587116305}
   - component: {fileID: 3096334909587116304}
+  - component: {fileID: 8909434409978745556}
   m_Layer: 8
   m_Name: Bee
   m_TagString: Bee
@@ -240,6 +241,26 @@ MonoBehaviour:
   gizmoIdle: {r: 0, g: 1, b: 0, a: 0.2}
   gizmoDetected: {r: 1, g: 0, b: 0, a: 0.21960784}
   ShowGizmos: 1
+--- !u!95 &8909434409978745556
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3096334909587116311}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 585b27dad0b60514c9b6bf7c6afe6834, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3096334909725936240
 GameObject:
   m_ObjectHideFlags: 0

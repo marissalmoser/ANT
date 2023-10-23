@@ -29,7 +29,7 @@ public class PlayerBehavior : MonoBehaviour
     //carrying object vars
     [Header("Carrying Objects")]
     [SerializeField] private Transform spotToCarry;
-    private GameObject pickedUpObject;
+    public GameObject pickedUpObject;
     private bool pickUpTriggered;
     private bool isCarrying;
     private Vector3 crawlCarryOffset = new Vector3(0, -0.12f, 0);
@@ -102,6 +102,7 @@ public class PlayerBehavior : MonoBehaviour
             //print("drop");
             isCarrying = false;
             ObjectDropped?.Invoke();
+            pickedUpObject.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }
 
