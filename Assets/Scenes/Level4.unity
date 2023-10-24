@@ -92059,7 +92059,7 @@ GameObject:
   - component: {fileID: 889178499}
   - component: {fileID: 889178498}
   - component: {fileID: 889178497}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall 1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
