@@ -940,7 +940,7 @@ GameObject:
   - component: {fileID: 626229832}
   - component: {fileID: 626229831}
   - component: {fileID: 626229830}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall 1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
