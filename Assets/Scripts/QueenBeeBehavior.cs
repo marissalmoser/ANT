@@ -89,6 +89,7 @@ public class QueenBeeBehavior : MonoBehaviour
     IEnumerator SuspiciousState()
     {
         //exclamation.SetActive(true);
+        AudioManager.Instance.Play("BeeSeesPlayer");
 
         yield return new WaitForSeconds(1);
 
@@ -114,13 +115,14 @@ public class QueenBeeBehavior : MonoBehaviour
     IEnumerator AlertState()
     {
         print("BEE MORE SNEAKY BZZZZZZ");
+        AudioManager.Instance.Play("BeeAlert");
         StartCoroutine(GameManager.Instance.RestartLevel()); 
         yield return null;
     }
 
     IEnumerator SleepState()
     {
-        gameObject.GetComponent<CapsuleCollider2D>().enabled = true;
+        //gameObject.GetComponent<PolygonCollider2D>().enabled = true;
         rb.gravityScale = 2;
 
         //turn off bee vision

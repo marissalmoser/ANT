@@ -65,6 +65,11 @@ public class BeeStates : MonoBehaviour
         {
             FSM(States.Patrol);
         }
+        else
+        {
+            StopAnimations();
+            anim.SetBool("Sleep", true);
+        }
     }
 
     public void FSM(States state)

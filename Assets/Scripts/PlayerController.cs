@@ -189,7 +189,7 @@ public class PlayerController : MonoBehaviour
     private void SwitchMovementSystem(InputAction.CallbackContext obj)
     {
         //switch to crawling movement system
-        if (!CrawlMapEnabled && canMove == 1) // && WallBehavior.OnClimbableWall) this broke it??
+        if (!CrawlMapEnabled && canMove == 1)// && WallBehavior.OnClimbableWall) //this broke it??
         {
             if (GameManager.Instance.BaseLeg)
             {

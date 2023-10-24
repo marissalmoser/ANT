@@ -26,12 +26,10 @@ public class WallBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        OnClimbableWall = false;
-        //print(OnClimbableWall);
-
         if(collision.CompareTag("Player"))
         {
-            //print("should switch");
+            OnClimbableWall = false;
+            print(OnClimbableWall);
             WallTriggered?.Invoke();
         }
     }
@@ -39,6 +37,6 @@ public class WallBehavior : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         OnClimbableWall = true;
-        //print(OnClimbableWall);
+        print(OnClimbableWall);
     }
 }

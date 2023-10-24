@@ -593,7 +593,7 @@ GameObject:
   - component: {fileID: 368628456}
   - component: {fileID: 368628455}
   m_Layer: 0
-  m_Name: Grid
+  m_Name: hexagon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -842,6 +842,38 @@ PrefabInstance:
       propertyPath: levelManager
       value: 
       objectReference: {fileID: 2092130439}
+    - target: {fileID: 3461796977683965257, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
+      propertyPath: m_LocalAABB.m_Center.x
+      value: -0.081911325
+      objectReference: {fileID: 0}
+    - target: {fileID: 3461796977683965257, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
+      propertyPath: m_LocalAABB.m_Center.y
+      value: 0.1593039
+      objectReference: {fileID: 0}
+    - target: {fileID: 3461796977683965257, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
+      propertyPath: m_LocalAABB.m_Extent.x
+      value: 3.7306695
+      objectReference: {fileID: 0}
+    - target: {fileID: 3461796977683965257, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
+      propertyPath: m_LocalAABB.m_Extent.y
+      value: 1.6517961
+      objectReference: {fileID: 0}
+    - target: {fileID: 3461796977683965258, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
+      propertyPath: m_Spline.m_ControlPoints.Array.data[1].position.x
+      value: -3.4662378
+      objectReference: {fileID: 0}
+    - target: {fileID: 3461796977683965258, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
+      propertyPath: m_Spline.m_ControlPoints.Array.data[1].position.y
+      value: 1.4647572
+      objectReference: {fileID: 0}
+    - target: {fileID: 3461796977683965258, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
+      propertyPath: m_Spline.m_ControlPoints.Array.data[2].position.x
+      value: 3.2236044
+      objectReference: {fileID: 0}
+    - target: {fileID: 3461796977683965258, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
+      propertyPath: m_Spline.m_ControlPoints.Array.data[2].position.y
+      value: 1.4751579
+      objectReference: {fileID: 0}
     - target: {fileID: 3461796977761094393, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
       propertyPath: m_Name
       value: Light
@@ -1221,6 +1253,90 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1f3b470c41c1994ca806400beeb0e4e, type: 3}
+--- !u!1 &714751799
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 714751801}
+  - component: {fileID: 714751800}
+  m_Layer: 0
+  m_Name: Signs (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &714751800
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714751799}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: f35c9cb0b547b6145b72c47c91a2c3a2, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &714751801
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714751799}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 39.94, y: 23.78, z: 0}
+  m_LocalScale: {x: 0.18964799, y: 0.18964799, z: 0.18964799}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 32
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &723258943
 GameObject:
   m_ObjectHideFlags: 0
@@ -91808,7 +91924,7 @@ GameObject:
   - component: {fileID: 853730879}
   - component: {fileID: 853730878}
   m_Layer: 0
-  m_Name: Grid
+  m_Name: square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92304,7 +92420,7 @@ GameObject:
   - component: {fileID: 1400676331}
   - component: {fileID: 1400676334}
   - component: {fileID: 1400676333}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MetalSheet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98736,7 +98852,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.3529412, g: 0.22352943, b: 0, a: 1}
   m_FlipX: 0
@@ -98756,8 +98872,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1825271446}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 21.3, y: 6.7434, z: 0}
-  m_LocalScale: {x: 19.70765, y: 11.594391, z: 1}
+  m_LocalPosition: {x: 21.3, y: 5.7938, z: 0}
+  m_LocalScale: {x: 17.80783, y: 11.594391, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -98772,7 +98888,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: speed
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: posA.x
