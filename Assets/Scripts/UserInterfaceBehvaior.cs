@@ -79,27 +79,27 @@ public class UserInterfaceBehvaior : MonoBehaviour
     {
         if(GameManager.Instance.WebPlatformList.Count == 0)
         {
-            WebPlatform1UI.SetActive(false);
-            WebPlatform2UI.SetActive(false);
-            WebPlatform3UI.SetActive(false);
+            WebPlatform1UI.SetActive(true);
+            WebPlatform2UI.SetActive(true);
+            WebPlatform3UI.SetActive(true);
         }
         if (GameManager.Instance.WebPlatformList.Count == 1)
         {
             WebPlatform1UI.SetActive(true);
-            WebPlatform2UI.SetActive(false);
+            WebPlatform2UI.SetActive(true);
             WebPlatform3UI.SetActive(false);
         }
         if (GameManager.Instance.WebPlatformList.Count == 2)
         {
             WebPlatform1UI.SetActive(true);
-            WebPlatform2UI.SetActive(true);
+            WebPlatform2UI.SetActive(false);
             WebPlatform3UI.SetActive(false);
         }
         if (GameManager.Instance.WebPlatformList.Count == 3)
         {
-            WebPlatform1UI.SetActive(true);
-            WebPlatform2UI.SetActive(true);
-            WebPlatform3UI.SetActive(true);
+            WebPlatform1UI.SetActive(false);
+            WebPlatform2UI.SetActive(false);
+            WebPlatform3UI.SetActive(false);
         }
     }
 
