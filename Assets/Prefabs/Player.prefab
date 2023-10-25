@@ -185,7 +185,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.32687885, y: -0.055677176}
+  m_Offset: {x: -0.34556782, y: -0.1758213}
   m_SpriteTilingProperty:
     border: {x: 0.38, y: 0, z: 1.01, w: 0.13}
     pivot: {x: 0.5, y: 0.5}
@@ -196,7 +196,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.337655, y: 0.7736993}
+  m_Size: {x: 1.182802, y: 0.5761285}
   m_EdgeRadius: 0
 --- !u!95 &655961731840277452
 Animator:
@@ -608,11 +608,11 @@ MonoBehaviour:
   climbableWalls:
     serializedVersion: 2
     m_Bits: 512
-  jumpingPower: 12
+  jumpingPower: 15
   groundCheck: {fileID: 1063440051855704490}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 1032
   Interact: 0
   beeMaskWalk: {fileID: 1063440052828694841}
   beeMaskCrawl: {fileID: 1063440052053636006}
@@ -631,6 +631,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spotToCarry: {fileID: 1063440052300591084}
+  pickedUpObject: {fileID: 0}
   WebPlatform: {fileID: 0}
   WebPlatformPrefab: {fileID: 4626731483180130535, guid: 61419224914f1c04ebbe84ddead1336f, type: 3}
 --- !u!1 &1063440052828694841

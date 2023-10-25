@@ -760,7 +760,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7318646834101081404, guid: ae039655fbdc8a241868e525d6e59b72, type: 3}
       propertyPath: BeeVisionObjects.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7318646834101081404, guid: ae039655fbdc8a241868e525d6e59b72, type: 3}
       propertyPath: BeeVisionObjects.Array.data[0]
@@ -770,6 +770,14 @@ PrefabInstance:
       propertyPath: BeeVisionObjects.Array.data[1]
       value: 
       objectReference: {fileID: 302117905}
+    - target: {fileID: 7318646834101081404, guid: ae039655fbdc8a241868e525d6e59b72, type: 3}
+      propertyPath: BeeVisionObjects.Array.data[2]
+      value: 
+      objectReference: {fileID: 1877936232}
+    - target: {fileID: 7318646834101081404, guid: ae039655fbdc8a241868e525d6e59b72, type: 3}
+      propertyPath: BeeVisionObjects.Array.data[3]
+      value: 
+      objectReference: {fileID: 693844204}
     - target: {fileID: 7318646834101081405, guid: ae039655fbdc8a241868e525d6e59b72, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1022,6 +1030,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
+--- !u!1 &693844204 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4342833701762050483, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
+  m_PrefabInstance: {fileID: 1113255045}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &719910883
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17974,7 +17987,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -18000,7 +18013,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.6, y: 1.24, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -18062,6 +18075,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7c8a990d5b4c45489601c2eb1f2391b, type: 3}
+--- !u!1 &1877936232 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4342833701762050483, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
+  m_PrefabInstance: {fileID: 1373913881}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1893292700 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6811718710104595203, guid: 66c5bdb202575624cb86bf6dce351017, type: 3}

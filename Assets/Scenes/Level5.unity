@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &14734396 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1128206381191103702, guid: 66c5bdb202575624cb86bf6dce351017, type: 3}
+  m_PrefabInstance: {fileID: 265805621}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &148012055
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,6 +296,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f8ee4f08abd4744e8d6d30b1a537205, type: 3}
+--- !u!1 &208550491 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4342833701762050483, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
+  m_PrefabInstance: {fileID: 540402725}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &235489178
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,6 +1136,11 @@ Transform:
   m_Father: {fileID: 1093597871}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &346200784 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1128206381191103702, guid: 66c5bdb202575624cb86bf6dce351017, type: 3}
+  m_PrefabInstance: {fileID: 1910558447}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &366478766
 GameObject:
   m_ObjectHideFlags: 0
@@ -1263,7 +1278,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1315,11 +1330,11 @@ PrefabInstance:
       objectReference: {fileID: 1331086137}
     - target: {fileID: 3373553991704726180, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
       propertyPath: detectorSize.x
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3373553991704726180, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
       propertyPath: detectorSize.y
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3373553991704726180, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
       propertyPath: hivePlacedVertically
@@ -1910,11 +1925,11 @@ PrefabInstance:
       objectReference: {fileID: 1331086137}
     - target: {fileID: 3373553991704726180, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
       propertyPath: detectorSize.x
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3373553991704726180, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
       propertyPath: detectorSize.y
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3373553991704726180, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
       propertyPath: hivePlacedVertically
@@ -2010,6 +2025,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
+--- !u!1 &607557029 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4342833701762050483, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
+  m_PrefabInstance: {fileID: 572698663}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &882019154
 GameObject:
   m_ObjectHideFlags: 0
@@ -14727,6 +14747,11 @@ Transform:
   m_Father: {fileID: 1093597871}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1384073187 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1128206381191103702, guid: 66c5bdb202575624cb86bf6dce351017, type: 3}
+  m_PrefabInstance: {fileID: 907258741}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1536708862
 GameObject:
   m_ObjectHideFlags: 0
@@ -15122,9 +15147,33 @@ PrefabInstance:
       value: Level Manager
       objectReference: {fileID: 0}
     - target: {fileID: 7318646834101081404, guid: ae039655fbdc8a241868e525d6e59b72, type: 3}
+      propertyPath: BeeVisionObjects.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7318646834101081404, guid: ae039655fbdc8a241868e525d6e59b72, type: 3}
       propertyPath: BeeVisionObjects.Array.data[0]
       value: 
-      objectReference: {fileID: 281036748}
+      objectReference: {fileID: 2058503281}
+    - target: {fileID: 7318646834101081404, guid: ae039655fbdc8a241868e525d6e59b72, type: 3}
+      propertyPath: BeeVisionObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 607557029}
+    - target: {fileID: 7318646834101081404, guid: ae039655fbdc8a241868e525d6e59b72, type: 3}
+      propertyPath: BeeVisionObjects.Array.data[2]
+      value: 
+      objectReference: {fileID: 208550491}
+    - target: {fileID: 7318646834101081404, guid: ae039655fbdc8a241868e525d6e59b72, type: 3}
+      propertyPath: BeeVisionObjects.Array.data[3]
+      value: 
+      objectReference: {fileID: 346200784}
+    - target: {fileID: 7318646834101081404, guid: ae039655fbdc8a241868e525d6e59b72, type: 3}
+      propertyPath: BeeVisionObjects.Array.data[4]
+      value: 
+      objectReference: {fileID: 14734396}
+    - target: {fileID: 7318646834101081404, guid: ae039655fbdc8a241868e525d6e59b72, type: 3}
+      propertyPath: BeeVisionObjects.Array.data[5]
+      value: 
+      objectReference: {fileID: 1384073187}
     - target: {fileID: 7318646834101081405, guid: ae039655fbdc8a241868e525d6e59b72, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -17121,6 +17170,11 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!1 &2058503281 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4342833701762050483, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
+  m_PrefabInstance: {fileID: 1590248939}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2097353517
 GameObject:
   m_ObjectHideFlags: 0

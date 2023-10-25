@@ -74,7 +74,7 @@ public class WebPlatformBehavior : MonoBehaviour
     IEnumerator PlatformBehavior()
     {
         print("wait 5");
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(7);
         currrentCoroutine = StartCoroutine(DestroyWebPlatform());
     }
 

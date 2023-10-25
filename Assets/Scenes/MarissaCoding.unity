@@ -206,6 +206,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3096334909725936243, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
 --- !u!1 &528769076
@@ -1496,7 +1500,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2020,6 +2024,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1893077223 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4342833701762050483, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
+  m_PrefabInstance: {fileID: 1932019765}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1919205568
 GameObject:
   m_ObjectHideFlags: 0
@@ -2537,12 +2546,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7318646834101081404, guid: ae039655fbdc8a241868e525d6e59b72, type: 3}
       propertyPath: BeeVisionObjects.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7318646834101081404, guid: ae039655fbdc8a241868e525d6e59b72, type: 3}
       propertyPath: BeeVisionObjects.Array.data[0]
       value: 
       objectReference: {fileID: 5582811198154060963}
+    - target: {fileID: 7318646834101081404, guid: ae039655fbdc8a241868e525d6e59b72, type: 3}
+      propertyPath: BeeVisionObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 1893077223}
     - target: {fileID: 7318646834101081405, guid: ae039655fbdc8a241868e525d6e59b72, type: 3}
       propertyPath: m_RootOrder
       value: 1
