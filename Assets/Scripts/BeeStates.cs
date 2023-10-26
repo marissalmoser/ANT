@@ -65,6 +65,11 @@ public class BeeStates : MonoBehaviour
         {
             FSM(States.Patrol);
         }
+        else
+        {
+            StopAnimations();
+            anim.SetBool("Sleep", true);
+        }
     }
 
     public void FSM(States state)
@@ -195,6 +200,7 @@ public class BeeStates : MonoBehaviour
         //stop all movement
         targetPos = transform.position;
         transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+        gameObject.GetComponent<CapsuleCollider2D>().enabled = true;
         rb.gravityScale = 2;
         AudioManager.Instance.Play("BeeSnoring");
 

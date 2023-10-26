@@ -18,6 +18,7 @@ public class UserInterfaceBehvaior : MonoBehaviour
 {
     [SerializeField] private TMP_Text beeVisionText;
     [SerializeField] private TMP_Text webPlatformText;
+    [SerializeField] private GameObject WebPlatformUI;
     [SerializeField] private GameObject errorMessageText;
 
     [SerializeField] private GameObject WebPlatform1UI;
@@ -65,13 +66,13 @@ public class UserInterfaceBehvaior : MonoBehaviour
     {
         if (!GameManager.Instance.BaseLeg)
         {
-
-            webPlatformText.text = "Web Platforms: On";
+            WebPlatformUI.SetActive(true);
+            //webPlatformText.text = "Web Platforms: On";
         }
         else
         {
-
-            webPlatformText.text = "Web Platforms: Off";
+            WebPlatformUI.SetActive(false);
+            //webPlatformText.text = "Web Platforms: Off";
         }
     }
 
@@ -79,27 +80,27 @@ public class UserInterfaceBehvaior : MonoBehaviour
     {
         if(GameManager.Instance.WebPlatformList.Count == 0)
         {
-            WebPlatform1UI.SetActive(false);
-            WebPlatform2UI.SetActive(false);
-            WebPlatform3UI.SetActive(false);
+            WebPlatform1UI.SetActive(true);
+            WebPlatform2UI.SetActive(true);
+            WebPlatform3UI.SetActive(true);
         }
         if (GameManager.Instance.WebPlatformList.Count == 1)
         {
             WebPlatform1UI.SetActive(true);
-            WebPlatform2UI.SetActive(false);
+            WebPlatform2UI.SetActive(true);
             WebPlatform3UI.SetActive(false);
         }
         if (GameManager.Instance.WebPlatformList.Count == 2)
         {
             WebPlatform1UI.SetActive(true);
-            WebPlatform2UI.SetActive(true);
+            WebPlatform2UI.SetActive(false);
             WebPlatform3UI.SetActive(false);
         }
         if (GameManager.Instance.WebPlatformList.Count == 3)
         {
-            WebPlatform1UI.SetActive(true);
-            WebPlatform2UI.SetActive(true);
-            WebPlatform3UI.SetActive(true);
+            WebPlatform1UI.SetActive(false);
+            WebPlatform2UI.SetActive(false);
+            WebPlatform3UI.SetActive(false);
         }
     }
 

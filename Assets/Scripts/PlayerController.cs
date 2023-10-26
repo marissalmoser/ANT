@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool Interact;
     private Vector3 mousePosition;
     private Vector2 mouseWorldPosition;
+    [SerializeField] private GameObject webCrosshair;
 
     [Header("Bug Parts")]
     [SerializeField] private GameObject beeMaskWalk;
@@ -189,7 +190,7 @@ public class PlayerController : MonoBehaviour
     private void SwitchMovementSystem(InputAction.CallbackContext obj)
     {
         //switch to crawling movement system
-        if (!CrawlMapEnabled && canMove == 1) // && WallBehavior.OnClimbableWall) this broke it??
+        if (!CrawlMapEnabled && canMove == 1)// && WallBehavior.OnClimbableWall) //this broke it??
         {
             if (GameManager.Instance.BaseLeg)
             {
@@ -218,7 +219,6 @@ public class PlayerController : MonoBehaviour
             print("what?");
         }
     }
-
     public void SwitchToWalk()
     {
         //print("switch to 2D movement system");
@@ -303,6 +303,7 @@ public class PlayerController : MonoBehaviour
             GameManager.Instance.BaseLeg = !GameManager.Instance.BaseLeg;
             WebShooterUI?.Invoke();
             AudioManager.Instance.Play("WebShooterOn");
+            StartCoroutine(MoveWebCrossHair());
         }
         //disables web shooter
         else
@@ -322,6 +323,18 @@ public class PlayerController : MonoBehaviour
         WebPlatformBehavior.MousePosition = mouseWorldPosition;
 
         pb.SpawnWebPlatform();
+    }
+    IEnumerator MoveWebCrossHair()
+    {
+        webCrosshair.SetActive(true);
+        while(!GameManager.Instance.BaseLeg)
+        {
+            mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            webCrosshair.transform.position = mouseWorldPosition;
+            yield return null;
+        }
+        webCrosshair.SetActive(false);
+        
     }
 
     private void Update()

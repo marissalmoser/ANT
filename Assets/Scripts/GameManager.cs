@@ -47,13 +47,22 @@ public class GameManager : MonoBehaviour
         //stop player movement
         //forloop all bee scream animation from list of bees, set move towards pos to player
         //clear bee list
+
         yield return new WaitForSeconds(2);
+
+        BaseLeg = true;
+        BaseHead = true;
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
     }
     public IEnumerator NextLevel()
     {
         yield return new WaitForSeconds(1);
+
+        BaseLeg = true;
+        BaseHead = true;
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     public IEnumerator GameWon()

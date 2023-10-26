@@ -41,8 +41,6 @@ public class WebPlatformBehavior : MonoBehaviour
                 if(Vector2.Distance(transform.position, MousePosition) > 0.05f)
                 {
                     transform.position = Vector3.MoveTowards(transform.position, MousePosition, step);
-                    //transform.Translate(targetPos * step);
-                    //Rb.AddForce(targetPos);
                 }
                 else
                 {
@@ -51,7 +49,6 @@ public class WebPlatformBehavior : MonoBehaviour
             }
             else
             {
-                //print("else");
                 Rb.velocity = Vector2.zero;
                 Rb.constraints = RigidbodyConstraints2D.FreezePosition;
                 Rb.freezeRotation = true;
@@ -73,14 +70,14 @@ public class WebPlatformBehavior : MonoBehaviour
 
     IEnumerator PlatformBehavior()
     {
-        print("wait 5");
-        yield return new WaitForSeconds(5);
+        //print("wait 7");
+        yield return new WaitForSeconds(7);
         currrentCoroutine = StartCoroutine(DestroyWebPlatform());
     }
 
     IEnumerator DestroyWebPlatform()
     {
-        print("destroy in 5");
+        //print("destroy in 3");
         StopCoroutine(currrentCoroutine);
         anim.SetBool("WebBreaking", true);
 
