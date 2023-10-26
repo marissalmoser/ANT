@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: a4798934edcf2734793c1646d3c5c567, type: 3}
-  m_Color: {r: 0.80871004, g: 0.8771214, b: 0.8867924, a: 0.4392157}
+  m_Color: {r: 0.5756497, g: 0.59247065, b: 0.5943396, a: 0.4392157}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -701,7 +701,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1032
   Interact: 0
-  webCrosshairPreFab: {fileID: 1055849521594894950}
+  webCrosshair: {fileID: 0}
   beeMaskWalk: {fileID: 1063440052828694841}
   beeMaskCrawl: {fileID: 1063440052053636006}
   webShooterWalk: {fileID: 1063440051061534949}

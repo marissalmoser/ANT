@@ -726,6 +726,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 453442695}
+    - target: {fileID: 1063440052790088572, guid: 2731053a08911bf4bb8c4aa3fbd4f78d, type: 3}
+      propertyPath: webCrosshair
+      value: 
+      objectReference: {fileID: 1134167070}
     - target: {fileID: 1063440052790088575, guid: 2731053a08911bf4bb8c4aa3fbd4f78d, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -14174,6 +14178,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1134167070 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1055849521594894950, guid: 2731053a08911bf4bb8c4aa3fbd4f78d, type: 3}
+  m_PrefabInstance: {fileID: 584489295}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1195839536
 PrefabInstance:
   m_ObjectHideFlags: 0

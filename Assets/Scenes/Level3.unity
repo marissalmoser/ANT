@@ -1147,6 +1147,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1676509595}
+    - target: {fileID: 1063440052790088572, guid: 2731053a08911bf4bb8c4aa3fbd4f78d, type: 3}
+      propertyPath: webCrosshair
+      value: 
+      objectReference: {fileID: 766588353}
     - target: {fileID: 1063440052790088575, guid: 2731053a08911bf4bb8c4aa3fbd4f78d, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -1193,6 +1197,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2731053a08911bf4bb8c4aa3fbd4f78d, type: 3}
+--- !u!1 &766588353 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1055849521594894950, guid: 2731053a08911bf4bb8c4aa3fbd4f78d, type: 3}
+  m_PrefabInstance: {fileID: 766588352}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &794417103
 PrefabInstance:
   m_ObjectHideFlags: 0
