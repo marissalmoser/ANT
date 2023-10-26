@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class MenuBehaviour : MonoBehaviour
 {
-    public void StartLevel1()
+    public void StartGame()
     {
-        StartCoroutine(GameManager.Instance.NextLevel());
+        GameManager.Instance.StartGame();
     }
 
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void ReturnToTitle()
+    {
+        GameManager.Instance.ReturnToTitle();
+    }
+
+    public void RetryLevel()
+    {
+        GameManager.Instance.RestartCurrentLevel();
     }
 }
