@@ -150,6 +150,10 @@ PrefabInstance:
       propertyPath: startInToPatrol
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3096334909587116306, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116311, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: m_Name
       value: Bee
@@ -2024,6 +2028,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1807965519 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1055849521594894950, guid: 2731053a08911bf4bb8c4aa3fbd4f78d, type: 3}
+  m_PrefabInstance: {fileID: 3400137250655503248}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1893077223 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4342833701762050483, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
@@ -2242,6 +2251,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 770911419}
+    - target: {fileID: 1063440052790088572, guid: 2731053a08911bf4bb8c4aa3fbd4f78d, type: 3}
+      propertyPath: webCrosshair
+      value: 
+      objectReference: {fileID: 1807965519}
     - target: {fileID: 1063440052790088575, guid: 2731053a08911bf4bb8c4aa3fbd4f78d, type: 3}
       propertyPath: m_RootOrder
       value: 6
