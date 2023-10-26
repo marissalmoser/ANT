@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> WebPlatformList = new List<GameObject>();
 
+    public static int CurrentLevel;
+
     void Awake()
     {
         if(Instance == null)
@@ -38,22 +40,22 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 60;
 
         BaseHead = true;
-        BaseLeg = true; 
+        BaseLeg = true;
     }
 
     public IEnumerator RestartLevel()
     {
-        print("Level Restarting");
+        //print("Level Restarting");
+
         //stop player movement
-        //forloop all bee scream animation from list of bees, set move towards pos to player
-        //clear bee list
+        //forloop all bee scream animation from list of bees, set move towards pos to player?
 
         yield return new WaitForSeconds(2);
 
         BaseLeg = true;
         BaseHead = true;
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameLost();
 
     }
     public IEnumerator NextLevel()
@@ -63,11 +65,44 @@ public class GameManager : MonoBehaviour
         BaseLeg = true;
         BaseHead = true;
 
+        //fade to black
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+        //fade from black
     }
-    public IEnumerator GameWon()
+    ///called from lv 5
+    public void GameWon()
+    {
+        SceneManager.LoadScene(6);
+    }
+    ///loads lose screen
+    public void GameLost()
+    {
+        CurrentLevel = SceneManager.GetActiveScene().buildIndex;
+        //print(CurrentLevel);
+        SceneManager.LoadScene(7);
+    }
+    ///LoadsScene1
+    public void StartGame()
+    {
+        CurrentLevel = 1;
+        SceneManager.LoadScene(1);
+    }
+    ///loads static variable "current level"
+    public void RestartCurrentLevel()
+    {
+        print(CurrentLevel);
+        SceneManager.LoadScene(CurrentLevel);
+    }
+    ///Loads Title scene
+    public void ReturnToTitle()
     {
         SceneManager.LoadScene(0);
-        yield return null;
+    }
+    ///Quits Application
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

@@ -131,7 +131,7 @@ public class QueenBeeBehavior : MonoBehaviour
 
         print("YOU BEAT THE BEE!");
         yield return new WaitForSeconds(2);
-        StartCoroutine(GameManager.Instance.GameWon());
+        GameManager.Instance.GameWon();
     }
 
     public bool PerformDetection()
