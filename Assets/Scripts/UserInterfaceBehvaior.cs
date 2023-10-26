@@ -18,6 +18,7 @@ public class UserInterfaceBehvaior : MonoBehaviour
 {
     [SerializeField] private TMP_Text beeVisionText;
     [SerializeField] private TMP_Text webPlatformText;
+    [SerializeField] private GameObject WebPlatformUI;
     [SerializeField] private GameObject errorMessageText;
 
     [SerializeField] private GameObject WebPlatform1UI;
@@ -65,13 +66,13 @@ public class UserInterfaceBehvaior : MonoBehaviour
     {
         if (!GameManager.Instance.BaseLeg)
         {
-
-            webPlatformText.text = "Web Platforms: On";
+            WebPlatformUI.SetActive(true);
+            //webPlatformText.text = "Web Platforms: On";
         }
         else
         {
-
-            webPlatformText.text = "Web Platforms: Off";
+            WebPlatformUI.SetActive(false);
+            //webPlatformText.text = "Web Platforms: Off";
         }
     }
 
