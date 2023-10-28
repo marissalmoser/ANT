@@ -397,10 +397,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4961002347910058538, guid: 66c5bdb202575624cb86bf6dce351017, type: 3}
-      propertyPath: m_GravityScale
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6811718710104595203, guid: 66c5bdb202575624cb86bf6dce351017, type: 3}
       propertyPath: m_Name
       value: ' Hive To Carry (3)'
@@ -549,19 +545,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3461796977761094396, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
       propertyPath: m_Size.x
-      value: 2.824584
+      value: 2.4576974
       objectReference: {fileID: 0}
     - target: {fileID: 3461796977761094396, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
       propertyPath: m_Size.y
-      value: 5.627076
+      value: 7.357083
       objectReference: {fileID: 0}
     - target: {fileID: 3461796977761094396, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
       propertyPath: m_Offset.x
-      value: -0.06712848
+      value: -0.19815964
       objectReference: {fileID: 0}
     - target: {fileID: 3461796977761094396, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
       propertyPath: m_Offset.y
-      value: -6.527983
+      value: -3.835049
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
@@ -672,7 +668,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: posA.y
-      value: 5.5
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: posB.x
@@ -680,7 +676,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: posB.y
-      value: 9
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: hivePiece
@@ -694,6 +690,14 @@ PrefabInstance:
       propertyPath: LevelManager
       value: 
       objectReference: {fileID: 612530197}
+    - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
+      propertyPath: StartInToPatrol
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3096334909587116305, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116311, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: m_Name
       value: Bee
@@ -704,11 +708,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116316, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 35
+      value: 31.08
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116316, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116316, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9911,6 +9915,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2104711373}
     - target: {fileID: 3373553991704726180, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
+      propertyPath: Bee2
+      value: 
+      objectReference: {fileID: 1106342396}
+    - target: {fileID: 3373553991704726180, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
+      propertyPath: hasTwoBees
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3373553991704726180, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
       propertyPath: levelManager
       value: 
       objectReference: {fileID: 612530197}
@@ -9976,7 +9988,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3461796977761094394, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3461796977761094395, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
       propertyPath: m_RootOrder
@@ -10152,6 +10164,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 139234367}
     - target: {fileID: 3373553991704726180, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
+      propertyPath: isFirstLight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3373553991704726180, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
       propertyPath: levelManager
       value: 
       objectReference: {fileID: 612530197}
@@ -10261,7 +10277,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3461796977761094394, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3461796977761094395, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
       propertyPath: m_RootOrder
@@ -10347,6 +10363,7 @@ GameObject:
   - component: {fileID: 1158276976}
   - component: {fileID: 1158276975}
   - component: {fileID: 1158276974}
+  - component: {fileID: 1158276977}
   m_Layer: 9
   m_Name: MetalSheets
   m_TagString: Untagged
@@ -10472,6 +10489,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1158276977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158276972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7899c3be6d69b7943ae36c25c7e5addc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1313413308
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10735,7 +10764,7 @@ Transform:
   m_GameObject: {fileID: 1574485468}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.41, y: 2.41, z: 2.41}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 858327553}
@@ -54031,10 +54060,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4961002347910058538, guid: 66c5bdb202575624cb86bf6dce351017, type: 3}
-      propertyPath: m_GravityScale
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6811718710104595203, guid: 66c5bdb202575624cb86bf6dce351017, type: 3}
       propertyPath: m_Name
       value: ' Hive To Carry (2)'
@@ -54087,11 +54112,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1063440052790088575, guid: 2731053a08911bf4bb8c4aa3fbd4f78d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7
+      value: 4.12
       objectReference: {fileID: 0}
     - target: {fileID: 1063440052790088575, guid: 2731053a08911bf4bb8c4aa3fbd4f78d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.5
+      value: -2.49
       objectReference: {fileID: 0}
     - target: {fileID: 1063440052790088575, guid: 2731053a08911bf4bb8c4aa3fbd4f78d, type: 3}
       propertyPath: m_LocalPosition.z

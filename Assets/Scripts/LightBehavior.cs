@@ -16,14 +16,18 @@ using UnityEngine;
 public class LightBehavior : MonoBehaviour
 {
     [SerializeField] private GameObject Bee;
+    [SerializeField] private GameObject Bee2;
     [SerializeField] private GameObject levelManager;
     private LevelManager lm;
     private GameObject hiveObject;
-    private bool hiveInPlace;
+    [SerializeField] private bool hiveInPlace;
     [SerializeField] private LayerMask hiveLM;
     [SerializeField] private Vector2 detectorSize;
     [SerializeField] private bool hivePlacedVertically;
     [SerializeField] private bool queensLight;
+    [SerializeField] private bool hasTwoBees;
+    [SerializeField] private bool isFirstLight;
+
     private void Start()
     {
         PlayerBehavior.ObjectDropped += LightBlocked;
@@ -35,14 +39,14 @@ public class LightBehavior : MonoBehaviour
     {
         if (hiveInPlace)
         {
-            //print("dropped");
+            print("dropped");
             //print(hiveObject.transform.parent.transform.rotation.z);
 
             if (!hivePlacedVertically) 
             {
+                print("true");
                 if(hiveObject.transform.parent.transform.rotation.z == 0 || hiveObject.transform.parent.transform.rotation.z == 1)
                 {
-                    //print("horiz 0");
                     if (queensLight)
                     {
                         Bee.GetComponent<QueenBeeBehavior>().LightShutOff();
@@ -50,6 +54,10 @@ public class LightBehavior : MonoBehaviour
                     else
                     {
                         Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
+                        if (hasTwoBees)
+                        {
+                            Bee2.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
+                        }
                     }
 
                     lm.BeeVisionObjects.Remove(hiveObject);
@@ -71,6 +79,10 @@ public class LightBehavior : MonoBehaviour
                     else
                     {
                         Bee.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
+                        if (hasTwoBees)
+                        {
+                            Bee2.GetComponent<BeeStates>().FSM(BeeStates.States.Sleep);
+                        }
                     }
 
                     lm.BeeVisionObjects.Remove(hiveObject.transform.parent.gameObject);
@@ -91,6 +103,11 @@ public class LightBehavior : MonoBehaviour
             {
                 hiveInPlace = true;
                 hiveObject = collider.gameObject;   //bee vision object
+                //print("in place");
+                if(isFirstLight)
+                {
+                    LightBlocked();
+                }
             }
             else
             {
@@ -107,6 +124,11 @@ public class LightBehavior : MonoBehaviour
         if(!queensLight && collision.CompareTag("Player") && Bee.GetComponent<BeeStates>().StartInToPatrol)
         {
             Bee.GetComponent<BeeStates>().FSM(BeeStates.States.ToPatrol);
+
+            if(hasTwoBees)
+            {
+                Bee2.GetComponent<BeeStates>().FSM(BeeStates.States.ToPatrol);
+            }
         }
     }
 

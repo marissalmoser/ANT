@@ -132,7 +132,6 @@ public class PlayerBehavior : MonoBehaviour
         }
 
         pickedUpObject = null;
-        StopCoroutine(MovePickedUpObjeect());
     }
 
     public void SpawnWebPlatform()
