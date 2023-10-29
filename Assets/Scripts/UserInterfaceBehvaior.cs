@@ -13,6 +13,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UserInterfaceBehvaior : MonoBehaviour
 {
@@ -135,6 +136,7 @@ public class UserInterfaceBehvaior : MonoBehaviour
     {
         pauseMenu.SetActive(true);
         GameManager.GameIsPaused = true;
+        GameManager.CurrentLevel = SceneManager.GetActiveScene().buildIndex;
         Time.timeScale = 0;
     }
     public void UnPause()

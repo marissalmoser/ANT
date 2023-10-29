@@ -118,10 +118,11 @@ public class PlayerController : MonoBehaviour
     private void Handle_interactStarted(InputAction.CallbackContext obj)
     {
         Interact = true;
-
-        pb.BreakObject();
-
-        pb.PickUpObject();
+        if(!GameManager.GameIsPaused)
+        {
+            pb.BreakObject();
+            pb.PickUpObject();
+        }
     }
     private void Handle_interactCanceled(InputAction.CallbackContext obj)
     {
@@ -130,19 +131,19 @@ public class PlayerController : MonoBehaviour
 
     private void Handle_moveStarted(InputAction.CallbackContext obj)
     {
-        playerCanMove = true;
-
-        //walking animations
-        
-
-        if (canMove == 0)
+        if (!GameManager.GameIsPaused)
         {
-            //part not enabled
-            ErrorMessage?.Invoke();
-        }
-        else
-        {
-            walkingAnim.SetBool("isWalking", true);
+            playerCanMove = true;
+
+            if (canMove == 0)
+            {
+                //part not enabled
+                ErrorMessage?.Invoke();
+            }
+            else
+            {
+                walkingAnim.SetBool("isWalking", true);
+            }
         }
     }
     private void Handle_moveCanceled(InputAction.CallbackContext obj)
@@ -153,7 +154,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Handle_jumpStarted(InputAction.CallbackContext obj)
     {
-        if (jumpStart == false)
+        if (jumpStart == false && !GameManager.GameIsPaused)
         {
             jumpStart = true;
         }
@@ -165,16 +166,19 @@ public class PlayerController : MonoBehaviour
 
     private void Handle_crawlStarted(InputAction.CallbackContext obj)
     {
-        playerCanCrawl = true;
+        if (!GameManager.GameIsPaused)
+        {
+            playerCanCrawl = true;
 
-        if (canMove == 0)
-        {
-            //part not enabled
-            ErrorMessage?.Invoke(); 
-        }
-        else
-        {
-            crawlingAnim.SetBool("isCrawling", true);
+            if (canMove == 0)
+            {
+                //part not enabled
+                ErrorMessage?.Invoke();
+            }
+            else
+            {
+                crawlingAnim.SetBool("isCrawling", true);
+            }
         }
     }
     private void Handle_crawlCanceled(InputAction.CallbackContext obj)
@@ -190,7 +194,7 @@ public class PlayerController : MonoBehaviour
     private void SwitchMovementSystem(InputAction.CallbackContext obj)
     {
         //switch to crawling movement system
-        if (!CrawlMapEnabled && canMove == 1)// && WallBehavior.OnClimbableWall) //this broke it??
+        if (!CrawlMapEnabled && canMove == 1 && !GameManager.GameIsPaused)// && WallBehavior.OnClimbableWall) //this broke it??
         {
             if (GameManager.Instance.BaseLeg)
             {
@@ -204,19 +208,19 @@ public class PlayerController : MonoBehaviour
         }
 
         //switch to 2D movement system
-        else if (CrawlMapEnabled && canMove == 1)
+        else if (CrawlMapEnabled && canMove == 1 && !GameManager.GameIsPaused)
         {
             SwitchToWalk();
         }
 
-        else if (!GameManager.Instance.BaseHead)
+        else if (!GameManager.Instance.BaseHead && !GameManager.GameIsPaused)
         {
             //trying to move with bee vision
             ErrorMessage?.Invoke();
         }
         else
         {
-            print("what?");
+            //print("what?");
         }
     }
     public void SwitchToWalk()

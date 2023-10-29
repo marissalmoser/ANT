@@ -121,7 +121,10 @@ public class BeeStates : MonoBehaviour
                 Flip();
             }
             
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+            if(!GameManager.GameIsPaused)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+            }
 
             yield return null;
         }
@@ -235,7 +238,11 @@ public class BeeStates : MonoBehaviour
         {
             targetPos = posA;
             Flip();
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+
+            if (!GameManager.GameIsPaused)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+            }
 
             if(Vector2.Distance(transform.position, posA) < 0.5)
             {
@@ -269,7 +276,7 @@ public class BeeStates : MonoBehaviour
         while(true)
         {
             Collider2D collider = Physics2D.OverlapBox(detectorOriginPt.transform.position, detectorSize, 0, playerLayer);
-            if (collider != null)
+            if (collider != null && !GameManager.GameIsPaused)
             {
                 Player = collider.gameObject;
                 FSM(States.Suspicious);                         //goes into suspicious state

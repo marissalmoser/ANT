@@ -1,3 +1,12 @@
+/**********************************************************************************
+
+// File Name :         UserInterfaceBehavior.cs
+// Author :            Marissa Moser
+// Creation Date :     October 18, 2023
+//
+// Brief Description : 
+
+**********************************************************************************/
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -80,7 +89,10 @@ public class QueenBeeBehavior : MonoBehaviour
                 yield return new WaitForSeconds(1);
             }
 
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+            if (!GameManager.GameIsPaused)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+            }
 
             yield return null;
         }
@@ -154,7 +166,7 @@ public class QueenBeeBehavior : MonoBehaviour
         while (!isFlipping)
         {
             Collider2D collider = Physics2D.OverlapBox(detectorOriginPt.transform.position, detectorSize, 0, playerLayer);
-            if (collider != null)
+            if (collider != null && !GameManager.GameIsPaused)
             {
                 Player = collider.gameObject;
                 print("detected");
