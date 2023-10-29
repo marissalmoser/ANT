@@ -26,7 +26,7 @@ public class LightBehavior : MonoBehaviour
     [SerializeField] private bool hivePlacedVertically;
     [SerializeField] private bool queensLight;
     [SerializeField] private bool hasTwoBees;
-    [SerializeField] private bool isFirstLight;
+    [SerializeField] public bool isFirstLight;
 
     private void Start()
     {

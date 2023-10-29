@@ -16,6 +16,7 @@ public class MenuBehaviour : MonoBehaviour
     public void StartGame()
     {
         GameManager.Instance.StartGame();
+        Time.timeScale = 1;
     }
 
     public void QuitGame()
@@ -31,5 +32,6 @@ public class MenuBehaviour : MonoBehaviour
     public void RetryLevel()
     {
         GameManager.Instance.RestartCurrentLevel();
+        Time.timeScale = 1;
     }
 }

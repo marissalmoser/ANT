@@ -55,7 +55,11 @@ public class BeeStates : MonoBehaviour
         lm = LevelManager.GetComponent<LevelManager>();
         anim = gameObject.GetComponent<Animator>();
 
-        lm.BeeVisionObjects.Add(detectorOriginPt);
+        if(!lightObject.GetComponent<LightBehavior>().isFirstLight)
+        {
+            lm.BeeVisionObjects.Add(detectorOriginPt);
+        }
+        
         lm.Bees.Add(gameObject);
 
         step = speed * Time.deltaTime;
