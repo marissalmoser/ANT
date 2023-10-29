@@ -241,6 +241,7 @@ public class BeeStates : MonoBehaviour
             {
                 //hivePiece.GetComponent<Rigidbody2D>().gravityScale = 0;                   ??
                 FSM(States.Patrol);
+                gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
             }
 
             yield return null;

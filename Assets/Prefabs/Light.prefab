@@ -289,13 +289,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bee: {fileID: 0}
+  Bee2: {fileID: 0}
   levelManager: {fileID: 0}
+  hiveInPlace: 0
   hiveLM:
     serializedVersion: 2
     m_Bits: 64
   detectorSize: {x: 4, y: 5}
   hivePlacedVertically: 0
   queensLight: 0
+  hasTwoBees: 0
 --- !u!1 &4342833701762050483
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,7 +310,7 @@ GameObject:
   - component: {fileID: 5794062259713476061}
   - component: {fileID: 6244136825940367498}
   - component: {fileID: 3046364402549563952}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: BeeVisionGlow
   m_TagString: PickUp-able
   m_Icon: {fileID: 0}
