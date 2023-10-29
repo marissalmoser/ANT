@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
     //actions
     private InputAction move, jump, head, leg, crawl, changeMov, interact, spawnWeb, pause, nextLevel;
-    public static Action BeeVision, WebShooterUI, ErrorMessage, PlatformCountUI;
+    public static Action BeeVision, WebShooterUI, ErrorMessage, PlatformCountUI, GamePaused;
 
     //moving variables
     [Header("Player Movement")]
@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
         interact.started += Handle_interactStarted;
         interact.canceled += Handle_interactCanceled;
         spawnWeb.started += SpawnWebStarted;
-        pause.started += GamePaused;
+        pause.started += PauseGame;
         nextLevel.started += SkipToNextLevel;
 
         WallBehavior.WallTriggered += SwitchToWalk;
@@ -110,9 +110,9 @@ public class PlayerController : MonoBehaviour
     {
         StartCoroutine(GameManager.Instance.NextLevel());
     }
-    private void GamePaused(InputAction.CallbackContext obj)
+    private void PauseGame(InputAction.CallbackContext obj)
     {
-        Application.Quit();
+        GamePaused?.Invoke();
     }
 
     private void Handle_interactStarted(InputAction.CallbackContext obj)
@@ -428,7 +428,7 @@ public class PlayerController : MonoBehaviour
         interact.started -= Handle_interactStarted;
         interact.canceled -= Handle_interactCanceled;
         spawnWeb.started -= SpawnWebStarted;
-        pause.started -= GamePaused;
+        pause.started -= PauseGame;
         WallBehavior.WallTriggered -= SwitchToWalk;
     }
 }
