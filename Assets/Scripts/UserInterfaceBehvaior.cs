@@ -141,7 +141,7 @@ public class UserInterfaceBehvaior : MonoBehaviour
     }
     public void UnPause()
     {
-        print("unpause");
+        //print("unpause");
         pauseMenu.SetActive(false);
         GameManager.GameIsPaused = false;
         Time.timeScale = 1;

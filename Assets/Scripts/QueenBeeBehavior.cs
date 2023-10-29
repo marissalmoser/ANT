@@ -117,7 +117,7 @@ public class QueenBeeBehavior : MonoBehaviour
             }
             else
             {
-                print("back to patrol");
+                //print("back to patrol");
                 //targetPos = posA;
                 FSM(States.Patrol);
             }
@@ -126,7 +126,7 @@ public class QueenBeeBehavior : MonoBehaviour
 
     IEnumerator AlertState()
     {
-        print("BEE MORE SNEAKY BZZZZZZ");
+        //print("BEE MORE SNEAKY BZZZZZZ");
         AudioManager.Instance.Play("BeeAlert");
         StartCoroutine(GameManager.Instance.RestartLevel()); 
         yield return null;
@@ -152,7 +152,7 @@ public class QueenBeeBehavior : MonoBehaviour
         if (collider != null)
         {
             Player = collider.gameObject;
-            print("player detected");
+            //print("player detected");
             return (true);
         }
         else
@@ -169,7 +169,7 @@ public class QueenBeeBehavior : MonoBehaviour
             if (collider != null && !GameManager.GameIsPaused)
             {
                 Player = collider.gameObject;
-                print("detected");
+                //print("detected");
                 FSM(States.Suspicious);  
             }
     

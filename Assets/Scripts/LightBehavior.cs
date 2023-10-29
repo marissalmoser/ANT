@@ -39,12 +39,12 @@ public class LightBehavior : MonoBehaviour
     {
         if (hiveInPlace)
         {
-            print("dropped");
+            //print("dropped");
             //print(hiveObject.transform.parent.transform.rotation.z);
 
             if (!hivePlacedVertically) 
             {
-                print("true");
+                //print("true");
                 if(hiveObject.transform.parent.transform.rotation.z == 0 || hiveObject.transform.parent.transform.rotation.z == 1)
                 {
                     if (queensLight)
