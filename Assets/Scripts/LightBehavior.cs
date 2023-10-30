@@ -19,7 +19,7 @@ public class LightBehavior : MonoBehaviour
     [SerializeField] private GameObject Bee2;
     [SerializeField] private GameObject levelManager;
     private LevelManager lm;
-    private GameObject hiveObject;
+    [SerializeField] private GameObject hiveObject;
     [SerializeField] private bool hiveInPlace;
     [SerializeField] private LayerMask hiveLM;
     [SerializeField] private Vector2 detectorSize;
@@ -106,10 +106,10 @@ public class LightBehavior : MonoBehaviour
                 //print("in place");
                 if(isFirstLight)
                 {
-                    LightBlocked();
+                    Invoke("LightBlocked", 0.2f);
                 }
             }
-            else
+            else if(!isFirstLight)
             {
                 hiveInPlace = false;
                 hiveObject = null;
@@ -129,6 +129,10 @@ public class LightBehavior : MonoBehaviour
             {
                 Bee2.GetComponent<BeeStates>().FSM(BeeStates.States.ToPatrol);
             }
+        }
+        if (isFirstLight && collision.CompareTag("Player"))
+        {
+            hiveObject.GetComponent<Rigidbody2D>().gravityScale = 0.7f;
         }
     }
 

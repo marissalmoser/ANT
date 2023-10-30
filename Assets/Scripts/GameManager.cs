@@ -94,6 +94,7 @@ public class GameManager : MonoBehaviour
     public void RestartCurrentLevel()
     {
         //print(CurrentLevel);
+        Time.timeScale = 1;
         SceneManager.LoadScene(CurrentLevel);
     }
     ///Loads Title scene

@@ -124,13 +124,14 @@ public class UserInterfaceBehvaior : MonoBehaviour
     }
     public void ReturnToTitle()
     {
-        GameManager.Instance.ReturnToTitle();
         Time.timeScale = 1;
+        GameManager.Instance.ReturnToTitle();
     }
     public void RetryLevel()
     {
-        GameManager.Instance.RestartCurrentLevel();
         Time.timeScale = 1;
+        GameManager.Instance.RestartCurrentLevel();
+        print(Time.timeScale);
     }
     public void Pause()
     {
@@ -138,13 +139,15 @@ public class UserInterfaceBehvaior : MonoBehaviour
         GameManager.GameIsPaused = true;
         GameManager.CurrentLevel = SceneManager.GetActiveScene().buildIndex;
         Time.timeScale = 0;
+        print(Time.timeScale);
     }
     public void UnPause()
     {
         //print("unpause");
+        Time.timeScale = 1;
         pauseMenu.SetActive(false);
         GameManager.GameIsPaused = false;
-        Time.timeScale = 1;
+        print(Time.timeScale);
     }
 
     private void OnDestroy()
