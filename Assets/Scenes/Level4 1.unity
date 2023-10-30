@@ -202,7 +202,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: posA.x
-      value: 17.94
+      value: 23.91
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: posA.y
@@ -210,7 +210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: posB.x
-      value: 23.9
+      value: 17.94
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: posB.y
@@ -91989,7 +91989,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: posA.y
-      value: 10.9
+      value: 13.45
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: posB.x
@@ -91997,7 +91997,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: posB.y
-      value: 13.6
+      value: 10.9
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: hivePiece
@@ -95840,7 +95840,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: posA.y
-      value: 42.49
+      value: 40.7
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: posB.x
@@ -95848,7 +95848,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: posB.y
-      value: 40.7
+      value: 42.49
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: hivePiece
