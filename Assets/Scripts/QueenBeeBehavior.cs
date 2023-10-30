@@ -1,3 +1,12 @@
+/**********************************************************************************
+
+// File Name :         UserInterfaceBehavior.cs
+// Author :            Marissa Moser
+// Creation Date :     October 18, 2023
+//
+// Brief Description : 
+
+**********************************************************************************/
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -80,7 +89,10 @@ public class QueenBeeBehavior : MonoBehaviour
                 yield return new WaitForSeconds(1);
             }
 
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+            if (!GameManager.GameIsPaused)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+            }
 
             yield return null;
         }
@@ -105,7 +117,7 @@ public class QueenBeeBehavior : MonoBehaviour
             }
             else
             {
-                print("back to patrol");
+                //print("back to patrol");
                 //targetPos = posA;
                 FSM(States.Patrol);
             }
@@ -114,7 +126,7 @@ public class QueenBeeBehavior : MonoBehaviour
 
     IEnumerator AlertState()
     {
-        print("BEE MORE SNEAKY BZZZZZZ");
+        //print("BEE MORE SNEAKY BZZZZZZ");
         AudioManager.Instance.Play("BeeAlert");
         StartCoroutine(GameManager.Instance.RestartLevel()); 
         yield return null;
@@ -140,7 +152,7 @@ public class QueenBeeBehavior : MonoBehaviour
         if (collider != null)
         {
             Player = collider.gameObject;
-            print("player detected");
+            //print("player detected");
             return (true);
         }
         else
@@ -154,10 +166,10 @@ public class QueenBeeBehavior : MonoBehaviour
         while (!isFlipping)
         {
             Collider2D collider = Physics2D.OverlapBox(detectorOriginPt.transform.position, detectorSize, 0, playerLayer);
-            if (collider != null)
+            if (collider != null && !GameManager.GameIsPaused)
             {
                 Player = collider.gameObject;
-                print("detected");
+                //print("detected");
                 FSM(States.Suspicious);  
             }
     

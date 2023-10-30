@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> WebPlatformList = new List<GameObject>();
 
     public static int CurrentLevel;
+    public static bool GameIsPaused;
 
     void Awake()
     {
@@ -92,7 +93,7 @@ public class GameManager : MonoBehaviour
     ///loads static variable "current level"
     public void RestartCurrentLevel()
     {
-        print(CurrentLevel);
+        //print(CurrentLevel);
         SceneManager.LoadScene(CurrentLevel);
     }
     ///Loads Title scene

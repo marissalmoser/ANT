@@ -13,6 +13,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UserInterfaceBehvaior : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class UserInterfaceBehvaior : MonoBehaviour
     [SerializeField] private TMP_Text webPlatformText;
     [SerializeField] private GameObject WebPlatformUI;
     [SerializeField] private GameObject errorMessageText;
+    [SerializeField] private GameObject pauseMenu;
 
     [SerializeField] private GameObject WebPlatform1UI;
     [SerializeField] private GameObject WebPlatform2UI;
@@ -33,6 +35,7 @@ public class UserInterfaceBehvaior : MonoBehaviour
         PlayerController.WebShooterUI += SwitchLegUI;
         PlayerController.ErrorMessage += StartErrorCoroutine;
         PlayerController.PlatformCountUI += ChangePlatformCountUI;
+        PlayerController.GamePaused += Pause;
     }
 
     private void StartErrorCoroutine()
@@ -114,11 +117,42 @@ public class UserInterfaceBehvaior : MonoBehaviour
         errorCoroutineCache = null;
     }
 
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+    public void ReturnToTitle()
+    {
+        GameManager.Instance.ReturnToTitle();
+        Time.timeScale = 1;
+    }
+    public void RetryLevel()
+    {
+        GameManager.Instance.RestartCurrentLevel();
+        Time.timeScale = 1;
+    }
+    public void Pause()
+    {
+        pauseMenu.SetActive(true);
+        GameManager.GameIsPaused = true;
+        GameManager.CurrentLevel = SceneManager.GetActiveScene().buildIndex;
+        Time.timeScale = 0;
+    }
+    public void UnPause()
+    {
+        //print("unpause");
+        pauseMenu.SetActive(false);
+        GameManager.GameIsPaused = false;
+        Time.timeScale = 1;
+    }
+
     private void OnDestroy()
     {
         PlayerController.BeeVision -= SwitchHeadUI;
         PlayerController.WebShooterUI -= SwitchLegUI;
         PlayerController.ErrorMessage -= StartErrorCoroutine;
         PlayerController.PlatformCountUI -= ChangePlatformCountUI;
+        PlayerController.GamePaused -= Pause;
     }
 }
