@@ -2211,6 +2211,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3192943434872489129, guid: c1f3b470c41c1994ca806400beeb0e4e, type: 3}
+      propertyPath: blackScreen
+      value: 
+      objectReference: {fileID: 3192943435153424218}
     - target: {fileID: 3192943434872489138, guid: c1f3b470c41c1994ca806400beeb0e4e, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -2299,8 +2303,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6494822779355517151, guid: c1f3b470c41c1994ca806400beeb0e4e, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1f3b470c41c1994ca806400beeb0e4e, type: 3}
+--- !u!1 &3192943435153424218 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7811095548143360274, guid: c1f3b470c41c1994ca806400beeb0e4e, type: 3}
+  m_PrefabInstance: {fileID: 3192943435153424217}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3400137250655503248
 PrefabInstance:
   m_ObjectHideFlags: 0

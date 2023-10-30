@@ -27,6 +27,9 @@ public class UserInterfaceBehvaior : MonoBehaviour
     [SerializeField] private GameObject WebPlatform2UI;
     [SerializeField] private GameObject WebPlatform3UI;
 
+    public static Action FadeToBlack;
+    [SerializeField] private GameObject blackScreen;
+
     private Coroutine errorCoroutineCache;
 
     void Awake()
@@ -36,6 +39,7 @@ public class UserInterfaceBehvaior : MonoBehaviour
         PlayerController.ErrorMessage += StartErrorCoroutine;
         PlayerController.PlatformCountUI += ChangePlatformCountUI;
         PlayerController.GamePaused += Pause;
+        FadeToBlack += Fade;
     }
 
     private void StartErrorCoroutine()
@@ -117,6 +121,10 @@ public class UserInterfaceBehvaior : MonoBehaviour
         errorCoroutineCache = null;
     }
 
+    private void Fade()
+    {
+        blackScreen.GetComponent<Animator>().SetBool("FadeToBlack", true);
+    }
 
     public void QuitGame()
     {
@@ -124,12 +132,12 @@ public class UserInterfaceBehvaior : MonoBehaviour
     }
     public void ReturnToTitle()
     {
-        Time.timeScale = 1;
+        UnPause();
         GameManager.Instance.ReturnToTitle();
     }
     public void RetryLevel()
     {
-        Time.timeScale = 1;
+        UnPause();
         GameManager.Instance.RestartCurrentLevel();
         print(Time.timeScale);
     }

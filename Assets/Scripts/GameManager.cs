@@ -61,16 +61,13 @@ public class GameManager : MonoBehaviour
     }
     public IEnumerator NextLevel()
     {
+        UserInterfaceBehvaior.FadeToBlack?.Invoke();
+
         yield return new WaitForSeconds(1);
 
         BaseLeg = true;
         BaseHead = true;
-
-        //fade to black
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-
-        //fade from black
     }
     ///called from lv 5
     public void GameWon()
