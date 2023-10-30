@@ -139,7 +139,6 @@ public class UserInterfaceBehvaior : MonoBehaviour
     {
         UnPause();
         GameManager.Instance.RestartCurrentLevel();
-        print(Time.timeScale);
     }
     public void Pause()
     {
@@ -147,7 +146,6 @@ public class UserInterfaceBehvaior : MonoBehaviour
         GameManager.GameIsPaused = true;
         GameManager.CurrentLevel = SceneManager.GetActiveScene().buildIndex;
         Time.timeScale = 0;
-        print(Time.timeScale);
     }
     public void UnPause()
     {
@@ -155,7 +153,6 @@ public class UserInterfaceBehvaior : MonoBehaviour
         Time.timeScale = 1;
         pauseMenu.SetActive(false);
         GameManager.GameIsPaused = false;
-        print(Time.timeScale);
     }
 
     private void OnDestroy()
@@ -165,5 +162,6 @@ public class UserInterfaceBehvaior : MonoBehaviour
         PlayerController.ErrorMessage -= StartErrorCoroutine;
         PlayerController.PlatformCountUI -= ChangePlatformCountUI;
         PlayerController.GamePaused -= Pause;
+        FadeToBlack -= Fade;
     }
 }
