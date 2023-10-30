@@ -27,6 +27,9 @@ public class UserInterfaceBehvaior : MonoBehaviour
     [SerializeField] private GameObject WebPlatform2UI;
     [SerializeField] private GameObject WebPlatform3UI;
 
+    public static Action FadeToBlack;
+    [SerializeField] private GameObject blackScreen;
+
     private Coroutine errorCoroutineCache;
 
     void Awake()
@@ -36,6 +39,7 @@ public class UserInterfaceBehvaior : MonoBehaviour
         PlayerController.ErrorMessage += StartErrorCoroutine;
         PlayerController.PlatformCountUI += ChangePlatformCountUI;
         PlayerController.GamePaused += Pause;
+        FadeToBlack += Fade;
     }
 
     private void StartErrorCoroutine()
@@ -117,6 +121,10 @@ public class UserInterfaceBehvaior : MonoBehaviour
         errorCoroutineCache = null;
     }
 
+    private void Fade()
+    {
+        blackScreen.GetComponent<Animator>().SetBool("FadeToBlack", true);
+    }
 
     public void QuitGame()
     {
@@ -124,14 +132,13 @@ public class UserInterfaceBehvaior : MonoBehaviour
     }
     public void ReturnToTitle()
     {
-        Time.timeScale = 1;
+        UnPause();
         GameManager.Instance.ReturnToTitle();
     }
     public void RetryLevel()
     {
-        Time.timeScale = 1;
+        UnPause();
         GameManager.Instance.RestartCurrentLevel();
-        print(Time.timeScale);
     }
     public void Pause()
     {
@@ -139,7 +146,6 @@ public class UserInterfaceBehvaior : MonoBehaviour
         GameManager.GameIsPaused = true;
         GameManager.CurrentLevel = SceneManager.GetActiveScene().buildIndex;
         Time.timeScale = 0;
-        print(Time.timeScale);
     }
     public void UnPause()
     {
@@ -147,7 +153,6 @@ public class UserInterfaceBehvaior : MonoBehaviour
         Time.timeScale = 1;
         pauseMenu.SetActive(false);
         GameManager.GameIsPaused = false;
-        print(Time.timeScale);
     }
 
     private void OnDestroy()
@@ -157,5 +162,6 @@ public class UserInterfaceBehvaior : MonoBehaviour
         PlayerController.ErrorMessage -= StartErrorCoroutine;
         PlayerController.PlatformCountUI -= ChangePlatformCountUI;
         PlayerController.GamePaused -= Pause;
+        FadeToBlack -= Fade;
     }
 }
