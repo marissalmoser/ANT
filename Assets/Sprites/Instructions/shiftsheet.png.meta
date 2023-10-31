@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 81427a9d06aac85448c81439f9bd4b50
+guid: 1e483fe805b3f2b40a851de1b747d06e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -120,7 +120,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 2
+        y: 514
         width: 510
         height: 510
       alignment: 0
@@ -130,8 +130,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8dab4fbce7072fc4ca47e11e6ad26885
-      internalID: 542329692
+      spriteID: a529385981dc41b44a98f7e7c30406a2
+      internalID: -801096622
       vertices: []
       indices: 
       edges: []
@@ -140,8 +140,8 @@ TextureImporter:
       name: shiftsheet_1
       rect:
         serializedVersion: 2
-        x: 510
-        y: 2
+        x: 0
+        y: 4
         width: 510
         height: 510
       alignment: 0
@@ -151,8 +151,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b9fb11eb62b31fb48805b2657212b040
-      internalID: -380162578
+      spriteID: 56845f549be997d4b9baac1cf23e0606
+      internalID: 793906152
       vertices: []
       indices: 
       edges: []
@@ -168,8 +168,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      shiftsheet_1: -380162578
-      shiftsheet_0: 542329692
+      shiftsheet_1: 793906152
+      shiftsheet_0: -801096622
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
