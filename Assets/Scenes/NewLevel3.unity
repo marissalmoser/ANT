@@ -1056,11 +1056,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3837057701828586112, guid: 8b58fa08442d1c94caf5d0baddeeabee, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.09
+      value: 25.6
       objectReference: {fileID: 0}
     - target: {fileID: 3837057701828586112, guid: 8b58fa08442d1c94caf5d0baddeeabee, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.59
+      value: 6.95
       objectReference: {fileID: 0}
     - target: {fileID: 3837057701828586112, guid: 8b58fa08442d1c94caf5d0baddeeabee, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1092,6 +1092,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3837057701828586112, guid: 8b58fa08442d1c94caf5d0baddeeabee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3837057701828586114, guid: 8b58fa08442d1c94caf5d0baddeeabee, type: 3}
+      propertyPath: m_UpdateMode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3837057701828586115, guid: 8b58fa08442d1c94caf5d0baddeeabee, type: 3}
@@ -9880,6 +9884,31 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!1 &873801982 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3192943434872489138, guid: c1f3b470c41c1994ca806400beeb0e4e, type: 3}
+  m_PrefabInstance: {fileID: 1358270019}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &873801988
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873801982}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fbe55b2f5f5ce4146b4921b503f0b5af, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &892967989
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10386,6 +10415,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8011880221540866004, guid: 52f86bd1c532a8c4d8a37713660b0e6a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8011880221540866006, guid: 52f86bd1c532a8c4d8a37713660b0e6a, type: 3}
+      propertyPath: m_UpdateMode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8011880221540866007, guid: 52f86bd1c532a8c4d8a37713660b0e6a, type: 3}
