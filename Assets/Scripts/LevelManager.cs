@@ -11,6 +11,11 @@ public class LevelManager : MonoBehaviour
     {
         PlayerController.BeeVision += BeeVisionEnabled;
         Time.timeScale = 1;
+
+        if(GameManager.Instance != null)
+        {
+            GameManager.Instance.WebPlatformList.Clear();
+        }
     }
     private void BeeVisionEnabled()
     {
