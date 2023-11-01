@@ -141,7 +141,7 @@ public class QueenBeeBehavior : MonoBehaviour
         lm.BeeVisionObjects.Remove(detectorOriginPt);
         Destroy(detectorOriginPt);
 
-        print("YOU BEAT THE BEE!");
+        //print("YOU BEAT THE BEE!");
         yield return new WaitForSeconds(2);
         GameManager.Instance.GameWon();
     }
