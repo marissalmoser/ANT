@@ -15809,8 +15809,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelManager: {fileID: 1331086137}
-  posA: {x: 5.94, y: 17.33}
-  posB: {x: 5.94, y: -1.46}
+  posA: {x: 5.94, y: 17.78}
+  posB: {x: 5.94, y: -2.5}
   speed: 2
   detectorSize: {x: 12.6, y: 3.15}
   playerLayer:
@@ -15898,7 +15898,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 559210714}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.94, y: 17.33, z: 0}
+  m_LocalPosition: {x: 5.94, y: 17.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -29493,6 +29493,10 @@ PrefabInstance:
       propertyPath: BeeVisionObjects.Array.data[5]
       value: 
       objectReference: {fileID: 1384073187}
+    - target: {fileID: 7318646834101081404, guid: ae039655fbdc8a241868e525d6e59b72, type: 3}
+      propertyPath: BeeVisionObjects.Array.data[6]
+      value: 
+      objectReference: {fileID: 281036748}
     - target: {fileID: 7318646834101081405, guid: ae039655fbdc8a241868e525d6e59b72, type: 3}
       propertyPath: m_RootOrder
       value: 1

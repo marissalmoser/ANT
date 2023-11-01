@@ -84,6 +84,9 @@ public class GameManager : MonoBehaviour
     ///LoadsScene1
     public void StartGame()
     {
+        BaseLeg = true;
+        BaseHead = true;
+
         CurrentLevel = 1;
         SceneManager.LoadScene(1);
     }

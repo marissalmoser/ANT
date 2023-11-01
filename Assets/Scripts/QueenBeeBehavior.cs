@@ -75,14 +75,14 @@ public class QueenBeeBehavior : MonoBehaviour
     {
         while (true)
         {
-            if (Vector2.Distance(transform.position, posA) < 0.05)
+            if (Vector2.Distance(transform.position, posA) < 0.5)
             {
                 targetPos = posB;
                 StartCoroutine(Flip());
                 yield return new WaitForSeconds(1);
 
             }
-            if (Vector2.Distance(transform.position, posB) < 0.05)
+            if (Vector2.Distance(transform.position, posB) < 0.5)
             {
                 targetPos = posA;
                 StartCoroutine(Flip());
@@ -141,7 +141,7 @@ public class QueenBeeBehavior : MonoBehaviour
         lm.BeeVisionObjects.Remove(detectorOriginPt);
         Destroy(detectorOriginPt);
 
-        print("YOU BEAT THE BEE!");
+        //print("YOU BEAT THE BEE!");
         yield return new WaitForSeconds(2);
         GameManager.Instance.GameWon();
     }
