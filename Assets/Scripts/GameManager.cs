@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
         //forloop all bee scream animation from list of bees, set move towards pos to player?
 
         yield return new WaitForSeconds(2);
+        GameManager.Instance.WebPlatformList.Clear();
 
         BaseLeg = true;
         BaseHead = true;
@@ -67,6 +68,8 @@ public class GameManager : MonoBehaviour
 
         BaseLeg = true;
         BaseHead = true;
+        GameManager.Instance.WebPlatformList.Clear();
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     ///called from lv 5
@@ -86,6 +89,7 @@ public class GameManager : MonoBehaviour
     {
         BaseLeg = true;
         BaseHead = true;
+        GameManager.Instance.WebPlatformList.Clear();
 
         CurrentLevel = 1;
         SceneManager.LoadScene(1);
@@ -94,12 +98,16 @@ public class GameManager : MonoBehaviour
     public void RestartCurrentLevel()
     {
         //print(CurrentLevel);
+        GameManager.Instance.WebPlatformList.Clear();
+        BaseLeg = true;
+        BaseHead = true;
         Time.timeScale = 1;
         SceneManager.LoadScene(CurrentLevel);
     }
     ///Loads Title scene
     public void ReturnToTitle()
     {
+        GameManager.Instance.WebPlatformList.Clear();
         SceneManager.LoadScene(0);
     }
     ///Quits Application

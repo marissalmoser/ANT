@@ -434,5 +434,6 @@ public class PlayerController : MonoBehaviour
         spawnWeb.started -= SpawnWebStarted;
         pause.started -= PauseGame;
         WallBehavior.WallTriggered -= SwitchToWalk;
+        nextLevel.started -= SkipToNextLevel;
     }
 }
