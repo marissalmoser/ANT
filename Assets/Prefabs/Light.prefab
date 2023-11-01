@@ -291,6 +291,8 @@ MonoBehaviour:
   Bee: {fileID: 0}
   Bee2: {fileID: 0}
   levelManager: {fileID: 0}
+  lightsBeeVisionObj: {fileID: 4342833701762050483}
+  hiveObject: {fileID: 0}
   hiveInPlace: 0
   hiveLM:
     serializedVersion: 2
@@ -299,6 +301,7 @@ MonoBehaviour:
   hivePlacedVertically: 0
   queensLight: 0
   hasTwoBees: 0
+  isFirstLight: 0
 --- !u!1 &4342833701762050483
 GameObject:
   m_ObjectHideFlags: 0

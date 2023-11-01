@@ -15,10 +15,11 @@ using UnityEngine;
 
 public class LightBehavior : MonoBehaviour
 {
+    private LevelManager lm;
     [SerializeField] private GameObject Bee;
     [SerializeField] private GameObject Bee2;
     [SerializeField] private GameObject levelManager;
-    private LevelManager lm;
+    [SerializeField] private GameObject lightsBeeVisionObj;
     [SerializeField] private GameObject hiveObject;
     [SerializeField] private bool hiveInPlace;
     [SerializeField] private LayerMask hiveLM;
@@ -62,6 +63,7 @@ public class LightBehavior : MonoBehaviour
 
                     lm.BeeVisionObjects.Remove(hiveObject);
                     Destroy(hiveObject.transform.parent.gameObject);
+                    lm.BeeVisionObjects.Remove(lightsBeeVisionObj);
                     Destroy(gameObject);
                 }
                 

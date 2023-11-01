@@ -19,8 +19,6 @@ public class LevelManager : MonoBehaviour
         {
             foreach (var vision in BeeVisionObjects)
             {
-                //check if var is not null?
-                // print("bes");
                 vision.GetComponent<SpriteRenderer>().enabled = true;
             }
         }

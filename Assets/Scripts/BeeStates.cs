@@ -27,8 +27,8 @@ public class BeeStates : MonoBehaviour
     public enum States{Patrol, Suspicious, Alert, Sleep, ToPatrol}
 
     [Header("Bee")]
-    private bool isFacingRight = true;
-    [SerializeField] private bool canFlip = true;
+    [SerializeField]private bool isFacingRight = true;
+    [SerializeField] private bool startFacingRight = true;
     [SerializeField] private GameObject exclamation;
 
     [Header("Patrol")]
@@ -110,24 +110,38 @@ public class BeeStates : MonoBehaviour
     {
         StopAnimations();
         anim.SetBool("Patrol", true);
+        FlipCheck();
 
         while (true)
         {
-            if (Vector2.Distance(transform.position, posA) < 0.5)
+            if (Vector2.Distance(transform.position, posB) > 0.5)
             {
                 targetPos = posB;
-                Flip();
+                //Flip();
+
+                while (Vector2.Distance(transform.position, posB) > 0.5)
+                {
+                    if (!GameManager.GameIsPaused)
+                    {
+                        transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+                    }
+                    yield return null;
+                }
 
             }
             if (Vector2.Distance(transform.position, posB) < 0.5)
             {
                 targetPos = posA;
-                Flip();
-            }
-            
-            if(!GameManager.GameIsPaused)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+                //Flip();
+
+                while (Vector2.Distance(transform.position, posA) > 0.5)
+                {
+                    if (!GameManager.GameIsPaused)
+                    {
+                        transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+                    }
+                    yield return null;
+                }
             }
 
             yield return null;
@@ -181,6 +195,15 @@ public class BeeStates : MonoBehaviour
                 targetPos = posA;
                 Flip();
                 AudioManager.Instance.Play("BeeBuzzing");
+                StartCoroutine(ConstantDetection());
+
+                //moves toward pos a
+                while (Vector2.Distance(transform.position, targetPos) > 0.5f)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+                    yield return null;
+                }
+
                 FSM(States.Patrol);
             }
         }
@@ -191,7 +214,7 @@ public class BeeStates : MonoBehaviour
         StopAnimations();
         anim.SetBool("Alert", true);
 
-        print("BEE MORE SNEAKY BZZZZZZ");
+        //print("BEE MORE SNEAKY BZZZZZZ");
 
         AudioManager.Instance.Play("BeeAlert");
         //all bees move toward player
@@ -303,12 +326,39 @@ public class BeeStates : MonoBehaviour
 
     private void Flip()
     {
-        if(canFlip && isFacingRight && targetPos.x < transform.position.x || !isFacingRight && targetPos.x > transform.position.x)
+        if(isFacingRight && targetPos.x < transform.position.x)
         {
             isFacingRight = !isFacingRight;
             Vector3 localScale = transform.localScale;
             localScale.x *= -1;
             transform.localScale = localScale;
+        }
+        else if(!isFacingRight && targetPos.x > transform.position.x)
+        {
+            isFacingRight = !isFacingRight;
+            Vector3 localScale = transform.localScale;
+            localScale.x *= -1;
+            transform.localScale = localScale;
+        }
+    }
+
+    void FlipCheck()
+    {
+        if(isFacingRight && !startFacingRight)
+        {
+            isFacingRight = !isFacingRight;
+            Vector3 localScale = transform.localScale;
+            localScale.x *= -1;
+            transform.localScale = localScale;
+            //print("check");
+        }
+        if(!isFacingRight && startFacingRight)
+        {
+            isFacingRight = !isFacingRight;
+            Vector3 localScale = transform.localScale;
+            localScale.x *= -1;
+            transform.localScale = localScale;
+            //print("check");
         }
     }
 
