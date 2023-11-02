@@ -71,6 +71,7 @@ public class UserInterfaceBehvaior : MonoBehaviour
 
     public void SwitchLegUI()
     {
+        //print("web ui");
         if (!GameManager.Instance.BaseLeg)
         {
             WebPlatformUI.SetActive(true);
