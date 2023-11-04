@@ -34,13 +34,15 @@ public class WebPlatformBehavior : MonoBehaviour
 
     IEnumerator PlatformMoving()
     {
+        Vector3 targetPos = MousePosition;
+        
         while(true)
         {
             if (PlatformCanMove)
             {
                 if(Vector2.Distance(transform.position, MousePosition) > 0.05f)
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, MousePosition, step);
+                    transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
                 }
                 else
                 {
