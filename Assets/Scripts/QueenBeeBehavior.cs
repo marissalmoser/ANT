@@ -25,7 +25,6 @@ public class QueenBeeBehavior : MonoBehaviour
     [SerializeField] private Vector2 posB;
     private Vector2 targetPos;
     [SerializeField] private float speed;
-    private float step;
 
     [Header("Detection")]
     [SerializeField] private Vector2 detectorSize;
@@ -40,8 +39,6 @@ public class QueenBeeBehavior : MonoBehaviour
         lm = LevelManager.GetComponent<LevelManager>();
 
         lm.BeeVisionObjects.Add(detectorOriginPt);
-
-        step = speed * Time.deltaTime;
 
         FSM(States.Patrol);
     }
@@ -91,7 +88,7 @@ public class QueenBeeBehavior : MonoBehaviour
 
             if (!GameManager.GameIsPaused)
             {
-                transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+                transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
             }
 
             yield return null;
