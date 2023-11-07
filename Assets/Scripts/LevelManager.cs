@@ -6,11 +6,13 @@ public class LevelManager : MonoBehaviour
 {
     public List<GameObject> Bees = new List<GameObject>();
     public List<GameObject> BeeVisionObjects = new List<GameObject>();
+    public static bool IsCaught;
 
     void Awake()
     {
         PlayerController.BeeVision += BeeVisionEnabled;
         Time.timeScale = 1;
+        IsCaught = false;
 
         if(GameManager.Instance != null)
         {
@@ -35,6 +37,10 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void GotCaught()
+    {
+        IsCaught = true;
+    }
 
     private void OnDisable()
     {

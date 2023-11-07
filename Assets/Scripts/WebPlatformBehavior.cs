@@ -40,9 +40,9 @@ public class WebPlatformBehavior : MonoBehaviour
         {
             if (PlatformCanMove)
             {
-                if(Vector2.Distance(transform.position, MousePosition) > 0.05f)
+                if(Vector2.Distance(transform.position, MousePosition) > 0.3f)
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+                    transform.position = Vector3.MoveTowards(transform.position, targetPos, platformSpeed * Time.deltaTime);
                 }
                 else
                 {

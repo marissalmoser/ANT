@@ -61,7 +61,6 @@ public class BeeStates : MonoBehaviour
         
         lm.Bees.Add(gameObject);
 
-
         if(!StartInToPatrol)
         {
             FSM(States.Patrol);
@@ -152,29 +151,29 @@ public class BeeStates : MonoBehaviour
 
         AudioManager.Instance.Play("BeeSeesPlayer");
         
-        //pauses movement
-        targetPos = transform.position;
-        Flip();
+        ////pauses movement
+        targetPos = transform.position;     //store old target pos??
+        //Flip();
         transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
 
         exclamation.SetActive(true);
-        targetPos = Player.transform.position;
+        //targetPos = Player.transform.position;
         Flip();
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
 
-        //moves toward where it saw the player
-        while(Vector2.Distance(transform.position, targetPos) > 0.5f)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
-            yield return null;
-        }
+        ////moves toward where it saw the player
+        //while(Vector2.Distance(transform.position, targetPos) > 0.5f)
+        //{
+        //    transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+        //    yield return null;
+        //}
 
-        //pauses
-        targetPos = transform.position;
-        Flip();
-        transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
-        yield return new WaitForSeconds(1);
+        ////pauses
+        //targetPos = transform.position;
+        //Flip();
+        //transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+        //yield return new WaitForSeconds(1);
 
         //checks for player
         if (Player != null)
@@ -189,12 +188,11 @@ public class BeeStates : MonoBehaviour
             else
             {
                 //print("back to patrol");
-                targetPos = posA;
-                Flip();
+                //targetPos = posA;
+                //Flip();
                 AudioManager.Instance.Play("BeeBuzzing");
                 StartCoroutine(ConstantDetection());
 
-                //moves toward pos a
                 while (Vector2.Distance(transform.position, targetPos) > 0.5f)
                 {
                     transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
@@ -211,7 +209,7 @@ public class BeeStates : MonoBehaviour
         StopAnimations();
         anim.SetBool("Alert", true);
 
-        //print("BEE MORE SNEAKY BZZZZZZ");
+        LevelManager.GetComponent<LevelManager>().GotCaught();
 
         AudioManager.Instance.Play("BeeAlert");
         //all bees move toward player

@@ -45,12 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: Background
-    clip: {fileID: 0}
-    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
-    volume: 1
-    pitch: 1
-    source: {fileID: 0}
   - name: BeeVisionOn
     clip: {fileID: 8300000, guid: 8f751679d19f3f142ab533545c659e67, type: 3}
     mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
@@ -75,20 +69,38 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     source: {fileID: 0}
-  - name: SwitchingMovementSystems
-    clip: {fileID: 0}
+  - name: ShootPlatform
+    clip: {fileID: 8300000, guid: d8fb65aedd7845d4fb554655eb61f61b, type: 3}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: PlatformBreak
+    clip: {fileID: 8300000, guid: 84eac41b8b2970b44ac418cef74bbd85, type: 3}
     mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
     volume: 1
     pitch: 1
     source: {fileID: 0}
   - name: Jump
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 4a5842cbaaf67e4499e6e3072a5849c2, type: 3}
     mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
     volume: 1
     pitch: 1
     source: {fileID: 0}
-  - name: ErrorMessage
-    clip: {fileID: 0}
+  - name: CrawlToWalkSwitch
+    clip: {fileID: 8300000, guid: bace9b3d07b929b44882efbd527493c0, type: 3}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: CrawlToWalkFall
+    clip: {fileID: 8300000, guid: 23cfd5adc625f8d40bbf98fed30b7e16, type: 3}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: WalkToCrawl
+    clip: {fileID: 8300000, guid: 4b53f39cafc18944db53c5de0d63368e, type: 3}
     mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
     volume: 1
     pitch: 1
@@ -117,7 +129,43 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     source: {fileID: 0}
-  - name: PlayerSlidesOffWall
+  - name: BeeWakesUp
+    clip: {fileID: 8300000, guid: 275ee77adca1f824d81818db5774e349, type: 3}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: TitleMusic
+    clip: {fileID: 0}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: TutorialMusic
+    clip: {fileID: 0}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: ChallengeMusic
+    clip: {fileID: 8300000, guid: 163bd392dcef5794ca0f81b7f14b579a, type: 3}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: BossMusic
+    clip: {fileID: 8300000, guid: 68973daf8e4437e49a6f784f35b0fd53, type: 3}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: ButtonCicks
+    clip: {fileID: 8300000, guid: 8a69c97d963b30b46ba5e84477dd2cf9, type: 3}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: LightBlocked
     clip: {fileID: 0}
     mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
     volume: 1
