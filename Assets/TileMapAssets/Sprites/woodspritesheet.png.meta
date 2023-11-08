@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 160
+  spritePixelsToUnits: 140
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -119,10 +119,10 @@ TextureImporter:
       name: woodspritesheet_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 76
         y: 160
-        width: 160
-        height: 160
+        width: 140
+        height: 140
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,10 +140,10 @@ TextureImporter:
       name: woodspritesheet_1
       rect:
         serializedVersion: 2
-        x: 160
+        x: 216
         y: 160
-        width: 160
-        height: 160
+        width: 140
+        height: 140
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,10 +161,10 @@ TextureImporter:
       name: woodspritesheet_2
       rect:
         serializedVersion: 2
-        x: 320
+        x: 356
         y: 160
-        width: 160
-        height: 160
+        width: 140
+        height: 140
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,10 +182,10 @@ TextureImporter:
       name: woodspritesheet_3
       rect:
         serializedVersion: 2
-        x: 480
+        x: 496
         y: 160
-        width: 160
-        height: 160
+        width: 140
+        height: 140
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,10 +203,10 @@ TextureImporter:
       name: woodspritesheet_4
       rect:
         serializedVersion: 2
-        x: 640
+        x: 636
         y: 160
-        width: 160
-        height: 160
+        width: 140
+        height: 140
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,10 +224,10 @@ TextureImporter:
       name: woodspritesheet_5
       rect:
         serializedVersion: 2
-        x: 800
+        x: 776
         y: 160
-        width: 160
-        height: 160
+        width: 140
+        height: 140
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,10 +245,10 @@ TextureImporter:
       name: woodspritesheet_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 160
-        height: 160
+        x: 76
+        y: 20
+        width: 140
+        height: 140
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -266,10 +266,10 @@ TextureImporter:
       name: woodspritesheet_7
       rect:
         serializedVersion: 2
-        x: 160
-        y: 0
-        width: 160
-        height: 160
+        x: 216
+        y: 20
+        width: 140
+        height: 140
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -287,10 +287,10 @@ TextureImporter:
       name: woodspritesheet_8
       rect:
         serializedVersion: 2
-        x: 320
-        y: 0
-        width: 160
-        height: 160
+        x: 356
+        y: 20
+        width: 140
+        height: 140
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -308,10 +308,10 @@ TextureImporter:
       name: woodspritesheet_9
       rect:
         serializedVersion: 2
-        x: 480
-        y: 0
-        width: 160
-        height: 160
+        x: 496
+        y: 20
+        width: 140
+        height: 140
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -329,10 +329,10 @@ TextureImporter:
       name: woodspritesheet_10
       rect:
         serializedVersion: 2
-        x: 640
-        y: 0
-        width: 160
-        height: 160
+        x: 636
+        y: 20
+        width: 140
+        height: 140
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -350,10 +350,10 @@ TextureImporter:
       name: woodspritesheet_11
       rect:
         serializedVersion: 2
-        x: 800
-        y: 0
-        width: 160
-        height: 160
+        x: 776
+        y: 20
+        width: 140
+        height: 140
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
