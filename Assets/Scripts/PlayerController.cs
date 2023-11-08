@@ -157,6 +157,7 @@ public class PlayerController : MonoBehaviour
         if (jumpStart == false && !GameManager.GameIsPaused)
         {
             jumpStart = true;
+            AudioManager.Instance.Play("Jump");
         }
     }
     private void Handle_jumpCanceled(InputAction.CallbackContext obj)
@@ -206,12 +207,14 @@ public class PlayerController : MonoBehaviour
             }
 
             SwitchToCrawl();
+            AudioManager.Instance.Play("WalkToCrawl");
         }
 
         //switch to 2D movement system
         else if (CrawlMapEnabled && canMove == 1 && !GameManager.GameIsPaused)
         {
             SwitchToWalk();
+            AudioManager.Instance.Play("CrawlToWalkSwitch");
         }
 
         else if (!GameManager.Instance.BaseHead && !GameManager.GameIsPaused)

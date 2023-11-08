@@ -31,6 +31,7 @@ public class WallBehavior : MonoBehaviour
             OnClimbableWall = false;
             //print(OnClimbableWall);
             WallTriggered?.Invoke();
+            AudioManager.Instance.Play("CrawlToWalkFall");
         }
     }
 

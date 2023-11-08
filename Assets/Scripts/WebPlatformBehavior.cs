@@ -30,6 +30,8 @@ public class WebPlatformBehavior : MonoBehaviour
         step = platformSpeed * Time.deltaTime;
 
         anim = gameObject.GetComponent<Animator>();
+
+        AudioManager.Instance.Play("ShootPlatform");
     }
 
     IEnumerator PlatformMoving()
@@ -89,6 +91,7 @@ public class WebPlatformBehavior : MonoBehaviour
         PlayerController.PlatformCountUI?.Invoke();
         anim.SetBool("WebFalling", true);
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        AudioManager.Instance.Play("PlatformBreak");
 
         yield return new WaitForSeconds(1);
 
