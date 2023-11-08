@@ -108,7 +108,7 @@ public class PlayerBehavior : MonoBehaviour
 
     public void BreakObject()
     {
-        if (GameManager.Instance.BaseHead && breakableTriggered)
+        if (GameManager.Instance.BaseHead && breakableTriggered && LevelManager.IsCaught == false)
         {
             Destroy(breakableObject);
             StartCoroutine(GameManager.Instance.NextLevel());

@@ -196,15 +196,16 @@ public class PlayerController : MonoBehaviour
         //switch to crawling movement system
         if (!CrawlMapEnabled && canMove == 1 && !GameManager.GameIsPaused)// && WallBehavior.OnClimbableWall) //this broke it??
         {
-            if (GameManager.Instance.BaseLeg)
+            if (!GameManager.Instance.BaseLeg)
             {
-                SwitchToCrawl();
+                //print("web off from crawl");
+                webShooterWalk.SetActive(false);
+                GameManager.Instance.BaseLeg = true;
+                WebShooterUI?.Invoke();
+                AudioManager.Instance.Play("WebShooterOff");
             }
-            else
-            {
-                //trying to crawl with web shooter enabled
-                ErrorMessage?.Invoke();
-            }
+
+            SwitchToCrawl();
         }
 
         //switch to 2D movement system
@@ -293,15 +294,15 @@ public class PlayerController : MonoBehaviour
     private void SwitchLegPart(InputAction.CallbackContext obj)
     {
 
-        //trying to turn web on with crawl
-        if (GameManager.Instance.BaseLeg && CrawlMapEnabled)
+        ///web on
+        if (GameManager.Instance.BaseLeg && !playerCanCrawl)
         {
-            //part not enabled
-            ErrorMessage?.Invoke();
-        }
-        //enables web shooter
-        else if (GameManager.Instance.BaseLeg && !playerCanCrawl)
-        {
+            ///with crawl
+            if(CrawlMapEnabled)
+            {
+                SwitchToWalk();
+            }
+      
             //print("web on");
             webShooterWalk.SetActive(true);
             GameManager.Instance.BaseLeg = !GameManager.Instance.BaseLeg;
@@ -309,7 +310,7 @@ public class PlayerController : MonoBehaviour
             AudioManager.Instance.Play("WebShooterOn");
             StartCoroutine(MoveWebCrossHair());
         }
-        //disables web shooter
+        ///disables web shooter
         else
         {
             //print("web off");

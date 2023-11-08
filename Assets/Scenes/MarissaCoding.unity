@@ -131,6 +131,22 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
+      propertyPath: posA.x
+      value: 3.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
+      propertyPath: posA.y
+      value: 2.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
+      propertyPath: posB.x
+      value: 3.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
+      propertyPath: posB.y
+      value: -2.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: hivePiece
       value: 
       objectReference: {fileID: 2042952660593191798}
@@ -168,11 +184,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116316, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.526
+      value: 3.8
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116316, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.417
+      value: 2.97
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116316, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: m_LocalPosition.z
