@@ -6775,7 +6775,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FadeImage: {fileID: 2073884335}
-  backgroundMusic: {fileID: 0}
 --- !u!1 &1964166325
 GameObject:
   m_ObjectHideFlags: 0
