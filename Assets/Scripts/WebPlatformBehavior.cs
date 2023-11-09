@@ -30,6 +30,8 @@ public class WebPlatformBehavior : MonoBehaviour
         step = platformSpeed * Time.deltaTime;
 
         anim = gameObject.GetComponent<Animator>();
+
+        AudioManager.Instance.Play("ShootPlatform");
     }
 
     IEnumerator PlatformMoving()
@@ -46,24 +48,21 @@ public class WebPlatformBehavior : MonoBehaviour
                 }
                 else
                 {
+                    Rb.velocity = Vector2.zero;
+                    Rb.constraints = RigidbodyConstraints2D.FreezePosition;
+                    Rb.freezeRotation = true;
+                    StopCoroutine(currrentCoroutine);
+                    currrentCoroutine = StartCoroutine(PlatformBehavior());
                     PlatformCanMove = false;
                 }
             }
-            else
-            {
-                Rb.velocity = Vector2.zero;
-                Rb.constraints = RigidbodyConstraints2D.FreezePosition;
-                Rb.freezeRotation = true;
-                StopCoroutine(currrentCoroutine);
-                currrentCoroutine = StartCoroutine(PlatformBehavior());
-            }
-
             yield return null;
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        print(collision.gameObject);
         if (collision.gameObject.CompareTag("Player") && !PlatformCanMove)
         {
             StartCoroutine(DestroyWebPlatform());
@@ -89,6 +88,7 @@ public class WebPlatformBehavior : MonoBehaviour
         PlayerController.PlatformCountUI?.Invoke();
         anim.SetBool("WebFalling", true);
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        AudioManager.Instance.Play("PlatformBreak");
 
         yield return new WaitForSeconds(1);
 

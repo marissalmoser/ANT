@@ -69,6 +69,12 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     source: {fileID: 0}
+  - name: ErrorSpark
+    clip: {fileID: 0}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
   - name: ShootPlatform
     clip: {fileID: 8300000, guid: d8fb65aedd7845d4fb554655eb61f61b, type: 3}
     mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
@@ -81,8 +87,14 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     source: {fileID: 0}
+  - name: WebEmpty
+    clip: {fileID: 8300000, guid: 2afcb97bdfc8567449a549faf5105ec9, type: 3}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
   - name: Jump
-    clip: {fileID: 8300000, guid: 4a5842cbaaf67e4499e6e3072a5849c2, type: 3}
+    clip: {fileID: 8300000, guid: 6a6d5166b27181b4799f82ebf043885a, type: 3}
     mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
     volume: 1
     pitch: 1
@@ -105,26 +117,20 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     source: {fileID: 0}
-  - name: BeeBuzzing
-    clip: {fileID: 8300000, guid: fa3e57e5d873f79458c16c6941e6b2cd, type: 3}
-    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
-    volume: 1
-    pitch: 1
-    source: {fileID: 0}
   - name: BeeSeesPlayer
-    clip: {fileID: 8300000, guid: 4c43db5f1d9c862499d34a8adb36a065, type: 3}
+    clip: {fileID: 8300000, guid: 39cd1079e911a2c4b8c97828581c30b9, type: 3}
     mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
     volume: 1
     pitch: 1
     source: {fileID: 0}
   - name: BeeAlert
-    clip: {fileID: 8300000, guid: eeac1864235409b4491e5105b93f3f75, type: 3}
+    clip: {fileID: 8300000, guid: b69012f5e6283a34f80150c251b72cd5, type: 3}
     mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
     volume: 1
     pitch: 1
     source: {fileID: 0}
   - name: BeeSnoring
-    clip: {fileID: 8300000, guid: e763604ba26ba9d48807122d4cc4b582, type: 3}
+    clip: {fileID: 8300000, guid: a95bdf52c63621b49a9234f8214b5125, type: 3}
     mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
     volume: 1
     pitch: 1
@@ -136,13 +142,13 @@ MonoBehaviour:
     pitch: 1
     source: {fileID: 0}
   - name: TitleMusic
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 96bf05b7ecf8b3344b162012c17dcbbf, type: 3}
     mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
     volume: 1
     pitch: 1
     source: {fileID: 0}
   - name: TutorialMusic
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: f2359cd2203a6d446860b55d052502ed, type: 3}
     mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
     volume: 1
     pitch: 1
@@ -159,14 +165,26 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     source: {fileID: 0}
-  - name: ButtonCicks
+  - name: BreakHive
+    clip: {fileID: 8300000, guid: 05b6eaf9a4f9eef49b363c526d9e0bc5, type: 3}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: PauseMenu
+    clip: {fileID: 8300000, guid: 830b80db4b6fa69469c0fe573223e472, type: 3}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: ButtonClicks
     clip: {fileID: 8300000, guid: 8a69c97d963b30b46ba5e84477dd2cf9, type: 3}
     mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
     volume: 1
     pitch: 1
     source: {fileID: 0}
   - name: LightBlocked
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: add72f5668aaa8b478cc7860b4c99f95, type: 3}
     mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
     volume: 1
     pitch: 1

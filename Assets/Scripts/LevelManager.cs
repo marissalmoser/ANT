@@ -19,6 +19,7 @@ public class LevelManager : MonoBehaviour
             GameManager.Instance.WebPlatformList.Clear();
         }
     }
+
     private void BeeVisionEnabled()
     {
         if(!GameManager.Instance.BaseHead)
@@ -40,6 +41,11 @@ public class LevelManager : MonoBehaviour
     public void GotCaught()
     {
         IsCaught = true;
+    }
+
+    public void Escaped()
+    {
+        IsCaught = false;
     }
 
     private void OnDisable()

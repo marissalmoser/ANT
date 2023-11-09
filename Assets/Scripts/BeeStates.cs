@@ -107,6 +107,7 @@ public class BeeStates : MonoBehaviour
         StopAnimations();
         anim.SetBool("Patrol", true);
         FlipCheck();
+        LevelManager.GetComponent<LevelManager>().Escaped();
 
         while (true)
         {
@@ -190,7 +191,6 @@ public class BeeStates : MonoBehaviour
                 //print("back to patrol");
                 //targetPos = posA;
                 //Flip();
-                AudioManager.Instance.Play("BeeBuzzing");
                 StartCoroutine(ConstantDetection());
 
                 while (Vector2.Distance(transform.position, targetPos) > 0.5f)
@@ -219,6 +219,7 @@ public class BeeStates : MonoBehaviour
 
     IEnumerator SleepState()
     {
+        LevelManager.GetComponent<LevelManager>().Escaped();
         StopAnimations();
         anim.SetBool("Sleep", true);
 
@@ -254,6 +255,7 @@ public class BeeStates : MonoBehaviour
 
         StopAnimations();
         anim.SetBool("ToPatrol", true);
+        AudioManager.Instance.Play("BeeWakesUp");
 
         //wing animation
         while (StartInToPatrol)

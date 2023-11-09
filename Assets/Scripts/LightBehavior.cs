@@ -61,6 +61,7 @@ public class LightBehavior : MonoBehaviour
                         }
                     }
 
+                    AudioManager.Instance.Play("LightBlocked");
                     lm.BeeVisionObjects.Remove(hiveObject);
                     Destroy(hiveObject.transform.parent.gameObject);
                     lm.BeeVisionObjects.Remove(lightsBeeVisionObj);
@@ -87,7 +88,8 @@ public class LightBehavior : MonoBehaviour
                         }
                     }
 
-                    lm.BeeVisionObjects.Remove(hiveObject.transform.parent.gameObject);
+                    AudioManager.Instance.Play("LightBlocked");
+                    lm.BeeVisionObjects.Remove(hiveObject.transform.parent.gameObject);         //why is this different from above???
                     Destroy(hiveObject.transform.parent.gameObject);
                     Destroy(gameObject);
                 }
@@ -134,7 +136,10 @@ public class LightBehavior : MonoBehaviour
         }
         if (isFirstLight && collision.CompareTag("Player"))
         {
-            hiveObject.GetComponent<Rigidbody2D>().gravityScale = 0.7f;
+            if(hiveObject.GetComponent<Rigidbody2D>() != null)
+            {
+                hiveObject.GetComponent<Rigidbody2D>().gravityScale = 0.7f;
+            }
         }
     }
 

@@ -129,20 +129,28 @@ public class UserInterfaceBehvaior : MonoBehaviour
 
     public void QuitGame()
     {
+        AudioManager.Instance.Play("ButtonClicks");
         Application.Quit();
     }
     public void ReturnToTitle()
     {
         UnPause();
         GameManager.Instance.ReturnToTitle();
+        AudioManager.Instance.Play("ButtonClicks");
     }
     public void RetryLevel()
     {
         UnPause();
         GameManager.Instance.RestartCurrentLevel();
+        AudioManager.Instance.Play("ButtonClicks");
     }
     public void Pause()
     {
+        //print(pauseMenu.activeSelf);
+        if (pauseMenu.activeSelf == false)
+        {
+            AudioManager.Instance.Play("PauseMenu");
+        }
         pauseMenu.SetActive(true);
         GameManager.GameIsPaused = true;
         GameManager.CurrentLevel = SceneManager.GetActiveScene().buildIndex;
@@ -152,8 +160,15 @@ public class UserInterfaceBehvaior : MonoBehaviour
     {
         //print("unpause");
         Time.timeScale = 1;
-        pauseMenu.SetActive(false);
+        pauseMenu.SetActive(false);         //instead of turning off it should fade away?
         GameManager.GameIsPaused = false;
+        AudioManager.Instance.Play("PauseMenu");
+        AudioManager.Instance.Play("ButtonClicks");
+    }
+
+    public void ClickSound()
+    {
+        AudioManager.Instance.Play("ButtonClicks");
     }
 
     private void OnDestroy()

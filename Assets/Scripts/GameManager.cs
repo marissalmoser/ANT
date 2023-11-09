@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> WebPlatformList = new List<GameObject>();
 
+    [SerializeField] private GameObject BKMM;
+
     public static int CurrentLevel;
     public static bool GameIsPaused;
 
@@ -42,6 +44,11 @@ public class GameManager : MonoBehaviour
 
         BaseHead = true;
         BaseLeg = true;
+
+        if(BKMM != null)
+        {
+            Instantiate(BKMM, transform.position, transform.rotation);
+        }
     }
 
     public IEnumerator RestartLevel()
@@ -70,11 +77,13 @@ public class GameManager : MonoBehaviour
         BaseHead = true;
         GameManager.Instance.WebPlatformList.Clear();
 
+        BackgroundMusicManager.NewLevelTriggered?.Invoke();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     ///called from lv 5
     public void GameWon()
     {
+        BackgroundMusicManager.NewLevelTriggered?.Invoke();
         SceneManager.LoadScene(6);
     }
     ///loads lose screen
@@ -82,6 +91,7 @@ public class GameManager : MonoBehaviour
     {
         CurrentLevel = SceneManager.GetActiveScene().buildIndex;
         //print(CurrentLevel);
+        BackgroundMusicManager.NewLevelTriggered?.Invoke();
         SceneManager.LoadScene(7);
     }
     ///LoadsScene1
@@ -92,6 +102,7 @@ public class GameManager : MonoBehaviour
         GameManager.Instance.WebPlatformList.Clear();
 
         CurrentLevel = 1;
+        BackgroundMusicManager.NewLevelTriggered?.Invoke();
         SceneManager.LoadScene(1);
     }
     ///loads static variable "current level"
@@ -102,12 +113,14 @@ public class GameManager : MonoBehaviour
         BaseLeg = true;
         BaseHead = true;
         Time.timeScale = 1;
+        BackgroundMusicManager.NewLevelTriggered?.Invoke();
         SceneManager.LoadScene(CurrentLevel);
     }
     ///Loads Title scene
     public void ReturnToTitle()
     {
         GameManager.Instance.WebPlatformList.Clear();
+        BackgroundMusicManager.NewLevelTriggered?.Invoke();
         SceneManager.LoadScene(0);
     }
     ///Quits Application

@@ -7,31 +7,62 @@
 // Brief Description : 
 
 **********************************************************************************/
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MenuBehaviour : MonoBehaviour
 {
+    [SerializeField] private GameObject FadeImage;
+
+    private void Awake()
+    {
+        if(AudioManager.Instance != null)
+        {
+            AudioManager.Instance.Play("TitleMusic");
+        }
+    }
     public void StartGame()
     {
-        Time.timeScale = 1;
-        GameManager.Instance.StartGame();
+        AudioManager.Instance.Play("ButtonClicks");
+        StartCoroutine(StartingGame());
     }
 
     public void QuitGame()
     {
+        AudioManager.Instance.Play("ButtonClicks");
         Application.Quit();
     }
 
     public void ReturnToTitle()
     {
+        AudioManager.Instance.Play("ButtonClicks");
         GameManager.Instance.ReturnToTitle();
     }
 
     public void RetryLevel()
     {
+        AudioManager.Instance.Play("ButtonClicks");
         Time.timeScale = 1;
         GameManager.Instance.RestartCurrentLevel();
+    }
+
+    public void ClickSound()
+    {
+        AudioManager.Instance.Play("ButtonClicks");
+    }
+
+    IEnumerator StartingGame()
+    {
+        Time.timeScale = 1;
+
+        //StartCoroutine(FadeMusic());
+        FadeImage.SetActive(true);
+        FadeImage.GetComponent<Animator>().SetBool("FadeToBlack", true);
+
+        yield return new WaitForSeconds(1);
+
+        GameManager.Instance.StartGame();
     }
 }

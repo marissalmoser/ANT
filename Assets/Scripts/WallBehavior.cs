@@ -29,8 +29,12 @@ public class WallBehavior : MonoBehaviour
         if(collision.CompareTag("Player"))
         {
             OnClimbableWall = false;
-            //print(OnClimbableWall);
-            WallTriggered?.Invoke();
+            //if crawling
+            if (PlayerController.PlayerCanCrawl)
+            {
+                WallTriggered?.Invoke();
+                AudioManager.Instance.Play("CrawlToWalkFall");
+            }
         }
     }
 
