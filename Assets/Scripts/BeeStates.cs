@@ -107,6 +107,7 @@ public class BeeStates : MonoBehaviour
         StopAnimations();
         anim.SetBool("Patrol", true);
         FlipCheck();
+        LevelManager.GetComponent<LevelManager>().Escaped();
 
         while (true)
         {
@@ -218,6 +219,7 @@ public class BeeStates : MonoBehaviour
 
     IEnumerator SleepState()
     {
+        LevelManager.GetComponent<LevelManager>().Escaped();
         StopAnimations();
         anim.SetBool("Sleep", true);
 

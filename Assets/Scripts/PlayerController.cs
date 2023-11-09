@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     //moving variables
     [Header("Player Movement")]
     [SerializeField] private bool playerCanMove;        //starts and stops player movement regardless of system
-    private bool playerCanCrawl;                        //on start and cancel
+    public static bool PlayerCanCrawl;                        //on start and cancel
     public bool CrawlMapEnabled;
     [SerializeField] private float speed;
     private float direction;
@@ -157,7 +157,6 @@ public class PlayerController : MonoBehaviour
         if (jumpStart == false && !GameManager.GameIsPaused)
         {
             jumpStart = true;
-            AudioManager.Instance.Play("Jump");
         }
     }
     private void Handle_jumpCanceled(InputAction.CallbackContext obj)
@@ -169,7 +168,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!GameManager.GameIsPaused)
         {
-            playerCanCrawl = true;
+            PlayerCanCrawl = true;
 
             if (canMove == 0)
             {
@@ -184,7 +183,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Handle_crawlCanceled(InputAction.CallbackContext obj)
     {
-        playerCanCrawl = false;
+        PlayerCanCrawl = false;
 
         crawlingAnim.SetBool("isCrawling", false);
 
@@ -298,7 +297,7 @@ public class PlayerController : MonoBehaviour
     {
 
         ///web on
-        if (GameManager.Instance.BaseLeg && !playerCanCrawl)
+        if (GameManager.Instance.BaseLeg && !PlayerCanCrawl)
         {
             ///with crawl
             if(CrawlMapEnabled)
@@ -353,7 +352,7 @@ public class PlayerController : MonoBehaviour
         {
             direction = move.ReadValue<float>();
         }
-        if(playerCanCrawl == true)
+        if(PlayerCanCrawl == true)
         {
             crawlDirection = crawl.ReadValue<Vector2>();
         }
@@ -384,6 +383,7 @@ public class PlayerController : MonoBehaviour
         {
             //print("jump");
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            AudioManager.Instance.Play("Jump");
         }
         else if(IsGrounded() && jumpStart && !CrawlMapEnabled && rb.velocity.y < 0.5f)
         {
@@ -391,7 +391,7 @@ public class PlayerController : MonoBehaviour
         }
         
         //player crawl
-        if(playerCanCrawl && CrawlMapEnabled) 
+        if(PlayerCanCrawl && CrawlMapEnabled) 
         {
             rb.velocity = new Vector2(crawlDirection.x, crawlDirection.y) * speed * canMove;
             //print(CanClimb());

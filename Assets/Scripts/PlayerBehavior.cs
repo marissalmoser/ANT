@@ -111,6 +111,7 @@ public class PlayerBehavior : MonoBehaviour
         if (GameManager.Instance.BaseHead && breakableTriggered && LevelManager.IsCaught == false)
         {
             Destroy(breakableObject);
+            AudioManager.Instance.Play("BreakHive");
             StartCoroutine(GameManager.Instance.NextLevel());
         }
     }
@@ -142,6 +143,10 @@ public class PlayerBehavior : MonoBehaviour
             WebPlatform = Instantiate(WebPlatformPrefab, spotToCarry.position, transform.rotation);
             GameManager.Instance.WebPlatformList.Add(WebPlatform);
             PlayerController.PlatformCountUI?.Invoke();
+        }
+        else if (!GameManager.Instance.BaseLeg)
+        {
+            AudioManager.Instance.Play("WebEmpty");
         }
     }
 
