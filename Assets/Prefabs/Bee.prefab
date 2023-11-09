@@ -228,7 +228,8 @@ MonoBehaviour:
   StartInToPatrol: 0
   hivePiece: {fileID: 0}
   lightObject: {fileID: 0}
-  canFlip: 1
+  isFacingRight: 1
+  startFacingRight: 1
   exclamation: {fileID: 3096334909567291336}
   posA: {x: 1.5, y: 0}
   posB: {x: 7.5, y: 0}
@@ -333,7 +334,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0.959244, b: 1, a: 0.5529412}
   m_FlipX: 0

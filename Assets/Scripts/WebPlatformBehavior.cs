@@ -48,24 +48,21 @@ public class WebPlatformBehavior : MonoBehaviour
                 }
                 else
                 {
+                    Rb.velocity = Vector2.zero;
+                    Rb.constraints = RigidbodyConstraints2D.FreezePosition;
+                    Rb.freezeRotation = true;
+                    StopCoroutine(currrentCoroutine);
+                    currrentCoroutine = StartCoroutine(PlatformBehavior());
                     PlatformCanMove = false;
                 }
             }
-            else
-            {
-                Rb.velocity = Vector2.zero;
-                Rb.constraints = RigidbodyConstraints2D.FreezePosition;
-                Rb.freezeRotation = true;
-                StopCoroutine(currrentCoroutine);
-                currrentCoroutine = StartCoroutine(PlatformBehavior());
-            }
-
             yield return null;
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        print(collision.gameObject);
         if (collision.gameObject.CompareTag("Player") && !PlatformCanMove)
         {
             StartCoroutine(DestroyWebPlatform());
