@@ -57,6 +57,18 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     source: {fileID: 0}
+  - name: BeeVisionElectricity
+    clip: {fileID: 8300000, guid: cea4573c352277a4a94188a354db8967, type: 3}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: ErrorSpark
+    clip: {fileID: 8300000, guid: 2b79ecc65cc4b5d40b485612ca3b4062, type: 3}
+    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
   - name: WebShooterOn
     clip: {fileID: 8300000, guid: f63173ccf768a6d4da3f0475774cfceb, type: 3}
     mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
@@ -65,12 +77,6 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: WebShooterOff
     clip: {fileID: 8300000, guid: 874137dbbd04e6b4ab039556710e2b6b, type: 3}
-    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
-    volume: 1
-    pitch: 1
-    source: {fileID: 0}
-  - name: ErrorSpark
-    clip: {fileID: 0}
     mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
     volume: 1
     pitch: 1
@@ -137,30 +143,6 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: BeeWakesUp
     clip: {fileID: 8300000, guid: 275ee77adca1f824d81818db5774e349, type: 3}
-    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
-    volume: 1
-    pitch: 1
-    source: {fileID: 0}
-  - name: TitleMusic
-    clip: {fileID: 8300000, guid: 96bf05b7ecf8b3344b162012c17dcbbf, type: 3}
-    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
-    volume: 1
-    pitch: 1
-    source: {fileID: 0}
-  - name: TutorialMusic
-    clip: {fileID: 8300000, guid: f2359cd2203a6d446860b55d052502ed, type: 3}
-    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
-    volume: 1
-    pitch: 1
-    source: {fileID: 0}
-  - name: ChallengeMusic
-    clip: {fileID: 8300000, guid: 163bd392dcef5794ca0f81b7f14b579a, type: 3}
-    mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
-    volume: 1
-    pitch: 1
-    source: {fileID: 0}
-  - name: BossMusic
-    clip: {fileID: 8300000, guid: 68973daf8e4437e49a6f784f35b0fd53, type: 3}
     mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
     volume: 1
     pitch: 1

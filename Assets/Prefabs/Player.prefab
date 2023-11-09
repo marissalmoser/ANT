@@ -702,6 +702,7 @@ MonoBehaviour:
     m_Bits: 1032
   Interact: 0
   webCrosshair: {fileID: 0}
+  errorSparks: {fileID: 1469745451007390477, guid: 6ab56ad8acc28c34b8a938785b2d908b, type: 3}
   beeMaskWalk: {fileID: 1063440052828694841}
   beeMaskCrawl: {fileID: 1063440052053636006}
   webShooterWalk: {fileID: 1063440051061534949}

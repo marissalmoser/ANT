@@ -137,7 +137,7 @@ public class BackgroundMusicManager : MonoBehaviour
         Challenge.GetComponent<AudioSource>().Stop();
         Boss.GetComponent<AudioSource>().Stop();
 
-        newMusic.GetComponent<AudioSource>().volume = 1;
+        newMusic.GetComponent<AudioSource>().volume = 0.5f;
         newMusic.SetActive(true);
     }
 
