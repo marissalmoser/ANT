@@ -276,7 +276,7 @@ public class PlayerController : MonoBehaviour
 
             //sound
             AudioManager.Instance.Play("BeeVisionOn");
-            //play constant sound
+            AudioManager.Instance.Play("BeeVisionElectricity");
         }
 
         //Bee vision turned off
@@ -294,7 +294,7 @@ public class PlayerController : MonoBehaviour
 
             //sound
             AudioManager.Instance.Play("BeeVisionOff");
-            //stop constant sound
+            AudioManager.Instance.Stop("BeeVisionElectricity");
         }
 
         
