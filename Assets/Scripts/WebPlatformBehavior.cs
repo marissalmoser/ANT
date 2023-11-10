@@ -17,7 +17,6 @@ public class WebPlatformBehavior : MonoBehaviour
     public bool PlatformCanMove = true;
     [SerializeField] private float platformSpeed;
     [SerializeField] private Rigidbody2D Rb;
-    private float step;
     public static Vector3 MousePosition;
     private Coroutine currrentCoroutine;
     private Animator anim;
@@ -25,9 +24,6 @@ public class WebPlatformBehavior : MonoBehaviour
     void Start()
     {
         currrentCoroutine = StartCoroutine(PlatformMoving());
-        Rb.freezeRotation = true;
-
-        step = platformSpeed * Time.deltaTime;
 
         anim = gameObject.GetComponent<Animator>();
 
@@ -37,32 +33,28 @@ public class WebPlatformBehavior : MonoBehaviour
     IEnumerator PlatformMoving()
     {
         Vector3 targetPos = MousePosition;
-        
-        while(true)
+
+        while(Vector2.Distance(transform.position, MousePosition) > 0.3f)
         {
             if (PlatformCanMove)
             {
-                if(Vector2.Distance(transform.position, MousePosition) > 0.3f)
-                {
-                    transform.position = Vector3.MoveTowards(transform.position, targetPos, platformSpeed * Time.deltaTime);
-                }
-                else
-                {
-                    Rb.velocity = Vector2.zero;
-                    Rb.constraints = RigidbodyConstraints2D.FreezePosition;
-                    Rb.freezeRotation = true;
-                    StopCoroutine(currrentCoroutine);
-                    currrentCoroutine = StartCoroutine(PlatformBehavior());
-                    PlatformCanMove = false;
-                }
+                transform.position = Vector3.MoveTowards(transform.position, targetPos, platformSpeed * Time.deltaTime);
             }
             yield return null;
         }
+
+        Rb.velocity = Vector2.zero;
+        Rb.constraints = RigidbodyConstraints2D.FreezePosition;
+        Rb.freezeRotation = true;
+        GetComponent<BoxCollider2D>().usedByEffector = true;
+
+        StopCoroutine(currrentCoroutine);
+        currrentCoroutine = StartCoroutine(PlatformBehavior());
+        PlatformCanMove = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        print(collision.gameObject);
         if (collision.gameObject.CompareTag("Player") && !PlatformCanMove)
         {
             StartCoroutine(DestroyWebPlatform());
@@ -71,14 +63,12 @@ public class WebPlatformBehavior : MonoBehaviour
 
     IEnumerator PlatformBehavior()
     {
-        //print("wait 7");
         yield return new WaitForSeconds(7);
         currrentCoroutine = StartCoroutine(DestroyWebPlatform());
     }
 
     IEnumerator DestroyWebPlatform()
     {
-        //print("destroy in 3");
         StopCoroutine(currrentCoroutine);
         anim.SetBool("WebBreaking", true);
 
