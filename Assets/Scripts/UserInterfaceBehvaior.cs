@@ -141,7 +141,7 @@ public class UserInterfaceBehvaior : MonoBehaviour
     public void RetryLevel()
     {
         UnPause();
-        GameManager.Instance.RestartCurrentLevel();
+        GameManager.Instance.RestartCurrentLevelFromPause();
         AudioManager.Instance.Play("ButtonClicks");
     }
     public void Pause()

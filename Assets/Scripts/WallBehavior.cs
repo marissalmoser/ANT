@@ -38,25 +38,6 @@ public class WallBehavior : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        print(OnClimbableWall);
-    }
-
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    if (collision.CompareTag("Player"))
-    //    {
-    //        OnClimbableWall = false;
-    //        //if crawling
-    //        if (PlayerController.PlayerCanCrawl)
-    //        {
-    //            WallTriggered?.Invoke();
-    //            AudioManager.Instance.Play("CrawlToWalkFall");
-    //        }
-    //    }
-    //}
-
     private void OnTriggerExit2D(Collider2D collision)
     {
         OnClimbableWall = true;

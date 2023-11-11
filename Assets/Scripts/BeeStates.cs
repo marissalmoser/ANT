@@ -208,6 +208,7 @@ public class BeeStates : MonoBehaviour
     {
         StopAnimations();
         anim.SetBool("Alert", true);
+        UserInterfaceBehvaior.FadeToBlack?.Invoke();
 
         LevelManager.GetComponent<LevelManager>().GotCaught();
 

@@ -8,6 +8,8 @@ public class LevelManager : MonoBehaviour
     public List<GameObject> BeeVisionObjects = new List<GameObject>();
     public static bool IsCaught;
 
+    [SerializeField] private GameObject BKMM;
+
     void Awake()
     {
         PlayerController.BeeVision += BeeVisionEnabled;
@@ -18,6 +20,17 @@ public class LevelManager : MonoBehaviour
         {
             GameManager.Instance.WebPlatformList.Clear();
         }
+
+        if (BackgroundMusicManager.Instance == null)
+        {
+            Instantiate(BKMM, transform.position, transform.rotation);
+        }
+        if (BackgroundMusicManager.Instance != null)
+        {
+
+        }
+
+
     }
 
     private void BeeVisionEnabled()

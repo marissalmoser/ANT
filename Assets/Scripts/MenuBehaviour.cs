@@ -16,13 +16,6 @@ public class MenuBehaviour : MonoBehaviour
 {
     [SerializeField] private GameObject FadeImage;
 
-    private void Awake()
-    {
-        if(AudioManager.Instance != null)
-        {
-            AudioManager.Instance.Play("TitleMusic");
-        }
-    }
     public void StartGame()
     {
         AudioManager.Instance.Play("ButtonClicks");
@@ -52,6 +45,7 @@ public class MenuBehaviour : MonoBehaviour
     {
         AudioManager.Instance.Play("ButtonClicks");
     }
+
 
     IEnumerator StartingGame()
     {

@@ -13,12 +13,7 @@ public class BackgroundMusicManager : MonoBehaviour
     public GameObject Challenge;
     public GameObject Boss;
 
-    private bool title;
-    private bool level;
-    private bool challenge;
-    private bool boss;
-
-    public static Action NewLevelTriggered;
+    private int track = 1;
 
     void Start()
     {
@@ -32,18 +27,15 @@ public class BackgroundMusicManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        NewLevelTriggered += ChangeMusic;
-
-        Title.SetActive(true);
-        title = true;
+        ChangeMusic();
     }
 
     public void ChangeMusic()
     {
-        switch(SceneManager.GetActiveScene().buildIndex + 1)
+        switch(SceneManager.GetActiveScene().buildIndex)
         {
             case 0:
-                if(!title)
+                if(track != 0)
                 {
                     PlayTitle();
                 }
@@ -51,25 +43,25 @@ public class BackgroundMusicManager : MonoBehaviour
             case 1:
             case 2:
             case 3:
-                if (!level)
+                if (track != 1)
                 {
                     PlayLevel();
                 }
                 break;
             case 4:
-                if (!challenge)
+                if (track != 2)
                 {
                     PlayChallenge();
                 }
                 break;
             case 5:
-                if (!boss)
+                if (track != 3)
                 {
                     PlayBoss();
                 }
                 break;
             default:
-                if (!title)
+                if (track != 0)
                 {
                     PlayTitle();
                 }
@@ -79,70 +71,56 @@ public class BackgroundMusicManager : MonoBehaviour
 
     private void PlayTitle()
     {
-        StartCoroutine(FadeMusic(Title));
+        track = 0;
 
-        title = true;
-        level = false;
-        challenge = false;
-        boss = false;
-
-        //Title.SetActive(true);
+        Title.GetComponent<AudioSource>().volume = 0.5f;
+        Title.SetActive(true);
     }
     private void PlayLevel()
     {
-        StartCoroutine(FadeMusic(Level));
+        track = 1;
 
-        title = false;
-        level = true;
-        challenge = false;
-        boss = false;
-
-        //Level.SetActive(true);
+        Level.GetComponent<AudioSource>().volume = 0.5f;
+        Level.SetActive(true);
     }
     private void PlayChallenge()
     {
-        StartCoroutine(FadeMusic(Challenge));
+        track = 2;
 
-        title = false;
-        level = false;
-        challenge = true;
-        boss = false;
-
-        //Challenge.SetActive(true);
+        Challenge.GetComponent<AudioSource>().volume = 0.5f;
+        Challenge.SetActive(true);
     }
     private void PlayBoss()
     {
-        StartCoroutine(FadeMusic(Boss));
+        track = 3;
 
-        title = false;
-        level = false;
-        challenge = false;
-        boss = true;
-
-        //Boss.SetActive(true);
+        Boss.GetComponent<AudioSource>().volume = 0.5f;
+        Boss.SetActive(true);
     }
-    IEnumerator FadeMusic(GameObject newMusic)
+    public IEnumerator FadeMusic(bool title)
     {
-        print("fading");
-        for (float i = 1; i >= 0; i -= 0.03f)
+        int cs = SceneManager.GetActiveScene().buildIndex;
+        if (cs == 0 || cs == 3 || cs == 4 || cs == 5 || title)
         {
-            Title.GetComponent<AudioSource>().volume = i;
-            Level.GetComponent<AudioSource>().volume = i;
-            Challenge.GetComponent<AudioSource>().volume = i;
-            Boss.GetComponent<AudioSource>().volume = i;
-            yield return null;
+            for (float i = 0.5f; i >= 0; i -= 0.03f)
+            {
+                Title.GetComponent<AudioSource>().volume = i;
+                Level.GetComponent<AudioSource>().volume = i;
+                Challenge.GetComponent<AudioSource>().volume = i;
+                Boss.GetComponent<AudioSource>().volume = i;
+                yield return null;
+            }
+            Title.GetComponent<AudioSource>().Stop();
+            Level.GetComponent<AudioSource>().Stop();
+            Challenge.GetComponent<AudioSource>().Stop();
+            Boss.GetComponent<AudioSource>().Stop();
+
+            Title.SetActive(false);
+            Level.SetActive(false);
+            Challenge.SetActive(false);
+            Boss.SetActive(false);
+
+            ChangeMusic();
         }
-        Title.GetComponent<AudioSource>().Stop();
-        Level.GetComponent<AudioSource>().Stop();
-        Challenge.GetComponent<AudioSource>().Stop();
-        Boss.GetComponent<AudioSource>().Stop();
-
-        newMusic.GetComponent<AudioSource>().volume = 0.5f;
-        newMusic.SetActive(true);
-    }
-
-    private void OnDestroy()
-    {
-        NewLevelTriggered -= ChangeMusic;
     }
 }

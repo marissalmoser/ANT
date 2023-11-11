@@ -23,8 +23,6 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> WebPlatformList = new List<GameObject>();
 
-    [SerializeField] private GameObject BKMM;
-
     public static int CurrentLevel;
     public static bool GameIsPaused;
 
@@ -44,11 +42,6 @@ public class GameManager : MonoBehaviour
 
         BaseHead = true;
         BaseLeg = true;
-
-        if(BKMM != null)
-        {
-            Instantiate(BKMM, transform.position, transform.rotation);
-        }
     }
 
     public IEnumerator RestartLevel()
@@ -58,8 +51,8 @@ public class GameManager : MonoBehaviour
         //stop player movement
         //forloop all bee scream animation from list of bees, set move towards pos to player?
 
-        yield return new WaitForSeconds(2);
-        GameManager.Instance.WebPlatformList.Clear();
+        yield return new WaitForSeconds(1);
+        WebPlatformList.Clear();
 
         BaseLeg = true;
         BaseHead = true;
@@ -75,23 +68,21 @@ public class GameManager : MonoBehaviour
 
         BaseLeg = true;
         BaseHead = true;
-        GameManager.Instance.WebPlatformList.Clear();
+        WebPlatformList.Clear();
 
-        BackgroundMusicManager.NewLevelTriggered?.Invoke();
+        StartCoroutine(BackgroundMusicManager.Instance.FadeMusic(false));
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     ///called from lv 5
     public void GameWon()
     {
-        BackgroundMusicManager.NewLevelTriggered?.Invoke();
         SceneManager.LoadScene(6);
     }
     ///loads lose screen
     public void GameLost()
     {
         CurrentLevel = SceneManager.GetActiveScene().buildIndex;
-        //print(CurrentLevel);
-        BackgroundMusicManager.NewLevelTriggered?.Invoke();
+        StartCoroutine(BackgroundMusicManager.Instance.FadeMusic(true));
         SceneManager.LoadScene(7);
     }
     ///LoadsScene1
@@ -99,13 +90,13 @@ public class GameManager : MonoBehaviour
     {
         BaseLeg = true;
         BaseHead = true;
-        GameManager.Instance.WebPlatformList.Clear();
+        WebPlatformList.Clear();
 
         CurrentLevel = 1;
-        BackgroundMusicManager.NewLevelTriggered?.Invoke();
+        StartCoroutine(BackgroundMusicManager.Instance.FadeMusic(false));
         SceneManager.LoadScene(1);
     }
-    ///loads static variable "current level"
+    ///loads static variable "current level", called from pause menu reset level and loss screen reset level
     public void RestartCurrentLevel()
     {
         //print(CurrentLevel);
@@ -113,14 +104,25 @@ public class GameManager : MonoBehaviour
         BaseLeg = true;
         BaseHead = true;
         Time.timeScale = 1;
-        BackgroundMusicManager.NewLevelTriggered?.Invoke();
+
+        StartCoroutine(BackgroundMusicManager.Instance.FadeMusic(true)); //cut
+        SceneManager.LoadScene(CurrentLevel);
+    }
+    public void RestartCurrentLevelFromPause()
+    {
+        //print(CurrentLevel);
+        GameManager.Instance.WebPlatformList.Clear();
+        BaseLeg = true;
+        BaseHead = true;
+        Time.timeScale = 1;
+
         SceneManager.LoadScene(CurrentLevel);
     }
     ///Loads Title scene
     public void ReturnToTitle()
     {
         GameManager.Instance.WebPlatformList.Clear();
-        BackgroundMusicManager.NewLevelTriggered?.Invoke();
+        StartCoroutine(BackgroundMusicManager.Instance.FadeMusic(true));
         SceneManager.LoadScene(0);
     }
     ///Quits Application
