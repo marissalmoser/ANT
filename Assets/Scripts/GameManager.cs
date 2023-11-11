@@ -70,7 +70,10 @@ public class GameManager : MonoBehaviour
         BaseHead = true;
         WebPlatformList.Clear();
 
-        StartCoroutine(BackgroundMusicManager.Instance.FadeMusic(false));
+        if (BackgroundMusicManager.Instance != null)
+        {
+            StartCoroutine(BackgroundMusicManager.Instance.FadeMusic(false));
+        }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     ///called from lv 5

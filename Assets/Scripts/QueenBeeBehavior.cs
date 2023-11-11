@@ -123,7 +123,7 @@ public class QueenBeeBehavior : MonoBehaviour
 
     IEnumerator AlertState()
     {
-        //print("BEE MORE SNEAKY BZZZZZZ");
+        UserInterfaceBehvaior.FadeToBlack?.Invoke();
         AudioManager.Instance.Play("BeeAlert");
         StartCoroutine(GameManager.Instance.RestartLevel()); 
         yield return null;

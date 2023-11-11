@@ -47,6 +47,7 @@ public class WebPlatformBehavior : MonoBehaviour
         Rb.constraints = RigidbodyConstraints2D.FreezePosition;
         Rb.freezeRotation = true;
         GetComponent<BoxCollider2D>().usedByEffector = true;
+        GetComponent<BoxCollider2D>().enabled = true;
 
         StopCoroutine(currrentCoroutine);
         currrentCoroutine = StartCoroutine(PlatformBehavior());
