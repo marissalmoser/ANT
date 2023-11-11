@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bees: []
-  BeeVisionObjects:
-  - {fileID: 0}
+  BeeVisionObjects: []
+  BKMM: {fileID: 600414142998861352, guid: 4c654c30cf82dae4e83605a7ddca9dc3, type: 3}

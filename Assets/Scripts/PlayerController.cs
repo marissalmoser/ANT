@@ -54,6 +54,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 mousePosition;
     private Vector2 mouseWorldPosition;
     [SerializeField] private GameObject webCrosshair;
+    [SerializeField] private GameObject errorSparks;
+    private GameObject sparks;
 
     [Header("Bug Parts")]
     [SerializeField] private GameObject beeMaskWalk;
@@ -137,8 +139,7 @@ public class PlayerController : MonoBehaviour
 
             if (canMove == 0)
             {
-                //part not enabled
-                ErrorMessage?.Invoke();
+                BeeVisionError();
             }
             else
             {
@@ -158,6 +159,10 @@ public class PlayerController : MonoBehaviour
         {
             jumpStart = true;
         }
+        if(canMove == 0)
+        {
+            BeeVisionError();
+        }
     }
     private void Handle_jumpCanceled(InputAction.CallbackContext obj)
     {
@@ -172,8 +177,7 @@ public class PlayerController : MonoBehaviour
 
             if (canMove == 0)
             {
-                //part not enabled
-                ErrorMessage?.Invoke();
+                BeeVisionError();
             }
             else
             {
@@ -194,7 +198,7 @@ public class PlayerController : MonoBehaviour
     private void SwitchMovementSystem(InputAction.CallbackContext obj)
     {
         //switch to crawling movement system
-        if (!CrawlMapEnabled && canMove == 1 && !GameManager.GameIsPaused)// && WallBehavior.OnClimbableWall) //this broke it??
+        if (!CrawlMapEnabled && canMove == 1 && !GameManager.GameIsPaused && WallBehavior.OnClimbableWall) //this broke it??
         {
             if (!GameManager.Instance.BaseLeg)
             {
@@ -218,8 +222,8 @@ public class PlayerController : MonoBehaviour
 
         else if (!GameManager.Instance.BaseHead && !GameManager.GameIsPaused)
         {
-            //trying to move with bee vision
-            ErrorMessage?.Invoke();
+            //trying to move with beevision
+            BeeVisionError();
         }
         else
         {
@@ -272,6 +276,7 @@ public class PlayerController : MonoBehaviour
 
             //sound
             AudioManager.Instance.Play("BeeVisionOn");
+            AudioManager.Instance.Play("BeeVisionElectricity");
         }
 
         //Bee vision turned off
@@ -289,6 +294,7 @@ public class PlayerController : MonoBehaviour
 
             //sound
             AudioManager.Instance.Play("BeeVisionOff");
+            AudioManager.Instance.Stop("BeeVisionElectricity");
         }
 
         
@@ -385,16 +391,17 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
             AudioManager.Instance.Play("Jump");
         }
-        else if(IsGrounded() && jumpStart && !CrawlMapEnabled && rb.velocity.y < 0.5f)
-        {
-            ErrorMessage?.Invoke(); 
-        }
         
         //player crawl
         if(PlayerCanCrawl && CrawlMapEnabled) 
         {
             rb.velocity = new Vector2(crawlDirection.x, crawlDirection.y) * speed * canMove;
             //print(CanClimb());
+        }
+
+        if(sparks != null)
+        {
+            sparks.transform.position = transform.position;
         }
 
         //camera movement
@@ -420,6 +427,13 @@ public class PlayerController : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+    }
+
+    private void BeeVisionError()
+    {
+        ErrorMessage?.Invoke();
+        AudioManager.Instance.Play("ErrorSpark");
+        sparks = Instantiate(errorSparks, transform.position, transform.rotation);
     }
 
     public void OnDestroy()

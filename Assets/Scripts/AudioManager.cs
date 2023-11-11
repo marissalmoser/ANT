@@ -54,22 +54,9 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
-    //public void StopSound(string name)
-    //{
-    //    Sound s = System.Array.Find(sounds, sounds => sounds.name == name);
-    //    s.source.volume = 0;
-    //}
-
-    //public IEnumerator FadeMusic(string name)
-    //{
-    //    print("yo");
-    //    Sound s = System.Array.Find(sounds, sounds => sounds.name == name);
-
-    //    for (float i = 1; i >= 0; i -= 0.03f)
-    //    {
-    //        s.volume = i;
-    //        yield return null;
-    //    }
-    //    s.source.Stop();
-    //}
+    public void Stop(string name)
+    {
+        Sound s = System.Array.Find(sounds, sounds => sounds.name == name);
+        s.source.Stop();
+    }
 }

@@ -89,8 +89,9 @@ public class LightBehavior : MonoBehaviour
                     }
 
                     AudioManager.Instance.Play("LightBlocked");
-                    lm.BeeVisionObjects.Remove(hiveObject.transform.parent.gameObject);         //why is this different from above???
+                    lm.BeeVisionObjects.Remove(hiveObject);
                     Destroy(hiveObject.transform.parent.gameObject);
+                    lm.BeeVisionObjects.Remove(lightsBeeVisionObj);
                     Destroy(gameObject);
                 }
 
