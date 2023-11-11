@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3461796977683965256}
   - component: {fileID: 3461796977683965257}
   - component: {fileID: 3461796977683965258}
+  - component: {fileID: 7810190278117493537}
   m_Layer: 0
   m_Name: LightSource
   m_TagString: Untagged
@@ -162,6 +163,26 @@ MonoBehaviour:
   m_EnableTangents: 0
   m_GeometryCached: 0
   m_UTess2D: 0
+--- !u!95 &7810190278117493537
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3461796977683965303}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a09a6189b2621444887bbe59d4a43223, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3461796977761094393
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,8 +349,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4342833701762050483}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5.5, y: 1.64, z: 1.12}
+  m_LocalPosition: {x: -0.1522, y: -0.0212, z: 0}
+  m_LocalScale: {x: 4.6205797, y: 0.58316517, z: 1.12}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3461796977761094395}
