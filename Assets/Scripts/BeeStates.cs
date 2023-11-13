@@ -110,6 +110,8 @@ public class BeeStates : MonoBehaviour
     {
         StopAnimations();
         anim.SetBool("Patrol", true);
+        wings.GetComponent<Animator>().SetBool("WingFlap", true);
+
         FlipCheck();
         LevelManager.GetComponent<LevelManager>().Escaped();
 
@@ -268,8 +270,7 @@ public class BeeStates : MonoBehaviour
             detectionCache = StartCoroutine(ConstantDetection());
             print("2");
         }
-
-        //wing animation
+        wings.GetComponent<Animator>().SetBool("WingFlap", true);
         while (Vector2.Distance(transform.position, posA) > 0.5)
         {
             targetPos = posA;
@@ -290,9 +291,9 @@ public class BeeStates : MonoBehaviour
         if (currentState != null)
         {
             StopCoroutine(currentState);
+            FSM(States.Patrol);
+            gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
         }
-        FSM(States.Patrol);
-        gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
     }
 
 
