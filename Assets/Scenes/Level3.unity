@@ -1392,21 +1392,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3373553991704726180, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
+      propertyPath: levelManager
+      value: 
+      objectReference: {fileID: 873456818}
     - target: {fileID: 3461796977683965257, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
       propertyPath: m_LocalAABB.m_Center.x
-      value: -0.16257453
+      value: -0.819612
       objectReference: {fileID: 0}
     - target: {fileID: 3461796977683965257, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
       propertyPath: m_LocalAABB.m_Center.y
-      value: 0.32980537
+      value: 0.34725368
       objectReference: {fileID: 0}
     - target: {fileID: 3461796977683965257, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
       propertyPath: m_LocalAABB.m_Extent.x
-      value: 3.7114024
+      value: 7.924189
       objectReference: {fileID: 0}
     - target: {fileID: 3461796977683965257, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
       propertyPath: m_LocalAABB.m_Extent.y
-      value: 1.8192778
+      value: 1.8010869
       objectReference: {fileID: 0}
     - target: {fileID: 3461796977683965258, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
       propertyPath: m_Spline.m_ControlPoints.Array.data[1].position.x
