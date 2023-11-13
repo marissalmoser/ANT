@@ -80,11 +80,9 @@ public class BeeStates : MonoBehaviour
         switch (state)
         {
             case States.Patrol:                                              //Patrol
+                StopAllCoroutines();
                 currentState = StartCoroutine(PatrolState());
-                if(detectionCache == null && !StartInToPatrol)
-                {
-                    detectionCache = StartCoroutine(ConstantDetection());
-                }
+                detectionCache = StartCoroutine(ConstantDetection());
                 break;
             case States.Suspicious:                                         //Suspicious
                 if(currentState != null)
@@ -264,11 +262,9 @@ public class BeeStates : MonoBehaviour
         StopAnimations();
         anim.SetBool("ToPatrol", true);
         AudioManager.Instance.Play("BeeWakesUp");
-        print("1");
         if (detectionCache == null)
         {
             detectionCache = StartCoroutine(ConstantDetection());
-            print("2");
         }
         wings.GetComponent<Animator>().SetBool("WingFlap", true);
         while (Vector2.Distance(transform.position, posA) > 0.5)
@@ -290,9 +286,9 @@ public class BeeStates : MonoBehaviour
         }
         if (currentState != null)
         {
-            StopCoroutine(currentState);
             FSM(States.Patrol);
             gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+            //print("current state is null"); //when patrol starts
         }
     }
 
