@@ -23,8 +23,10 @@ public class BeeStates : MonoBehaviour
     public bool StartInToPatrol;
     [SerializeField] private GameObject hivePiece;
     [SerializeField] private GameObject lightObject;
+    [SerializeField] private GameObject wings;
 
     public enum States{Patrol, Suspicious, Alert, Sleep, ToPatrol}
+    private Coroutine currentState;
 
     [Header("Bee")]
     [SerializeField]private bool isFacingRight = true;
@@ -42,6 +44,7 @@ public class BeeStates : MonoBehaviour
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private GameObject detectorOriginPt;
     private GameObject Player;
+    private Coroutine detectionCache;
 
     [Header("Gizmos")]
     public Color gizmoIdle = Color.green;
@@ -74,30 +77,29 @@ public class BeeStates : MonoBehaviour
 
     public void FSM(States state)
     {
-        //State = newState;
         switch (state)
         {
             case States.Patrol:                                              //Patrol
-                
                 StopAllCoroutines();
-                StartCoroutine(PatrolState());
-                StartCoroutine(ConstantDetection());
+                currentState = StartCoroutine(PatrolState());
+                detectionCache = StartCoroutine(ConstantDetection());
                 break;
             case States.Suspicious:                                         //Suspicious
-                StopAllCoroutines();
-                StartCoroutine(SusState());
+                if(currentState != null)
+                {
+                    StopCoroutine(currentState);
+                }
+                currentState = StartCoroutine(SusState());
                 break;
             case States.Alert:                                              //Alert
-                StopAllCoroutines();
-                StartCoroutine(AlertState());
+                currentState = StartCoroutine(AlertState());
                 break;
             case States.Sleep:                                              //Sleep
                 StopAllCoroutines();
-                StartCoroutine(SleepState());
+                currentState = StartCoroutine(SleepState());
                 break;
             case States.ToPatrol:
-                StopAllCoroutines();
-                StartCoroutine(ToPatrol());
+                currentState = StartCoroutine(ToPatrol()); 
                 break;
         }
     }
@@ -106,6 +108,8 @@ public class BeeStates : MonoBehaviour
     {
         StopAnimations();
         anim.SetBool("Patrol", true);
+        wings.GetComponent<Animator>().SetBool("WingFlap", true);
+
         FlipCheck();
         LevelManager.GetComponent<LevelManager>().Escaped();
 
@@ -175,23 +179,23 @@ public class BeeStates : MonoBehaviour
         //Flip();
         //transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
         //yield return new WaitForSeconds(1);
-
         //checks for player
         if (Player != null)
         {
             Player = null;
             exclamation.SetActive(false);
 
-            if (PerformDetection())
+            if (PerformDetection() && !lightObject.GetComponent<LightBehavior>().isFirstLight)
             {
+                //StopCoroutine(currentState);
                 FSM(States.Alert);
             }
             else
             {
-                //print("back to patrol");
-                //targetPos = posA;
-                //Flip();
-                StartCoroutine(ConstantDetection());
+                if (detectionCache == null)
+                {
+                    detectionCache = StartCoroutine(ConstantDetection());
+                }
 
                 while (Vector2.Distance(transform.position, targetPos) > 0.5f)
                 {
@@ -223,6 +227,7 @@ public class BeeStates : MonoBehaviour
         LevelManager.GetComponent<LevelManager>().Escaped();
         StopAnimations();
         anim.SetBool("Sleep", true);
+        wings.GetComponent<Animator>().SetBool("WingFlap", false);
 
         //stop all movement
         targetPos = transform.position;
@@ -257,26 +262,33 @@ public class BeeStates : MonoBehaviour
         StopAnimations();
         anim.SetBool("ToPatrol", true);
         AudioManager.Instance.Play("BeeWakesUp");
-
-        //wing animation
-        while (StartInToPatrol)
+        if (detectionCache == null)
+        {
+            detectionCache = StartCoroutine(ConstantDetection());
+        }
+        wings.GetComponent<Animator>().SetBool("WingFlap", true);
+        while (Vector2.Distance(transform.position, posA) > 0.5)
         {
             targetPos = posA;
             Flip();
 
-            if (!GameManager.GameIsPaused)
+            if (!GameManager.GameIsPaused && Player == null)
             {
                 transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
             }
-
-            if(Vector2.Distance(transform.position, posA) < 0.5)
+            else if (currentState != null)
             {
-                //hivePiece.GetComponent<Rigidbody2D>().gravityScale = 0;                   ??
-                FSM(States.Patrol);
-                gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+                StopCoroutine(currentState);
+                break;
             }
 
             yield return null;
+        }
+        if (currentState != null)
+        {
+            FSM(States.Patrol);
+            gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+            //print("current state is null"); //when patrol starts
         }
     }
 
@@ -304,7 +316,13 @@ public class BeeStates : MonoBehaviour
             if (collider != null && !GameManager.GameIsPaused)
             {
                 Player = collider.gameObject;
-                FSM(States.Suspicious);                         //goes into suspicious state
+
+                FSM(States.Suspicious);
+                if (detectionCache != null)
+                {
+                    StopCoroutine(detectionCache);
+                }
+                detectionCache = null;
             }
 
             yield return new WaitForSeconds(0.3f);

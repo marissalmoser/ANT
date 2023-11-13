@@ -34,24 +34,29 @@ public class WebPlatformBehavior : MonoBehaviour
     {
         Vector3 targetPos = MousePosition;
 
-        while(Vector2.Distance(transform.position, MousePosition) > 0.3f)
+        while(PlatformCanMove)
         {
-            if (PlatformCanMove)
+            print(targetPos);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, platformSpeed * Time.deltaTime);
+
+            if(Vector2.Distance(transform.position, MousePosition) < 0.3f)
             {
-                transform.position = Vector3.MoveTowards(transform.position, targetPos, platformSpeed * Time.deltaTime);
+                PlatformCanMove = false;
+
+                Rb.velocity = Vector2.zero;
+                Rb.constraints = RigidbodyConstraints2D.FreezePosition;
+                Rb.freezeRotation = true;
+                GetComponent<BoxCollider2D>().usedByEffector = true;
+                GetComponent<BoxCollider2D>().enabled = true;
+
+                StopCoroutine(currrentCoroutine);
+                currrentCoroutine = StartCoroutine(PlatformBehavior());
+                PlatformCanMove = false;
+                break;
             }
+
             yield return null;
         }
-
-        Rb.velocity = Vector2.zero;
-        Rb.constraints = RigidbodyConstraints2D.FreezePosition;
-        Rb.freezeRotation = true;
-        GetComponent<BoxCollider2D>().usedByEffector = true;
-        GetComponent<BoxCollider2D>().enabled = true;
-
-        StopCoroutine(currrentCoroutine);
-        currrentCoroutine = StartCoroutine(PlatformBehavior());
-        PlatformCanMove = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
