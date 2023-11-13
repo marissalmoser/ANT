@@ -34,29 +34,28 @@ public class WebPlatformBehavior : MonoBehaviour
     {
         Vector3 targetPos = MousePosition;
 
-        while(PlatformCanMove)
+        for(int i = 0; i < 75; i++)
         {
-            print(targetPos);
+            print("in loop");
             transform.position = Vector3.MoveTowards(transform.position, targetPos, platformSpeed * Time.deltaTime);
 
-            if(Vector2.Distance(transform.position, MousePosition) < 0.3f)
+            if (Vector2.Distance(transform.position, MousePosition) < 0.4f)
             {
-                PlatformCanMove = false;
-
-                Rb.velocity = Vector2.zero;
-                Rb.constraints = RigidbodyConstraints2D.FreezePosition;
-                Rb.freezeRotation = true;
-                GetComponent<BoxCollider2D>().usedByEffector = true;
-                GetComponent<BoxCollider2D>().enabled = true;
-
-                StopCoroutine(currrentCoroutine);
-                currrentCoroutine = StartCoroutine(PlatformBehavior());
-                PlatformCanMove = false;
                 break;
             }
-
             yield return null;
         }
+
+        print("inplace");
+        PlatformCanMove = false;
+
+        Rb.velocity = Vector2.zero;
+        Rb.constraints = RigidbodyConstraints2D.FreezePosition;
+        Rb.freezeRotation = true;
+        GetComponent<BoxCollider2D>().usedByEffector = true;
+        GetComponent<BoxCollider2D>().enabled = true;
+
+        currrentCoroutine = StartCoroutine(PlatformBehavior());
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -75,7 +74,10 @@ public class WebPlatformBehavior : MonoBehaviour
 
     IEnumerator DestroyWebPlatform()
     {
-        StopCoroutine(currrentCoroutine);
+        if(currrentCoroutine != null)
+        {
+            StopCoroutine(currrentCoroutine);
+        }
         anim.SetBool("WebBreaking", true);
 
         yield return new WaitForSeconds(3);
