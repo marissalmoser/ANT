@@ -19,6 +19,7 @@ public class QueenBeeBehavior : MonoBehaviour
     [SerializeField] GameObject LevelManager;
     private LevelManager lm;
     int lightBlocked = 0;
+    [SerializeField] private GameObject wings;
 
     [Header("Patrol")]
     [SerializeField] private Vector2 posA;
@@ -39,6 +40,7 @@ public class QueenBeeBehavior : MonoBehaviour
         lm = LevelManager.GetComponent<LevelManager>();
 
         lm.BeeVisionObjects.Add(detectorOriginPt);
+        wings.GetComponent<Animator>().SetBool("WingFlap", true);
 
         FSM(States.Patrol);
     }
@@ -133,6 +135,7 @@ public class QueenBeeBehavior : MonoBehaviour
     {
         //gameObject.GetComponent<PolygonCollider2D>().enabled = true;
         rb.gravityScale = 2;
+        wings.GetComponent<Animator>().SetBool("WingFlap", false);
 
         //turn off bee vision
         lm.BeeVisionObjects.Remove(detectorOriginPt);
