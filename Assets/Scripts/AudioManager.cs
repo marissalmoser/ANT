@@ -4,7 +4,8 @@
 // Author :            Marissa Moser
 // Creation Date :     October 16, 2023
 //
-// Brief Description : 
+// Brief Description : This script is a static singleton that manages a list of
+SFX Sound objects. It contains methods to start and stop specific SFX.
 
 **********************************************************************************/
 
@@ -18,9 +19,6 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager Instance;
 
-    /// <summary>
-    /// Start function assigns components to the sound class objects
-    /// </summary>
     void Start()
     {
         if (Instance == null)
@@ -44,10 +42,6 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Function called from anywhere to play sound 
-    /// </summary>
-    /// <param name="name"></param>
     public void Play(string name)
     {
         Sound s = System.Array.Find(sounds, sounds => sounds.name == name);

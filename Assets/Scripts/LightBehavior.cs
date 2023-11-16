@@ -4,9 +4,10 @@
 // Author :            Marissa Moser
 // Creation Date :     September 25, 2023
 //
-// Brief Description : 
+// Brief Description : This script contains the behavior for the light objects.
+It reacts to the light blockde event to put the bee asleep and turn off the light.
 
-**********************************************************************************/ 
+**********************************************************************************/
 
 using System;
 using System.Collections;
@@ -40,12 +41,8 @@ public class LightBehavior : MonoBehaviour
     {
         if (hiveInPlace)
         {
-            //print("dropped");
-            //print(hiveObject.transform.parent.transform.rotation.z);
-
             if (!hivePlacedVertically) 
             {
-                //print("true");
                 if(hiveObject.transform.parent.transform.rotation.z == 0 || hiveObject.transform.parent.transform.rotation.z == 1)
                 {
                     if (queensLight)
@@ -71,10 +68,8 @@ public class LightBehavior : MonoBehaviour
             }
             else if (hivePlacedVertically)
             {
-                //print("vert");
                 if (hiveObject.transform.parent.transform.rotation.z < 1 && hiveObject.transform.parent.transform.rotation.z > -1 && hiveObject.transform.parent.transform.rotation.z != 0)
                 {
-                    //print("vert 90");
                     if (queensLight)
                     {
                         Bee.GetComponent<QueenBeeBehavior>().LightShutOff();
@@ -107,8 +102,7 @@ public class LightBehavior : MonoBehaviour
             if (collider != null)
             {
                 hiveInPlace = true;
-                hiveObject = collider.gameObject;   //bee vision object
-                //print("in place");
+                hiveObject = collider.gameObject;
                 if(isFirstLight)
                 {
                     Invoke("LightBlocked", 0.2f);

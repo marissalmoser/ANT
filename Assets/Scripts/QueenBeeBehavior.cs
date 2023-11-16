@@ -4,7 +4,10 @@
 // Author :            Marissa Moser
 // Creation Date :     October 18, 2023
 //
-// Brief Description : 
+// Brief Description :  This script contains the finite state machine for the queen
+bee boss. The states include Partol, Suspicious, Alert, and Sleep. These states
+manage the bee's movement, detection and targeting of the player, as well as 
+counting the number of lights turned off and entering sleep state when in darkness.
 
 **********************************************************************************/
 using System;
@@ -46,7 +49,6 @@ public class QueenBeeBehavior : MonoBehaviour
     }
     public void FSM(States state)
     {
-        //State = newState;
         switch (state)
         {
             case States.Patrol:                                              //Patrol
@@ -116,8 +118,6 @@ public class QueenBeeBehavior : MonoBehaviour
             }
             else
             {
-                //print("back to patrol");
-                //targetPos = posA;
                 FSM(States.Patrol);
             }
         }
@@ -133,7 +133,6 @@ public class QueenBeeBehavior : MonoBehaviour
 
     IEnumerator SleepState()
     {
-        //gameObject.GetComponent<PolygonCollider2D>().enabled = true;
         rb.gravityScale = 2;
         wings.GetComponent<Animator>().SetBool("WingFlap", false);
 
@@ -141,7 +140,6 @@ public class QueenBeeBehavior : MonoBehaviour
         lm.BeeVisionObjects.Remove(detectorOriginPt);
         Destroy(detectorOriginPt);
 
-        //print("YOU BEAT THE BEE!");
         yield return new WaitForSeconds(2);
         GameManager.Instance.GameWon();
     }
@@ -152,7 +150,6 @@ public class QueenBeeBehavior : MonoBehaviour
         if (collider != null)
         {
             Player = collider.gameObject;
-            //print("player detected");
             return (true);
         }
         else
@@ -169,7 +166,6 @@ public class QueenBeeBehavior : MonoBehaviour
             if (collider != null && !GameManager.GameIsPaused)
             {
                 Player = collider.gameObject;
-                //print("detected");
                 FSM(States.Suspicious);  
             }
     
@@ -198,7 +194,6 @@ public class QueenBeeBehavior : MonoBehaviour
     public void LightShutOff()
     {
         lightBlocked++;
-        //print(lightBlocked);
         if(lightBlocked >=3)
         {
             FSM(States.Sleep);
