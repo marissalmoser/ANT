@@ -130,7 +130,7 @@ MonoBehaviour:
     pitch: 1
     source: {fileID: 0}
   - name: BeeAlert
-    clip: {fileID: 8300000, guid: b69012f5e6283a34f80150c251b72cd5, type: 3}
+    clip: {fileID: 8300000, guid: 3be64799bbb44234c8d2318bb63909ae, type: 3}
     mixer: {fileID: 24300002, guid: 0da3ad775c4ffa04f94508fa9017c001, type: 2}
     volume: 1
     pitch: 1
