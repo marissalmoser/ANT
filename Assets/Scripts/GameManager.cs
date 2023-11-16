@@ -4,7 +4,10 @@
 // Author :            Marissa Moser
 // Creation Date :     September 18, 2023
 //
-// Brief Description : 
+// Brief Description : A static singleton that manages the game. Contains booleans 
+that reference which parts of the player are enabled. Also contains public methods
+which deal with scene management.
+
 
 **********************************************************************************/
 

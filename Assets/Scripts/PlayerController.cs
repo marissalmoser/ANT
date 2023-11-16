@@ -4,7 +4,10 @@
 // Author :            Marissa Moser
 // Creation Date :     September 13, 2023
 //
-// Brief Description : 
+// Brief Description : Manages the input for the player including the 2 movement
+methods, switching between them, switching bug parts, and interacting with the
+enviroment. This script also manages the camera movement.
+
 
 **********************************************************************************/
 
@@ -69,8 +72,6 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        //gm = GameManager.Instance;
-
         pb = gameObject.GetComponent<PlayerBehavior>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         walkingAnim = WalkGraphics.GetComponent<Animator>();
@@ -198,11 +199,10 @@ public class PlayerController : MonoBehaviour
     private void SwitchMovementSystem(InputAction.CallbackContext obj)
     {
         //switch to crawling movement system
-        if (!CrawlMapEnabled && canMove == 1 && !GameManager.GameIsPaused && WallBehavior.OnClimbableWall) //this broke it??
+        if (!CrawlMapEnabled && canMove == 1 && !GameManager.GameIsPaused && WallBehavior.OnClimbableWall)
         {
             if (!GameManager.Instance.BaseLeg)
             {
-                //print("web off from crawl");
                 webShooterWalk.SetActive(false);
                 GameManager.Instance.BaseLeg = true;
                 WebShooterUI?.Invoke();
@@ -220,19 +220,14 @@ public class PlayerController : MonoBehaviour
             AudioManager.Instance.Play("CrawlToWalkSwitch");
         }
 
+        //trying to move with beevision
         else if (!GameManager.Instance.BaseHead && !GameManager.GameIsPaused)
         {
-            //trying to move with beevision
             BeeVisionError();
-        }
-        else
-        {
-            //print("what?");
         }
     }
     public void SwitchToWalk()
     {
-        //print("switch to 2D movement system");
         CrawlMapEnabled = false;
         rb.gravityScale = 4;
         transform.rotation = Quaternion.AngleAxis(0, Vector3.forward);
@@ -247,7 +242,6 @@ public class PlayerController : MonoBehaviour
     }
     public void SwitchToCrawl()
     {
-        //print("switch to crawling movement system");
         CrawlMapEnabled = true;
         rb.gravityScale = 0;
         rb.velocity = Vector2.zero;
@@ -264,17 +258,13 @@ public class PlayerController : MonoBehaviour
         //Bee Vision turned on
         if(!GameManager.Instance.BaseHead)
         {
-            //changes the sprite
             beeMaskCrawl.SetActive(true);
             beeMaskWalk.SetActive(true);
 
-            //vision on
             BeeVision?.Invoke();
             
-            //stop movement
             canMove = 0;
 
-            //sound
             AudioManager.Instance.Play("BeeVisionOn");
             AudioManager.Instance.Play("BeeVisionElectricity");
         }
@@ -282,17 +272,13 @@ public class PlayerController : MonoBehaviour
         //Bee vision turned off
         if (GameManager.Instance.BaseHead)
         {
-            //changes the sprite
             beeMaskCrawl.SetActive(false);
             beeMaskWalk.SetActive(false);
 
-            //vision off
             BeeVision?.Invoke();
 
-            //resume movement
             canMove = 1;
 
-            //sound
             AudioManager.Instance.Play("BeeVisionOff");
             AudioManager.Instance.Stop("BeeVisionElectricity");
         }
@@ -301,7 +287,6 @@ public class PlayerController : MonoBehaviour
     }
     private void SwitchLegPart(InputAction.CallbackContext obj)
     {
-
         ///web on
         if (GameManager.Instance.BaseLeg && !PlayerCanCrawl)
         {
@@ -311,7 +296,6 @@ public class PlayerController : MonoBehaviour
                 SwitchToWalk();
             }
       
-            //print("web on");
             webShooterWalk.SetActive(true);
             GameManager.Instance.BaseLeg = !GameManager.Instance.BaseLeg;
             WebShooterUI?.Invoke();
@@ -321,7 +305,6 @@ public class PlayerController : MonoBehaviour
         ///disables web shooter
         else
         {
-            //print("web off");
             webShooterWalk.SetActive(false);
             GameManager.Instance.BaseLeg = !GameManager.Instance.BaseLeg;
             WebShooterUI?.Invoke();
@@ -363,7 +346,7 @@ public class PlayerController : MonoBehaviour
             crawlDirection = crawl.ReadValue<Vector2>();
         }
 
-        //rotation of the player during movement. Only if in crawl map and bee vision off
+        //rotation of the player during movement
         if (crawlDirection != Vector2.zero && CrawlMapEnabled && canMove == 1)
         {
             angle = Mathf.Atan2(crawlDirection.y, crawlDirection.x) * Mathf.Rad2Deg;
@@ -396,9 +379,9 @@ public class PlayerController : MonoBehaviour
         if(PlayerCanCrawl && CrawlMapEnabled) 
         {
             rb.velocity = new Vector2(crawlDirection.x, crawlDirection.y) * speed * canMove;
-            //print(CanClimb());
         }
 
+        //bee vision error sparks
         if(sparks != null)
         {
             sparks.transform.position = transform.position;
