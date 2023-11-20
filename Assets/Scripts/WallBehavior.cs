@@ -4,7 +4,8 @@
 // Author :            Marissa Moser
 // Creation Date :     October 12, 2023
 //
-// Brief Description : 
+// Brief Description : This script checks if the player is on a climbable wall
+when climbing, and then switches the player to walking movement system.
 
 **********************************************************************************/
 
@@ -18,7 +19,6 @@ public class WallBehavior : MonoBehaviour
     public static bool OnClimbableWall;
     public static Action WallTriggered;
 
-    // Start is called before the first frame update
     void Start()
     {
         OnClimbableWall = true;
@@ -29,7 +29,7 @@ public class WallBehavior : MonoBehaviour
         if(collision.CompareTag("Player"))
         {
             OnClimbableWall = false;
-            //if crawling
+            
             if (PlayerController.PlayerCanCrawl)
             {
                 WallTriggered?.Invoke();
@@ -41,6 +41,5 @@ public class WallBehavior : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         OnClimbableWall = true;
-        //print(OnClimbableWall);
     }
 }

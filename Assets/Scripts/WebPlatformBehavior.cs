@@ -4,7 +4,10 @@
 // Author :            Marissa Moser
 // Creation Date :     September 21, 2023
 //
-// Brief Description : 
+// Brief Description : This script manages the behavior of the web platforms. It
+contains a coroutine to move the platform to its target location, wait for a
+period of time, and then destory itself after that time or once the player 
+collides with it.
 
 **********************************************************************************/
 

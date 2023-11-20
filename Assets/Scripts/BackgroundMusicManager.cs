@@ -1,3 +1,14 @@
+/**********************************************************************************
+
+// File Name :         AudioManager.cs
+// Author :            Marissa Moser
+// Creation Date :     November 9, 2023
+//
+// Brief Description : This script is a static singleotn that manages the behaviour
+of the background music depending on the current scene.
+
+**********************************************************************************/
+
 using System;
 using System.Collections;
 using System.Collections.Generic;

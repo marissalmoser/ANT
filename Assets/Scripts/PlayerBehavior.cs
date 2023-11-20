@@ -4,7 +4,9 @@
 // Author :            Marissa Moser
 // Creation Date :     September 19, 2023
 //
-// Brief Description : 
+// Brief Description : This script manages the behaviors of the player abilities
+and interactable objects. This includes breaking and carrying objects, and
+spawning web platforms.
 
 **********************************************************************************/
 
@@ -61,7 +63,6 @@ public class PlayerBehavior : MonoBehaviour
         if (collision.gameObject.CompareTag("PickUp-able"))
         {
             pickUpTriggered = true;
-            //print(pickUpTriggered);
 
             if (!isCarrying)
             {
@@ -83,7 +84,6 @@ public class PlayerBehavior : MonoBehaviour
         if (collision.gameObject.CompareTag("PickUp-able"))
         {
             pickUpTriggered = false;
-            //print(pickUpTriggered);
         }
     }
 
@@ -92,14 +92,12 @@ public class PlayerBehavior : MonoBehaviour
         //picking up
         if (pickUpTriggered && !isCarrying)
         {
-            //print("pick up");
             isCarrying = true;
             StartCoroutine(MovePickedUpObjeect());
         }
         //dropping
         else if (pickedUpObject != null)
         {
-            //print("drop");
             isCarrying = false;
             ObjectDropped?.Invoke();
             pickedUpObject.transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -148,6 +146,4 @@ public class PlayerBehavior : MonoBehaviour
             AudioManager.Instance.Play("WebEmpty");
         }
     }
-
-    
 }

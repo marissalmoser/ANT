@@ -4,7 +4,10 @@
 // Author :            Marissa Moser
 // Creation Date :     September 24, 2023
 //
-// Brief Description : 
+// Brief Description : This script contains the finite state machine for the bee
+enemies. The states include ToPatrol, Partol, Suspicious, Alert, and Sleep. 
+These states manage the bee's movement, detection and targeting of the player, 
+as well as entering sleep state when in darkness.
 
 **********************************************************************************/
 
@@ -187,7 +190,6 @@ public class BeeStates : MonoBehaviour
 
             if (PerformDetection() && !lightObject.GetComponent<LightBehavior>().isFirstLight)
             {
-                //StopCoroutine(currentState);
                 FSM(States.Alert);
             }
             else
@@ -217,7 +219,6 @@ public class BeeStates : MonoBehaviour
         LevelManager.GetComponent<LevelManager>().GotCaught();
 
         AudioManager.Instance.Play("BeeAlert");
-        //all bees move toward player
         StartCoroutine(GameManager.Instance.RestartLevel());
         yield return null;
     }
@@ -243,9 +244,8 @@ public class BeeStates : MonoBehaviour
         }
 
         lm.BeeVisionObjects.Remove(detectorOriginPt);
-        Destroy(detectorOriginPt); //just turn off the sprite renderer is its off
+        Destroy(detectorOriginPt);
 
-        //bzzzz sound
         yield return null;
     }
 
@@ -253,7 +253,7 @@ public class BeeStates : MonoBehaviour
     {
         //hive falls
         hivePiece.GetComponent<Rigidbody2D>().gravityScale = 1;
-        //light turns on ->                                                           change to be gradual when have art
+        //light turns on                                                           change to be gradual when have art
         lightObject.GetComponent<SpriteRenderer>().enabled = true;
         lightObject.transform.GetChild(0).gameObject.SetActive(true);
 
@@ -288,7 +288,6 @@ public class BeeStates : MonoBehaviour
         {
             FSM(States.Patrol);
             gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
-            //print("current state is null"); //when patrol starts
         }
     }
 
@@ -299,7 +298,6 @@ public class BeeStates : MonoBehaviour
         if(collider != null)
         {
             Player = collider.gameObject;
-            //print("player detected");
             return (true);
         }
         else
@@ -366,7 +364,6 @@ public class BeeStates : MonoBehaviour
             Vector3 localScale = transform.localScale;
             localScale.x *= -1;
             transform.localScale = localScale;
-            //print("check");
         }
         if(!isFacingRight && startFacingRight)
         {
@@ -374,7 +371,6 @@ public class BeeStates : MonoBehaviour
             Vector3 localScale = transform.localScale;
             localScale.x *= -1;
             transform.localScale = localScale;
-            //print("check");
         }
     }
 

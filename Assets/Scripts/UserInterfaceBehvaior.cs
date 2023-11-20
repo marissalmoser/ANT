@@ -4,7 +4,9 @@
 // Author :            Marissa Moser
 // Creation Date :     October 5, 2023
 //
-// Brief Description : 
+// Brief Description : This script manages the HUD and UI for the levels. This 
+includes a the part not enabled message for bee vision, the web counters for the
+ web platforms, as well as functionality of the pause menu.
 
 **********************************************************************************/
 
@@ -71,16 +73,13 @@ public class UserInterfaceBehvaior : MonoBehaviour
 
     public void SwitchLegUI()
     {
-        //print("web ui");
         if (!GameManager.Instance.BaseLeg)
         {
             WebPlatformUI.SetActive(true);
-            //webPlatformText.text = "Web Platforms: On";
         }
         else
         {
             WebPlatformUI.SetActive(false);
-            //webPlatformText.text = "Web Platforms: Off";
         }
     }
 
@@ -146,7 +145,6 @@ public class UserInterfaceBehvaior : MonoBehaviour
     }
     public void Pause()
     {
-        //print(pauseMenu.activeSelf);
         if (pauseMenu.activeSelf == false)
         {
             AudioManager.Instance.Play("PauseMenu");
@@ -158,9 +156,8 @@ public class UserInterfaceBehvaior : MonoBehaviour
     }
     public void UnPause()
     {
-        //print("unpause");
         Time.timeScale = 1;
-        pauseMenu.SetActive(false);         //instead of turning off it should fade away?
+        pauseMenu.SetActive(false);
         GameManager.GameIsPaused = false;
         AudioManager.Instance.Play("PauseMenu");
         AudioManager.Instance.Play("ButtonClicks");

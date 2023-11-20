@@ -6,8 +6,8 @@
 //
 // Brief Description : Manages the input for the player including the 2 movement
 methods, switching between them, switching bug parts, and interacting with the
-enviroment. This script also manages the camera movement.
-
+enviroment. This script also manages the camera movement and the web shooter
+crosshair.
 
 **********************************************************************************/
 

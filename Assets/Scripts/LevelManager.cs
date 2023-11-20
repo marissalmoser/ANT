@@ -1,3 +1,13 @@
+/**********************************************************************************
+
+// File Name :         BeeStates.cs
+// Author :            Marissa Moser
+// Creation Date :     September 24, 2023
+//
+// Brief Description : This script manages the behaviors that reset for each level.
+This includes clearing the web platform list, bee vision objects.
+
+**********************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,12 +35,6 @@ public class LevelManager : MonoBehaviour
         {
             Instantiate(BKMM, transform.position, transform.rotation);
         }
-        if (BackgroundMusicManager.Instance != null)
-        {
-
-        }
-
-
     }
 
     private void BeeVisionEnabled()

@@ -6,8 +6,8 @@
 //
 // Brief Description : A static singleton that manages the game. Contains booleans 
 that reference which parts of the player are enabled. Also contains public methods
-which deal with scene management.
-
+which deal with scene management. And a list to count the number of spawned web
+platforms.
 
 **********************************************************************************/
 

@@ -4,7 +4,8 @@
 // Author :            Marissa Moser
 // Creation Date :     October 22, 2023
 //
-// Brief Description : 
+// Brief Description : This script contains the behaviors for the buttons on the
+menu screens. 
 
 **********************************************************************************/
 using System;
@@ -46,12 +47,10 @@ public class MenuBehaviour : MonoBehaviour
         AudioManager.Instance.Play("ButtonClicks");
     }
 
-
     IEnumerator StartingGame()
     {
         Time.timeScale = 1;
 
-        //StartCoroutine(FadeMusic());
         FadeImage.SetActive(true);
         FadeImage.GetComponent<Animator>().SetBool("FadeToBlack", true);
 
