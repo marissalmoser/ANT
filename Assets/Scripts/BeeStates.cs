@@ -27,6 +27,7 @@ public class BeeStates : MonoBehaviour
     [SerializeField] private GameObject hivePiece;
     [SerializeField] private GameObject lightObject;
     [SerializeField] private GameObject wings;
+    [SerializeField] private GameObject Zzz;
 
     public enum States{Patrol, Suspicious, Alert, Sleep, ToPatrol}
     private Coroutine currentState;
@@ -229,6 +230,7 @@ public class BeeStates : MonoBehaviour
         StopAnimations();
         anim.SetBool("Sleep", true);
         wings.GetComponent<Animator>().SetBool("WingFlap", false);
+        Zzz.SetActive(true);
 
         //stop all movement
         targetPos = transform.position;
