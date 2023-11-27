@@ -82,6 +82,7 @@ public class GameManager : MonoBehaviour
     ///called from lv 5
     public void GameWon()
     {
+        StartCoroutine(BackgroundMusicManager.Instance.FadeMusic(true));
         SceneManager.LoadScene(6);
     }
     ///loads lose screen
