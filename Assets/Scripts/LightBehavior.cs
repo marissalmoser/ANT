@@ -45,12 +45,6 @@ public class LightBehavior : MonoBehaviour
             {
                 if(hiveObject.transform.parent.transform.rotation.z == 0 || hiveObject.transform.parent.transform.rotation.z == 1)
                 {
-                    //while move towards
-                    //while (Vector2.Distance(transform.position, posB) > 0.5)
-                    {
-                        //transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
-                    }
-
                     if (queensLight)
                     {
                         Bee.GetComponent<QueenBeeBehavior>().LightShutOff();
@@ -95,7 +89,6 @@ public class LightBehavior : MonoBehaviour
                     lm.BeeVisionObjects.Remove(lightsBeeVisionObj);
                     Destroy(gameObject);
                 }
-
             }
         }
     }

@@ -16,6 +16,8 @@ using UnityEngine;
 public class MenuBehaviour : MonoBehaviour
 {
     [SerializeField] private GameObject FadeImage;
+    [SerializeField] private GameObject Background;
+    [SerializeField] private GameObject AntIdle;
 
     public void StartGame()
     {
@@ -45,6 +47,13 @@ public class MenuBehaviour : MonoBehaviour
     public void ClickSound()
     {
         AudioManager.Instance.Play("ButtonClicks");
+    }
+
+    public void EndWinScreenAnim()
+    {
+        AntIdle.SetActive(true);
+        Background.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     IEnumerator StartingGame()
