@@ -5875,6 +5875,10 @@ PrefabInstance:
       propertyPath: levelManager
       value: 
       objectReference: {fileID: 612530197}
+    - target: {fileID: 3373553991704726180, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
+      propertyPath: detectorSize.x
+      value: 5.4
+      objectReference: {fileID: 0}
     - target: {fileID: 3461796977683965257, guid: 1cb01a4162b66ce4ba54d31a04b3b1c9, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -6242,7 +6246,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: posA.x
-      value: 25
+      value: 25.85
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: posA.y
@@ -6250,7 +6254,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: posB.x
-      value: 25
+      value: 25.85
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116304, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: posB.y
@@ -6294,7 +6298,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116316, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 25
+      value: 25.85
       objectReference: {fileID: 0}
     - target: {fileID: 3096334909587116316, guid: db90e3788b0f22e4f8a21b3ee8d1caf3, type: 3}
       propertyPath: m_LocalPosition.y
