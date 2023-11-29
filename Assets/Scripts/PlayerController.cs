@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     private Animator crawlingAnim;
 
     //actions
-    private InputAction move, jump, head, leg, crawl, changeMov, interact, spawnWeb, pause, nextLevel;
+    private InputAction move, jump, head, leg, crawl, changeMov, interact, spawnWeb, pause, nextLevel, crawlJump;
     public static Action BeeVision, WebShooterUI, ErrorMessage, PlatformCountUI, GamePaused;
 
     //moving variables
@@ -90,6 +90,7 @@ public class PlayerController : MonoBehaviour
         spawnWeb = MyPlayerInput.actions.FindActionMap("PartSwitching").FindAction("SpawnWebPlatform");
         pause = MyPlayerInput.actions.FindActionMap("PartSwitching").FindAction("Pause");
         nextLevel = MyPlayerInput.actions.FindActionMap("PartSwitching").FindAction("NextLevelKB");
+        crawlJump = MyPlayerInput.actions.FindActionMap("PlayerCrawlingMovement").FindAction("Jump");
 
         move.started += Handle_moveStarted;
         move.canceled += Handle_moveCanceled;
@@ -105,6 +106,8 @@ public class PlayerController : MonoBehaviour
         spawnWeb.started += SpawnWebStarted;
         pause.started += PauseGame;
         nextLevel.started += SkipToNextLevel;
+        crawlJump.started += Handle_jumpStarted;
+        crawlJump.canceled += Handle_jumpCanceled;
 
         WallBehavior.WallTriggered += SwitchToWalk;
     }
@@ -163,6 +166,10 @@ public class PlayerController : MonoBehaviour
         if(canMove == 0)
         {
             BeeVisionError();
+        }
+        if(CrawlMapEnabled)
+        {
+            SwitchToWalk();
         }
     }
     private void Handle_jumpCanceled(InputAction.CallbackContext obj)
@@ -436,5 +443,7 @@ public class PlayerController : MonoBehaviour
         pause.started -= PauseGame;
         WallBehavior.WallTriggered -= SwitchToWalk;
         nextLevel.started -= SkipToNextLevel;
+        crawlJump.started -= Handle_jumpStarted;
+        crawlJump.canceled -= Handle_jumpCanceled;
     }
 }

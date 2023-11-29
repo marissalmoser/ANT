@@ -173,6 +173,11 @@ public class QueenBeeBehavior : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        FSM(States.Alert);
+    }
+
     IEnumerator Flip()
     {
         //front animation true

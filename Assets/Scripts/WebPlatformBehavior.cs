@@ -39,7 +39,6 @@ public class WebPlatformBehavior : MonoBehaviour
 
         for(int i = 0; i < 75; i++)
         {
-            print("in loop");
             transform.position = Vector3.MoveTowards(transform.position, targetPos, platformSpeed * Time.deltaTime);
 
             if (Vector2.Distance(transform.position, MousePosition) < 0.4f)
@@ -49,7 +48,6 @@ public class WebPlatformBehavior : MonoBehaviour
             yield return null;
         }
 
-        print("inplace");
         PlatformCanMove = false;
 
         Rb.velocity = Vector2.zero;
