@@ -21,6 +21,7 @@ public class QueenBeeBehavior : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField] GameObject LevelManager;
     private LevelManager lm;
+    private Animator anim;
     int lightBlocked = 0;
     [SerializeField] private GameObject wings;
 
@@ -41,6 +42,7 @@ public class QueenBeeBehavior : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         lm = LevelManager.GetComponent<LevelManager>();
+        anim = GetComponent<Animator>();
 
         lm.BeeVisionObjects.Add(detectorOriginPt);
         wings.GetComponent<Animator>().SetBool("WingFlap", true);
@@ -74,6 +76,7 @@ public class QueenBeeBehavior : MonoBehaviour
 
     IEnumerator PatrolState()
     {
+        anim.SetTrigger("Patrol");
         while (true)
         {
             if (Vector2.Distance(transform.position, posA) < 0.5)
@@ -101,6 +104,7 @@ public class QueenBeeBehavior : MonoBehaviour
 
     IEnumerator SuspiciousState()
     {
+        anim.SetTrigger("Suspicious");
         //exclamation.SetActive(true);
         AudioManager.Instance.Play("BeeSeesPlayer");
 
@@ -125,6 +129,7 @@ public class QueenBeeBehavior : MonoBehaviour
 
     IEnumerator AlertState()
     {
+        anim.SetTrigger("Alert");
         UserInterfaceBehvaior.FadeToBlack?.Invoke();
         AudioManager.Instance.Play("BeeAlert");
         StartCoroutine(GameManager.Instance.RestartLevel()); 
@@ -133,6 +138,8 @@ public class QueenBeeBehavior : MonoBehaviour
 
     IEnumerator SleepState()
     {
+        anim.SetTrigger("Sleep");
+        Destroy(wings);
         rb.gravityScale = 2;
         wings.GetComponent<Animator>().SetBool("WingFlap", false);
 

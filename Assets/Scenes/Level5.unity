@@ -16330,6 +16330,7 @@ GameObject:
   - component: {fileID: 559210720}
   - component: {fileID: 559210716}
   - component: {fileID: 559210715}
+  - component: {fileID: 559210721}
   m_Layer: 0
   m_Name: QueenBee
   m_TagString: Untagged
@@ -16726,6 +16727,26 @@ PolygonCollider2D:
       - {x: -2.9199998, y: -1.3399999}
       - {x: -2.8999999, y: -1.3199999}
       - {x: -2.8899999, y: -1.1899999}
+--- !u!95 &559210721
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559210714}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ba6f0e20b6c9f0c4a82d32a6c7771c06, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &572698663
 PrefabInstance:
   m_ObjectHideFlags: 0
