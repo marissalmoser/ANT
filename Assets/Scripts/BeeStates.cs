@@ -83,22 +83,22 @@ public class BeeStates : MonoBehaviour
     {
         switch (state)
         {
-            case States.Patrol:                                              //Patrol
+            case States.Patrol:                                    
                 StopAllCoroutines();
                 currentState = StartCoroutine(PatrolState());
                 detectionCache = StartCoroutine(ConstantDetection());
                 break;
-            case States.Suspicious:                                         //Suspicious
+            case States.Suspicious:                                  
                 if(currentState != null)
                 {
                     StopCoroutine(currentState);
                 }
                 currentState = StartCoroutine(SusState());
                 break;
-            case States.Alert:                                              //Alert
+            case States.Alert:                                          
                 currentState = StartCoroutine(AlertState());
                 break;
-            case States.Sleep:                                              //Sleep
+            case States.Sleep:                            
                 StopAllCoroutines();
                 currentState = StartCoroutine(SleepState());
                 break;
