@@ -213,13 +213,13 @@ public class BeeStates : MonoBehaviour
 
     IEnumerator AlertState()
     {
+        AudioManager.Instance.Play("BeeAlert");
         StopAnimations();
         anim.SetBool("Alert", true);
         UserInterfaceBehvaior.FadeToBlack?.Invoke();
 
         LevelManager.GetComponent<LevelManager>().GotCaught();
 
-        AudioManager.Instance.Play("BeeAlert");
         StartCoroutine(GameManager.Instance.RestartLevel());
         yield return null;
     }

@@ -30,6 +30,7 @@ public class QueenBeeBehavior : MonoBehaviour
     [SerializeField] private Vector2 posB;
     private Vector2 targetPos;
     [SerializeField] private float speed;
+    private bool isSleep;
 
     [Header("Detection")]
     [SerializeField] private Vector2 detectorSize;
@@ -138,6 +139,7 @@ public class QueenBeeBehavior : MonoBehaviour
 
     IEnumerator SleepState()
     {
+        isSleep = true;
         anim.SetTrigger("Sleep");
         Destroy(wings);
         rb.gravityScale = 2;
@@ -182,7 +184,7 @@ public class QueenBeeBehavior : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if(collision.gameObject.CompareTag("Player") && !isSleep)
         {
             FSM(States.Alert);
         }
